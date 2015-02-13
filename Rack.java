@@ -10,7 +10,7 @@ public class Rack
 	}
 	public Card discard(int index)
 	{
-		return Hand.remove(index);
+		return this.Hand.remove(index);
 	}
 	public void show()
 	{
