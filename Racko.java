@@ -7,6 +7,7 @@ public class Racko
 	
 	public void addPlayer(Player P, char type)
 	{
-		
-	}	
+		return this.Players.add(P);
+	}
+	
 }

@@ -6,10 +6,7 @@ public class Rack
 
 	public boolean addCard(Card C)
 	{
-		
-		boolean result = this.Hand.add(C);
-		
-		return result;
+		return this.Hand.add(C);
 	}
 	public Card discard(int index)
 	{
