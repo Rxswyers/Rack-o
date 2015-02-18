@@ -1,13 +1,13 @@
 public class Racko
-{	
+{
 	//members
 	ArrayList<Player> Players = new ArrayList<Player>();
-	Stack<Card> Deck = new Stack<Card>();
-	Stack<Card> DiscardPile = new Stack<Card>();
-	
-	public void addPlayer(Player P, char type)
+	Deck DrawPile = new Deck();
+	Deck DiscardPile = new Deck();
+
+	public void addPlayer(Player P)
 	{
 		return this.Players.add(P);
 	}
-	
+
 }
