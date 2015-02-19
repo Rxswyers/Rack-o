@@ -5,7 +5,7 @@ public class Player
   int score;				//this score is going to be the actual score
   int currentScore;			//this will be the calculated score at the end of each turn
   //methods
-  
+
   //sets
   public void setScore(int s)
   {
@@ -15,7 +15,7 @@ public class Player
   {
 	  this.currentScore = s;
   }
-  
+
   //gets
   public int getScore()
   {
@@ -25,14 +25,22 @@ public class Player
   {
 	  return this.currentScore;
   }
-  
+  public void pickupCard(Card C)
+  {
+    this.Hand.addCard(C);
+  }
+  public void printHand()
+  {
+    System.out.println(this.Hand);
+  }
+
   //other methods
-  public void takeTurn()
-  {
-	  
-  }
-  public void countScore()
-  {
-	  
-  }
+  //public void takeTurn()
+  //{
+
+  //}
+  //public void countScore()
+  //{
+
+  //}
 }
