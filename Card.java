@@ -30,7 +30,7 @@ public class Card
 	public Card(int v)
 	{
 		this.value = v;
-		this.state = true;
+		this.state = false;
 	}
 
 	//other methods

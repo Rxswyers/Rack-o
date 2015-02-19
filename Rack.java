@@ -4,7 +4,7 @@ public class Rack
 	//members
 	private ArrayList<Card> Hand = new ArrayList<Card>();
 
-	//
+	//methods
 	public boolean addCard(Card C)
 	{
 		return this.Hand.add(C);
@@ -12,6 +12,10 @@ public class Rack
 	public Card discard(int index)
 	{
 		return this.Hand.remove(index);
+	}
+	public int getSize()
+	{
+		return this.Hand.size();
 	}
 	public String toString()
 	{
