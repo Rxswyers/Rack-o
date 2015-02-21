@@ -16,16 +16,12 @@ public class Test
 		System.out.println("Removing " + P1Rack.discard(2));
 		System.out.println(P1Rack);
 
-		ArrayList<Integer> testList = new ArrayList<Integer>();
-
-		testList.add(1);
-		testList.add(3);
-
 		//testing an arrayList for the purpose of Racko.deal()
 		//will it print the other 8 null, or will it just print 2 things?
 		//this is good to test, because there will only be 2 players at first, but there can be up to 4
 		Player P1 = new Player();
-
+		Player P2 = new Player();
+		Player P3 = new Player();
 		P1.pickupCard(C1);
 		P1.pickupCard(C2);
 
@@ -39,6 +35,12 @@ public class Test
 		System.out.println(Pickup.getSize());
 		System.out.println(Pickup.draw());
 		System.out.println(Pickup.getSize());
+
+		Racko R = new Racko();
+		R.addPlayer(P1);
+		R.addPlayer(P2);
+		R.addPlayer(P3);
+		R.getCards();
 
 	}
 }
