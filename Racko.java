@@ -70,10 +70,7 @@ public class Racko
 		for(int num = count; num < this.Cards.size(); num++)
 		{
 			DrawPile.addCard(this.Cards.get(num));
-			//Used for debugging
-			//DiscardPile.addCard(this.Cards.get(num));
 		}
-		DrawPile.showTop();
 	}
 	//Name:					checkDeck
 	//Parameters:		none
