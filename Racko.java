@@ -8,10 +8,10 @@ public class Racko
 	Deck DrawPile = new Deck();
 	Deck DiscardPile = new Deck();
 	//methods
-	public void Racko()
+	public void getCards()
 	{
-		int cardSize;
-		switch(Players.size())
+		int cardSize = 0;
+		switch(this.Players.size())
 		{
 			case 2:
 			cardSize = 40;
@@ -25,20 +25,22 @@ public class Racko
 		}
 		for(int i = 1; i <= cardSize; i ++)
 		{
-			this.Cards.add(new Card(this));
+			this.Cards.add(new Card(i));
 		}
-		Collections.shuffle(Cards);
+		Collections.shuffle(this.Cards);
+
+		System.out.println(this.Cards);
 	}
 	public void addPlayer(Player P)
 	{
-		return this.Players.add(P);
+		this.Players.add(P);
 	}
 	public void deal()
 	{
 		int count = 0;
-		for(int i = 0; i < Players.size(); i++)
+		for(int i = 0; i < this.Players.size(); i++)
 		{
-			Players.get(i).pickupCard(Cards.get(count));
+			this.Players.get(i).pickupCard(this.Cards.get(count));
 			count++;
 		}
 	}

@@ -1,6 +1,7 @@
 public class Player
 {
   //members
+  String name;
   Rack Hand = new Rack();
   int score;				//this score is going to be the actual score
   int currentScore;			//this will be the calculated score at the end of each turn
@@ -15,7 +16,10 @@ public class Player
   {
 	  this.currentScore = s;
   }
-
+  public void setName(String s)
+  {
+    this.name = s;
+  }
   //gets
   public int getScore()
   {
@@ -25,7 +29,10 @@ public class Player
   {
 	  return this.currentScore;
   }
-
+  public String getName()
+  {
+    return this.name;
+  }
   //other methods
   public void pickupCard(Card C)
   {
@@ -35,7 +42,7 @@ public class Player
   {
     System.out.println(this.Hand);
   }
-  
+
   //public void takeTurn()
   //{
 
