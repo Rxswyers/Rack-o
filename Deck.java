@@ -17,5 +17,16 @@ public class Deck
 	{
 		return Pile.size();
 	}
+	public String toString()
+	{
+		String result = "";
+		//Printed out the stack without popping anything from it
+		//in order to do so, you need to treat it as a vector
+		for(int i = Pile.size() - 1; i >= 0; i--)
+		{
+			result += "" + Pile.get(i).toString() + "\n";
+		}
+		return result;
+	}
 
 }

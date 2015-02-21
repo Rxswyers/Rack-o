@@ -27,9 +27,7 @@ public class Racko
 		{
 			this.Cards.add(new Card(i));
 		}
-		Collections.shuffle(this.Cards);
-
-		System.out.println(this.Cards);
+		//Collections.shuffle(this.Cards);
 	}
 	public void addPlayer(Player P)
 	{
@@ -40,9 +38,23 @@ public class Racko
 		int count = 0;
 		for(int i = 0; i < this.Players.size(); i++)
 		{
-			this.Players.get(i).pickupCard(this.Cards.get(count));
-			count++;
+			for(int j = 0; j < 10; j++)
+			{
+				this.Players.get(i).pickupCard(this.Cards.get(count));
+				count++;
+			}
 		}
+		System.out.println("Player one's hand");
+		this.Players.get(0).printHand();
+		System.out.println("Player two's hand");
+		this.Players.get(1).printHand();
+		//Populates the draw pile with the rest of the cards that weren't dealt to players
+		for(int num = count; num < this.Cards.size(); num++)
+		{
+			DrawPile.addCard(this.Cards.get(num));
+		}
+		System.out.println(DrawPile);
+		System.out.println(DrawPile.draw());
 	}
 /*
 public void populateDeck()
