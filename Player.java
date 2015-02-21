@@ -1,10 +1,10 @@
 public class Player
 {
   //members
-  String name;
-  Rack Hand = new Rack();
-  int score;				//this score is going to be the actual score
-  int currentScore;			//this will be the calculated score at the end of each turn
+  protected String name;
+  protected Rack Hand = new Rack();
+  protected int score;				//this score is going to be the actual score
+  protected int currentScore;			//this will be the calculated score at the end of each turn
   //methods
 
   //sets
@@ -43,10 +43,10 @@ public class Player
     System.out.println(this.Hand);
   }
 
-  //public void takeTurn()
-  //{
+  public void takeTurn()
+  {
 
-  //}
+  }
   //public void countScore()
   //{
 

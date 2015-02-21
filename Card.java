@@ -36,11 +36,11 @@ public class Card
 	//other methods
 	public String toString()
 	{
-		String s = this.getValue() + " ";
+		String s ="";
 		if(this.getState())
-			s += "face up";
+			s += this.getValue(); //face up
 		else
-			s+= "face down";
+			s+= "x";//face down;
 		return s;
 	}
 }

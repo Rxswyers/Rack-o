@@ -73,6 +73,7 @@ public class Racko
 			//Used for debugging
 			//DiscardPile.addCard(this.Cards.get(num));
 		}
+		DrawPile.showTop();
 	}
 	//Name:					checkDeck
 	//Parameters:		none
@@ -99,7 +100,7 @@ public class Racko
 			TempCards.add(DiscardPile.draw());
 		}
 		//Shuffle the cards before they go into the drawPile
-		TempCards.shuffle();
+		Collections.shuffle(TempCards);
 		for(Card C: TempCards)
 		{
 			C.setState(false);
