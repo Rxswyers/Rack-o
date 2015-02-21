@@ -25,6 +25,8 @@ public class Player
   {
 	  return this.currentScore;
   }
+
+  //other methods
   public void pickupCard(Card C)
   {
     this.Hand.addCard(C);
@@ -33,8 +35,7 @@ public class Player
   {
     System.out.println(this.Hand);
   }
-
-  //other methods
+  
   //public void takeTurn()
   //{
 

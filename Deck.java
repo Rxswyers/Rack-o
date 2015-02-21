@@ -1,3 +1,4 @@
+import java.util.Stack;
 public class Deck
 {
 	//members
@@ -12,5 +13,9 @@ public class Deck
 	{
 		return this.Pile.pop();
 	}
-	
+	public int getSize()
+	{
+		return Pile.size();
+	}
+
 }

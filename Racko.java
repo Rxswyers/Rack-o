@@ -11,7 +11,21 @@ public class Racko
 	//methods
 	public void Racko()
 	{
-		for(int i = 1; i <= 40; i ++)
+		int cardSize;
+
+		switch(Players.size())
+		{
+			case 2:
+				cardSize = 40;
+				break;
+			case 3:
+				cardSize = 50;
+				break;
+			case 4:
+				cardSize = 60;
+				break;
+		}
+		for(int i = 1; i <= cardSize; i ++)
 		{
 			this.Cards.add(new Card(this));
 		}
@@ -31,6 +45,7 @@ public class Racko
 			count++;
 		}
 	}
+	/*
 	public void populateDeck()
 	{
 
@@ -39,4 +54,5 @@ public class Racko
 	{
 
 	}
+	*/
 }

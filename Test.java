@@ -30,5 +30,15 @@ public class Test
 		P1.pickupCard(C2);
 
 		P1.printHand();
+
+		Deck Pickup = new Deck();
+
+		Pickup.addCard(C1);
+		Pickup.addCard(C2);
+
+		System.out.println(Pickup.getSize());
+		System.out.println(Pickup.draw());
+		System.out.println(Pickup.getSize());
+
 	}
 }

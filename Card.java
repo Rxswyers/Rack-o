@@ -6,6 +6,13 @@ public class Card
 
 	//methods
 
+	//constructor
+	public Card(int v)
+	{
+		this.value = v;
+		this.state = false;
+	}
+
 	//gets
 	public int getValue()
 	{
@@ -24,13 +31,6 @@ public class Card
 	public void setState(boolean s)
 	{
 		this.state = s;
-	}
-
-	//constructor
-	public Card(int v)
-	{
-		this.value = v;
-		this.state = false;
 	}
 
 	//other methods
