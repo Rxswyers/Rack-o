@@ -12,5 +12,6 @@ public class NewTest
     Game.addPlayer(P2);
     Game.getCards();
     Game.deal();
+    Game.checkDeck();
   }
 }

@@ -17,6 +17,10 @@ public class Deck
 	{
 		return Pile.size();
 	}
+	public boolean empty()
+	{
+		return Pile.empty();
+	}
 	public String toString()
 	{
 		String result = "";
