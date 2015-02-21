@@ -7,6 +7,7 @@ public class Rack
 	//methods
 	public boolean addCard(Card C)
 	{
+		C.setState(true);
 		return this.Hand.add(C);
 	}
 	public Card discard(int index)

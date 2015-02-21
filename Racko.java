@@ -102,6 +102,7 @@ public class Racko
 		TempCards.shuffle();
 		for(Card C: TempCards)
 		{
+			C.setState(false);
 			DrawPile.addCard(C);
 		}
 	}
