@@ -56,9 +56,9 @@ public class Player
     System.out.println(this.Hand);
   }
 
-  public Card takeTurn()
+  public Card takeTurn(Card C)
   {
-    this.pickupCard();
+    this.pickupCard(C);
     return chooseDiscard();
   }
   public Card chooseDiscard()

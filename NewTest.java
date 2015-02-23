@@ -7,11 +7,13 @@ public class NewTest
     Racko Game = new Racko();
     Scanner keyboard = new Scanner(System.in);
 
-	
+
     Game.addPlayer("Hank", 'h');
     Game.addPlayer("Cortana", 'c');
     Game.getCards();
     Game.deal();
-	System.out.println(Game);
+	  System.out.println(Game);
+    Game.
+
   }
 }
