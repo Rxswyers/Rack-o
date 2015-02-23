@@ -7,6 +7,7 @@ public class Racko
 	ArrayList<Card> Cards = new ArrayList<Card>();
 	Deck DrawPile = new Deck();
 	Deck DiscardPile = new Deck();
+	int currentTurn;
 	//methods
 	//Name: 		getCards
 	//Parameters:	none
@@ -51,7 +52,7 @@ public class Racko
 		{
 			this.Players.add(new Computer(name));
 		}
-		
+
 	}
 	//Name:			deal
 	//Parameters:	none
@@ -81,6 +82,8 @@ public class Racko
 		{
 			DrawPile.addCard(this.Cards.get(num));
 		}
+		//sets player one as going first
+		this.currentTurn = 0;
 	}
 	//Name:			checkDeck
 	//Parameters:	none
@@ -112,6 +115,27 @@ public class Racko
 		{
 			C.setState(false);
 			DrawPile.addCard(C);
+		}
+	}
+	public void nextTurn()
+	{
+		switch(currentTurn % this.Players.size())
+		{
+			case 0:
+				this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile()));
+				//pickp here
+		}
+		this.currentTurn ++;
+	}
+	public Card drawFrom(int choice)
+	{
+		if(choice == 1)
+		{
+			return DrawPile.draw();
+		}
+		else
+		{
+			return DiscardPile.draw();
 		}
 	}
 	public String toString()

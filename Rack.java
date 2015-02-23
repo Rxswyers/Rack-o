@@ -5,19 +5,40 @@ public class Rack
 	private ArrayList<Card> Hand = new ArrayList<Card>();
 
 	//methods
+	//Name:				addCard
+	//Parameters:	a Card
+	//Returns:		boolean
+	//Description:
 	public boolean addCard(Card C)
 	{
-		C.setState(true);
 		return this.Hand.add(C);
 	}
-	public Card discard(int index)
+	//Name:
+	//Parameters:
+	//Returns:
+	//Description:
+	public Card discard(int value)
 	{
-		return this.Hand.remove(index);
+		for(Card C:Hand)
+		{
+			if(C.getValue() == value)
+			{
+				return C;
+			}
+		}
 	}
+	//Name:
+	//Parameters:
+	//Returns:
+	//Description:
 	public int getSize()
 	{
 		return this.Hand.size();
 	}
+	//Name:
+	//Parameters:
+	//Returns:
+	//Description:
 	public String toString()
 	{
 		String result = "\n";

@@ -1,3 +1,4 @@
+import java.util.Scanner;
 public class Player
 {
   //members
@@ -5,6 +6,7 @@ public class Player
   protected Rack Hand = new Rack();
   protected int score;				//this score is going to be the actual score
   protected int currentScore;			//this will be the calculated score at the end of each turn
+  protected Card ExtraCard = new Card();
   //methods
 
   public Player(String name)
@@ -40,16 +42,43 @@ public class Player
   //other methods
   public void pickupCard(Card C)
   {
-    this.Hand.addCard(C);
+    C.setState(true); //flips the card up so the value can be seen
+    System.out.println("Picked up:");
+    this.showExtraCard();
+    //this.Hand.addCard(C);
+  }
+  public void showExtraCard()
+  {
+    System.out.println(this.ExtraCard);
   }
   public void printHand()
   {
     System.out.println(this.Hand);
   }
 
-  public void takeTurn()
+  public Card takeTurn()
   {
+    this.pickupCard();
+    return chooseDiscard();
+  }
+  public Card chooseDiscard()
+  {
+    Scanner keyboard = new Scanner(System.in);
+    int choice;
+    System.out.println("My Rack:")
+    System.out.println(this.Hand);
+    System.out.println("What card do you want to discard? (Enter the value of the card)");
+    choice = keyboard.nextInt();
+    return this.Hand.discard(choice);
 
+  }
+  public int choosePile()
+  {
+    Scanner keyboard = new Scanner(System.in);
+    int choice;
+    System.out.println("What pile would you like to pick up from? (0 for Draw, 1 for Discard)");
+    choice = keyboard.nextInt();
+    return choice;
   }
   //public void countScore()
   //{
