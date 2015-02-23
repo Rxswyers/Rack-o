@@ -21,9 +21,16 @@ public class Deck
 	{
 		return Pile.empty();
 	}
-	public void showTop()
+	public String top()
 	{
-		System.out.println(this.Pile.peek());
+		if(this.empty())
+		{
+			return "O";
+		}
+		else
+		{
+			return this.Pile.peek().toString();
+		}
 	}
 	public String toString()
 	{

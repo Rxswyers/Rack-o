@@ -6,12 +6,12 @@ public class NewTest
     Deck Stuff = new Deck();
     Racko Game = new Racko();
     Scanner keyboard = new Scanner(System.in);
-    Player P1 = new Player();
-    Player P2 = new Player();
-    Game.addPlayer(P1);
-    Game.addPlayer(P2);
+
+	
+    Game.addPlayer("Hank", 'h');
+    Game.addPlayer("Cortana", 'c');
     Game.getCards();
     Game.deal();
-    Game.checkDeck();
+	System.out.println(Game);
   }
 }

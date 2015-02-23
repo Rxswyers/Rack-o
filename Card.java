@@ -40,7 +40,7 @@ public class Card
 		if(this.getState())
 			s += this.getValue(); //face up
 		else
-			s+= "x";//face down;
+			s+= "X";//face down;
 		return s;
 	}
 }

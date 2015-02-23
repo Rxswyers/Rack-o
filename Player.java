@@ -7,6 +7,10 @@ public class Player
   protected int currentScore;			//this will be the calculated score at the end of each turn
   //methods
 
+  public Player(String name)
+  {
+	  this.setName(name);
+  }
   //sets
   public void setScore(int s)
   {

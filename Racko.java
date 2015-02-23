@@ -8,9 +8,9 @@ public class Racko
 	Deck DrawPile = new Deck();
 	Deck DiscardPile = new Deck();
 	//methods
-	//Name: 				getCards
-	//Parameters:		none
-	//Returns:			N/A
+	//Name: 		getCards
+	//Parameters:	none
+	//Returns:		N/A
 	//Description:	Depending on the number of players there are,
 	// a certain number of cards will be used for the game. After
 	// the number of cards is decided, they are shuffled.
@@ -35,17 +35,27 @@ public class Racko
 		}
 		Collections.shuffle(this.Cards);
 	}
-	//Name:					addPlayer
-	//Paramaters:		a Player
-	//Returns:			N/A
+	//Name:			addPlayer
+	//Paramaters:	a Player
+	//Returns:		N/A
 	//Description:	Adds a player to the ArrayList of players
-	public void addPlayer(Player P)
+	//public void addPlayer(Player P)
+	public void addPlayer(String name, char type)
 	{
-		this.Players.add(P);
+		//this.Players.add(P);
+		if(type == 'h' || type == 'H')
+		{
+			this.Players.add(new Human(name));
+		}
+		else
+		{
+			this.Players.add(new Computer(name));
+		}
+		
 	}
-	//Name:					deal
-	//Parameters:		none
-	//Returns:			N/A
+	//Name:			deal
+	//Parameters:	none
+	//Returns:		N/A
 	//Description:	This method deals 10 cards to each player and then
 	// populates the DrawPile with the rest of the cards.
 	public void deal()
@@ -62,9 +72,9 @@ public class Racko
 			}
 		}
 		//Used for debugging
-		System.out.println("Player one's hand");
+		System.out.println(this.Players.get(0).getName() +"'s hand");
 		this.Players.get(0).printHand();
-		System.out.println("Player two's hand");
+		System.out.println(this.Players.get(1).getName() +"'s hand");
 		this.Players.get(1).printHand();
 		//Populates the draw pile with the rest of the cards that weren't dealt to players
 		for(int num = count; num < this.Cards.size(); num++)
@@ -72,9 +82,9 @@ public class Racko
 			DrawPile.addCard(this.Cards.get(num));
 		}
 	}
-	//Name:					checkDeck
-	//Parameters:		none
-	//Returns:			N/A
+	//Name:			checkDeck
+	//Parameters:	none
+	//Returns:		N/A
 	//Description:	Checks to see if the drawPile is empty, if it is, it'll
 	// call switchDecks()
 	public void checkDeck()
@@ -84,9 +94,9 @@ public class Racko
 			this.switchDecks();
 		}
 	}
-	//Name:					switchDecks
-	//Parameters:		none
-	//Returns:			N/A
+	//Name:			switchDecks
+	//Parameters:	none
+	//Returns:		N/A
 	//Description:	Empties out the discard pile, shuffles the cards,
 	// then populates the draw pile with those cards
 	public void switchDecks()
@@ -103,5 +113,9 @@ public class Racko
 			C.setState(false);
 			DrawPile.addCard(C);
 		}
+	}
+	public String toString()
+	{
+		return DrawPile.top() + "     "+ DiscardPile.top();
 	}
 }
