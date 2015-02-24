@@ -26,6 +26,7 @@ public class Rack
 				return C;
 			}
 		}
+		return new Card(0);
 	}
 	//Name:
 	//Parameters:

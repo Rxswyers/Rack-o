@@ -68,7 +68,7 @@ public class Racko
 		{
 			for(int j = 0; j < 10; j++)
 			{
-				this.Players.get(i).pickupCard(this.Cards.get(count));
+				this.Players.get(i).getCard(this.Cards.get(count));
 				count++;
 			}
 		}
