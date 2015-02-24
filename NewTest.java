@@ -13,7 +13,7 @@ public class NewTest
     Game.getCards();
     Game.deal();
 	  System.out.println(Game);
-    //Game.
+    Game.nextTurn();
 
   }
 }

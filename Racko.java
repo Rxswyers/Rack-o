@@ -82,6 +82,7 @@ public class Racko
 		{
 			DrawPile.addCard(this.Cards.get(num));
 		}
+		System.out.println(DrawPile);
 		//sets player one as going first
 		this.currentTurn = 0;
 	}
@@ -122,14 +123,19 @@ public class Racko
 		switch(currentTurn % this.Players.size())
 		{
 			case 0:
-				this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile()));
-				//pickp here
+				DiscardPile.addCard(this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile())));
+			case 1:
+				this.Players.get(1).takeTurn(this.drawFrom(this.Players.get(1).choosePile()));
+			case 2:
+				this.Players.get(2).takeTurn(this.drawFrom(this.Players.get(2).choosePile()));
+			case 3:
+				this.Players.get(3).takeTurn(this.drawFrom(this.Players.get(3).choosePile()));
 		}
-		this.currentTurn ++;
+		//this.currentTurn ++;
 	}
 	public Card drawFrom(int choice)
 	{
-		if(choice == 1)
+		if(choice == 0)
 		{
 			return DrawPile.draw();
 		}

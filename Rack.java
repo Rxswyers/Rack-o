@@ -19,7 +19,7 @@ public class Rack
 	//Description:
 	public Card discard(int value)
 	{
-		for(Card C:Hand)
+		for(Card C:this.Hand)
 		{
 			if(C.getValue() == value)
 			{

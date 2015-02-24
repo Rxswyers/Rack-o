@@ -48,6 +48,7 @@ public class Player
   public void pickupCard(Card C)
   {
     C.setState(true); //flips the card up so the value can be seen
+    this.ExtraCard = C;
     System.out.println("Picked up:");
     this.showExtraCard();
     //this.Hand.addCard(C);
@@ -74,7 +75,15 @@ public class Player
     System.out.println(this.Hand);
     System.out.println("What card do you want to discard? (Enter the value of the card)");
     choice = keyboard.nextInt();
-    return this.Hand.discard(choice);
+    if(choice == this.ExtraCard.getValue())
+    {
+      return this.ExtraCard;
+    }
+    else
+    {
+      return this.Hand.discard(choice);
+    }
+
 
   }
   public int choosePile()
@@ -83,6 +92,11 @@ public class Player
     int choice;
     System.out.println("What pile would you like to pick up from? (0 for Draw, 1 for Discard)");
     choice = keyboard.nextInt();
+    while(choice != 0 && choice != 1)
+    {
+      System.out.println("You did not enter 0 or 1. Please enter 0 for the Draw pile or 1 for the Discard pile:");
+      choice = keyboard.nextInt();
+    }
     return choice;
   }
   //public void countScore()
