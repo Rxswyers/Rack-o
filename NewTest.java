@@ -14,6 +14,7 @@ public class NewTest
     Game.deal();
 	  System.out.println(Game);
     Game.nextTurn();
+    System.out.println(Game);
 
   }
 }
