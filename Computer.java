@@ -4,5 +4,12 @@ public class Computer extends Player
 	{
 		super(name);
 	}
-	
+	public int choosePile()
+	{
+		return 1;
+	}
+	public Card takeTurn(Card C)
+	{
+		return new Card(0);
+	}
 }

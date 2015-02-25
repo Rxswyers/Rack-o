@@ -61,20 +61,13 @@ public class Rack
 		int high = 0;
 		for(Card C: this.Hand)
 		{
-			System.out.println("Card Value: " + C.getValue());
-			System.out.println("Least before if: "+ least);
 			if(least < C.getValue())
 			{
 				least = C.getValue();
-				System.out.println("Least in for loop: " + least);
 				run ++;
-				System.out.println("Run in for loop: " + run);
-				System.out.println("Highest Run: " + highestRun);
-
 			}
 			else
 			{
-				System.out.println("Least is bigger than this number");
 				if(run > highestRun)
 				{
 					highestRun = run;
