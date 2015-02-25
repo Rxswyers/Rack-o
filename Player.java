@@ -70,6 +70,7 @@ public class Player
   public Card chooseDiscard()
   {
     Scanner keyboard = new Scanner(System.in);
+    Card Result;
     int choice;
     System.out.println("My Rack:");
     System.out.println(this.Hand);
@@ -77,12 +78,14 @@ public class Player
     choice = keyboard.nextInt();
     if(choice == this.ExtraCard.getValue())
     {
-      return this.ExtraCard;
+      Result = this.ExtraCard;
     }
     else
     {
-      return this.Hand.discard(this.ExtraCard,this.Hand.find(choice));
+      Result = this.Hand.discard(this.ExtraCard,this.Hand.find(choice));
     }
+    System.out.println("Current rack score: " + this.Hand.score());
+    return Result;
 
 
   }

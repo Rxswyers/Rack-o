@@ -44,6 +44,43 @@ public class Rack
 	{
 		return this.Hand.size();
 	}
+	public int score()
+	{
+		int run = 1;
+		int highestRun = 0;
+		int score = 0;
+		int least = this.Hand.get(0).getValue();
+		int high = 0;
+		for(Card C: this.Hand)
+		{
+			System.out.println("Card Value: " + C.getValue());
+			System.out.println("Least before if: "+ least);
+			if(least < C.getValue())
+			{
+				least = C.getValue();
+				System.out.println("Least in for loop: " + least);
+				run ++;
+				System.out.println("Run in for loop: " + run);
+
+			}
+			else
+			{
+				System.out.println("Least is bigger than this number");
+				if(run > highestRun)
+				{
+					highestRun = run;
+				}
+				run = 1;
+				least = C.getValue();
+			}
+		}
+		score = highestRun * 5;
+		if(score == 50)
+		{
+			score += 25;
+		}
+		return score;
+	}
 	//Name:
 	//Parameters:
 	//Returns:
@@ -51,7 +88,7 @@ public class Rack
 	public String toString()
 	{
 		String result = "\n";
-		for(int i = 0; i < Hand.size(); i ++)
+		for(int i = this.Hand.size() - 1; i >= 0; i --)
 		{
 			result += this.Hand.get(i) +"\n";
 		}
