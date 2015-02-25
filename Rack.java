@@ -25,6 +25,10 @@ public class Rack
 		return Discard;
 
 	}
+	//Name:
+	//Parameters:
+	//Returns:
+	//Description:
 	public Card find(int value)
 	{
 		for(Card C:this.Hand)
@@ -44,6 +48,10 @@ public class Rack
 	{
 		return this.Hand.size();
 	}
+	//Name:
+	//Parameters:
+	//Returns:
+	//Description:
 	public int score()
 	{
 		int run = 1;
