@@ -69,6 +69,7 @@ public class Rack
 				System.out.println("Least in for loop: " + least);
 				run ++;
 				System.out.println("Run in for loop: " + run);
+				System.out.println("Highest Run: " + highestRun);
 
 			}
 			else
