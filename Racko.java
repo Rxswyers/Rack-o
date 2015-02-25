@@ -126,6 +126,7 @@ public class Racko
 		{
 			case 0:
 				DiscardPile.addCard(this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile())));
+				this.Players.get(0).printHand();
 				//System.out.println("This is what you chose " + this.Players.get(0).choosePile());
 				break;
 			case 1:

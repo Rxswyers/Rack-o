@@ -81,7 +81,7 @@ public class Player
     }
     else
     {
-      return this.Hand.discard(choice);
+      return this.Hand.discard(this.ExtraCard,this.Hand.find(choice));
     }
 
 

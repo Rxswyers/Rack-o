@@ -17,7 +17,15 @@ public class Rack
 	//Parameters:
 	//Returns:
 	//Description:
-	public Card discard(int value)
+	public Card discard(Card Replace,Card Discard)
+	{
+		int place = this.Hand.indexOf(Discard);
+		this.Hand.remove(Discard);
+		this.Hand.add(place,Replace);
+		return Discard;
+
+	}
+	public Card find(int value)
 	{
 		for(Card C:this.Hand)
 		{
