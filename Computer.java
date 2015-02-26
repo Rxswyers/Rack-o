@@ -4,6 +4,11 @@ public class Computer extends Player
 	{
 		super(name);
 	}
+	public void pickupCard(Card C) // set this to abstract
+	{
+		C.setState(true); //flips the card up so the value can be seen
+		this.ExtraCard = C;
+	}
 	public int choosePile(Card Top)
 	{
 		if(this.positionWanted(Top) < 0)//the Discard pile is emtpy
@@ -92,7 +97,6 @@ public class Computer extends Player
 		}
 		else
 		{
-			System.out.println("Swapping it for: " +this.Hand.search(pos));
 			return this.Hand.discard(this.ExtraCard,this.Hand.search(pos));
 		}
 	}

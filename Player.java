@@ -45,13 +45,7 @@ abstract public class Player
     C.setState(true);
     this.Hand.addCard(C);
   }
-  public void pickupCard(Card C) // set this to abstract
-  {
-    C.setState(true); //flips the card up so the value can be seen
-    this.ExtraCard = C;
-    System.out.println("Picked up:");
-    this.showExtraCard();
-  }
+  public abstract void pickupCard(Card C);
   public void showExtraCard()
   {
     System.out.println(this.ExtraCard);
@@ -60,18 +54,14 @@ abstract public class Player
   {
     System.out.println(this.Hand);
   }
-  abstract int choosePile(Card Top);
-  abstract Card chooseDiscard();
+  public abstract int choosePile(Card Top);
+  public abstract Card chooseDiscard();
   public Card takeTurn(Card C)
 	{
 		this.pickupCard(C);
 		Card result = chooseDiscard();
-		this.currentScore = this.Hand.score();
+		this.setCurrentScore(this.Hand.score());
+    System.out.println("Current Score: "+ this.currentScore);
 		return result;
 	}
-
-  //public void countScore()
-  //{
-
-  //}
 }

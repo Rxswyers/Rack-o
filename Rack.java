@@ -82,6 +82,7 @@ public class Rack
 			}
 		}
 		score = highestRun * 5;
+		System.out.println("Highest run: "+ highestRun);
 		if(score == 50)
 		{
 			score += 25;

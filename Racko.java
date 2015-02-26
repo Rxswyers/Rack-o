@@ -126,17 +126,20 @@ public class Racko
 		{
 			case 0:
 				DiscardPile.addCard(this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile(this.DiscardPile.getTop()))));
+				System.out.println(this.Players.get(0).getname() + "'s Hand'");
 				this.Players.get(0).printHand();
-				//System.out.println("This is what you chose " + this.Players.get(0).choosePile());
 				break;
 			case 1:
 				DiscardPile.addCard(this.Players.get(1).takeTurn(this.drawFrom(this.Players.get(1).choosePile(this.DiscardPile.getTop()))));
+				System.out.println(this.Players.get(1).getname() + "'s Hand'");
 				this.Players.get(1).printHand();
 				break;
 			case 2:
 			DiscardPile.addCard(this.Players.get(2).takeTurn(this.drawFrom(this.Players.get(2).choosePile(this.DiscardPile.getTop()))));
+			break;
 			case 3:
 			DiscardPile.addCard(this.Players.get(3).takeTurn(this.drawFrom(this.Players.get(3).choosePile(this.DiscardPile.getTop()))));
+			break;
 		}
 		this.currentTurn ++;
 	}
@@ -153,6 +156,19 @@ public class Racko
 	}
 	public String toString()
 	{
+
 		return DrawPile.top() + "     "+ DiscardPile.top();
+	}
+	public boolean checkWin()
+	{
+		for(Player P:Players)
+		{
+			if(P.getCurrentScore() == 75)
+			{
+				System.out.println(P.getName() + " won!!");
+				return true;
+			}
+		}
+		return false;
 	}
 }

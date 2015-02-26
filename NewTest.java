@@ -12,12 +12,12 @@ public class NewTest
     Game.addPlayer("Cortana", 'c');
     Game.getCards();
     Game.deal();
-	  System.out.println(Game);
-    Game.nextTurn();
-    System.out.println(Game);
-    Game.nextTurn();
-    System.out.println(Game);
-    
+    while(Game.checkWin()!= true)
+    {
+      System.out.println(Game);
+      Game.nextTurn();
+    }
+
 
   }
 }

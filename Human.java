@@ -5,6 +5,13 @@ public class Human extends Player
 	{
 		super(name);
 	}
+	public void pickupCard(Card C)
+	{
+		C.setState(true); //flips the card up so the value can be seen
+		this.ExtraCard = C;
+		System.out.println("Picked up:");
+		this.showExtraCard();
+	}
   public Card chooseDiscard()
   {
     Scanner keyboard = new Scanner(System.in);
@@ -30,6 +37,8 @@ public class Human extends Player
   {
     Scanner keyboard = new Scanner(System.in);
     int choice;
+		System.out.println("My Rack:");
+		this.printHand();
 		System.out.println("The top of the discard pile is: " + Top);
     System.out.println("What pile would you like to pick up from? (0 for Draw, 1 for Discard)");
     choice = keyboard.nextInt();
