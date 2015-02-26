@@ -25,6 +25,10 @@ public class Rack
 		return Discard;
 
 	}
+	public Card search(int pos)
+	{
+		return this.Hand.get(pos);
+	}
 	//Name:
 	//Parameters:
 	//Returns:

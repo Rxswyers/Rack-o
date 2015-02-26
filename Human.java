@@ -31,10 +31,11 @@ public class Human extends Player
     return Result;
 
   }
-  public int choosePile()
+  public int choosePile(Card Top)
   {
     Scanner keyboard = new Scanner(System.in);
     int choice;
+		System.out.println("The top of the discard pile is: " + Top);
     System.out.println("What pile would you like to pick up from? (0 for Draw, 1 for Discard)");
     choice = keyboard.nextInt();
     while(choice != 0 && choice != 1)

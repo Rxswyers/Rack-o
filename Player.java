@@ -45,7 +45,7 @@ abstract public class Player
     C.setState(true);
     this.Hand.addCard(C);
   }
-  public void pickupCard(Card C)
+  public void pickupCard(Card C) // set this to abstract
   {
     C.setState(true); //flips the card up so the value can be seen
     this.ExtraCard = C;
@@ -60,7 +60,7 @@ abstract public class Player
   {
     System.out.println(this.Hand);
   }
-  abstract int choosePile();
+  abstract int choosePile(Card Top);
   abstract Card takeTurn(Card C);
 
   //public void countScore()

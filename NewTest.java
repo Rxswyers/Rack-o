@@ -15,6 +15,9 @@ public class NewTest
 	  System.out.println(Game);
     Game.nextTurn();
     System.out.println(Game);
+    Game.nextTurn();
+    System.out.println(Game);
+    
 
   }
 }

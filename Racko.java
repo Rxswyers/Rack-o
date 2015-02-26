@@ -125,19 +125,20 @@ public class Racko
 		switch(num)
 		{
 			case 0:
-				DiscardPile.addCard(this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile())));
+				DiscardPile.addCard(this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile(this.DiscardPile.getTop()))));
 				this.Players.get(0).printHand();
 				//System.out.println("This is what you chose " + this.Players.get(0).choosePile());
 				break;
 			case 1:
-				this.Players.get(1).takeTurn(this.drawFrom(this.Players.get(1).choosePile()));
+				this.Players.get(1).takeTurn(this.drawFrom(this.Players.get(1).choosePile(this.DiscardPile.getTop())));
+				this.Players.get(1).printHand();
 				break;
 			//case 2:
 				//this.Players.get(2).takeTurn(this.drawFrom(this.Players.get(2).choosePile()));
 			//case 3:
 				//this.Players.get(3).takeTurn(this.drawFrom(this.Players.get(3).choosePile()));
 		}
-		//this.currentTurn ++;
+		this.currentTurn ++;
 	}
 	public Card drawFrom(int choice)
 	{

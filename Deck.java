@@ -21,6 +21,17 @@ public class Deck
 	{
 		return Pile.empty();
 	}
+	public Card getTop()
+	{
+		if(this.empty())
+		{
+			return new Card(0);
+		}
+		else
+		{
+			return this.Pile.peek();
+		}
+	}
 	public String top()
 	{
 		if(this.empty())
