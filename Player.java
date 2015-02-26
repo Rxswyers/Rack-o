@@ -61,7 +61,14 @@ abstract public class Player
     System.out.println(this.Hand);
   }
   abstract int choosePile(Card Top);
-  abstract Card takeTurn(Card C);
+  abstract Card chooseDiscard();
+  public Card takeTurn(Card C)
+	{
+		this.pickupCard(C);
+		Card result = chooseDiscard();
+		this.currentScore = this.Hand.score();
+		return result;
+	}
 
   //public void countScore()
   //{

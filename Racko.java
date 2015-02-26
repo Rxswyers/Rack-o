@@ -130,13 +130,13 @@ public class Racko
 				//System.out.println("This is what you chose " + this.Players.get(0).choosePile());
 				break;
 			case 1:
-				this.Players.get(1).takeTurn(this.drawFrom(this.Players.get(1).choosePile(this.DiscardPile.getTop())));
+				DiscardPile.addCard(this.Players.get(1).takeTurn(this.drawFrom(this.Players.get(1).choosePile(this.DiscardPile.getTop()))));
 				this.Players.get(1).printHand();
 				break;
-			//case 2:
-				//this.Players.get(2).takeTurn(this.drawFrom(this.Players.get(2).choosePile()));
-			//case 3:
-				//this.Players.get(3).takeTurn(this.drawFrom(this.Players.get(3).choosePile()));
+			case 2:
+			DiscardPile.addCard(this.Players.get(2).takeTurn(this.drawFrom(this.Players.get(2).choosePile(this.DiscardPile.getTop()))));
+			case 3:
+			DiscardPile.addCard(this.Players.get(3).takeTurn(this.drawFrom(this.Players.get(3).choosePile(this.DiscardPile.getTop()))));
 		}
 		this.currentTurn ++;
 	}

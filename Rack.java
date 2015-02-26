@@ -22,6 +22,7 @@ public class Rack
 		int place = this.Hand.indexOf(Discard);
 		this.Hand.remove(Discard);
 		this.Hand.add(place,Replace);
+		System.out.println("Discarding: " + Discard);
 		return Discard;
 
 	}

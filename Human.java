@@ -5,11 +5,6 @@ public class Human extends Player
 	{
 		super(name);
 	}
-	public Card takeTurn(Card C)
-  {
-    this.pickupCard(C);
-    return chooseDiscard();
-  }
   public Card chooseDiscard()
   {
     Scanner keyboard = new Scanner(System.in);

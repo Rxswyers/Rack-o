@@ -12,20 +12,14 @@ public class Computer extends Player
 		}
 		else if(this.checkPosition(this.positionWanted(Top)))
 		{
-			return 1; //draw from the discard
+			return 0; //draw from the discard
 		}
 		else
 		{
-			return 0; //draw from the draw pile
+			return 1; //draw from the draw pile
 		}
 	}
-	public Card takeTurn(Card C)
-	{
-		this.pickupCard(C);
-		Card result = chooseDiscard();
-		this.currentScore = this.Hand.score();
-		return result;
-	}
+
 	public int positionWanted(Card C)
 	{
 		int value = C.getValue();
@@ -98,6 +92,7 @@ public class Computer extends Player
 		}
 		else
 		{
+			System.out.println("Swapping it for: " +this.Hand.search(pos));
 			return this.Hand.discard(this.ExtraCard,this.Hand.search(pos));
 		}
 	}
