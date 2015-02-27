@@ -5,6 +5,10 @@ public class Racko
 	//members
 	ArrayList<Player> Players = new ArrayList<Player>();
 	ArrayList<Card> Cards = new ArrayList<Card>();
+	boolean showOpponent;
+	boolean limitTurns;
+	int turns;
+	ArrayList<String> Cheats = new ArrayList<String>();
 	Deck DrawPile = new Deck();
 	Deck DiscardPile = new Deck();
 	int currentTurn;
@@ -73,16 +77,17 @@ public class Racko
 			}
 		}
 		//Used for debugging
+		/*
 		System.out.println(this.Players.get(0).getName() +"'s hand");
 		this.Players.get(0).printHand();
 		System.out.println(this.Players.get(1).getName() +"'s hand");
 		this.Players.get(1).printHand();
+		*/
 		//Populates the draw pile with the rest of the cards that weren't dealt to players
 		for(int num = count; num < this.Cards.size(); num++)
 		{
 			DrawPile.addCard(this.Cards.get(num));
 		}
-		System.out.println(DrawPile);
 		//sets player one as going first
 		this.currentTurn = 0;
 	}
@@ -121,18 +126,22 @@ public class Racko
 	public void nextTurn()
 	{
 		int num = currentTurn % this.Players.size();
-		System.out.println("This is num: " + num);
 		switch(num)
 		{
 			case 0:
 				DiscardPile.addCard(this.Players.get(0).takeTurn(this.drawFrom(this.Players.get(0).choosePile(this.DiscardPile.getTop()))));
-				System.out.println(this.Players.get(0).getname() + "'s Hand'");
+				System.out.println(this.Players.get(0).getName() + "'s Hand'");
 				this.Players.get(0).printHand();
+				this.Players.get(0).updateScore();
 				break;
 			case 1:
 				DiscardPile.addCard(this.Players.get(1).takeTurn(this.drawFrom(this.Players.get(1).choosePile(this.DiscardPile.getTop()))));
-				System.out.println(this.Players.get(1).getname() + "'s Hand'");
-				this.Players.get(1).printHand();
+				if(showOpponent)
+				{
+					System.out.println(this.Players.get(1).getName() + "'s Hand'");
+					this.Players.get(1).printHand();
+				}
+				this.Players.get(1).updateScore();
 				break;
 			case 2:
 			DiscardPile.addCard(this.Players.get(2).takeTurn(this.drawFrom(this.Players.get(2).choosePile(this.DiscardPile.getTop()))));
@@ -141,6 +150,7 @@ public class Racko
 			DiscardPile.addCard(this.Players.get(3).takeTurn(this.drawFrom(this.Players.get(3).choosePile(this.DiscardPile.getTop()))));
 			break;
 		}
+		this.checkDeck();
 		this.currentTurn ++;
 	}
 	public Card drawFrom(int choice)
@@ -169,6 +179,45 @@ public class Racko
 				return true;
 			}
 		}
+		if(limitTurns)
+		{
+			if(this.turns == currentTurn)
+			{
+				for(Player P:Players)
+				{
+					System.out.println(P.getName()+" Score: "+P.getCurrentScore());
+				}
+				return true;
+			}
+		}
 		return false;
+	}
+	public void loadCheats(String []args)
+	{
+		for(String arg:args)
+		{
+			Cheats.add(arg);
+		}
+		checkCheats();
+	}
+	public void checkCheats()
+	{
+		if(Cheats.contains("/c"))
+		{
+			showOpponent = true;
+		}
+		else
+		{
+			showOpponent = false;
+		}
+		if(Cheats.contains("/n"))
+		{
+			limitTurns = true;
+			turns = Cheats.indexOf("/n") + 1;
+		}
+		else
+		{
+			limitTurns = false;
+		}
 	}
 }

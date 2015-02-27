@@ -59,10 +59,10 @@ public class Rack
 	//Description:
 	public int score()
 	{
-		int run = 1;
+		int run = 0;
 		int highestRun = 0;
 		int score = 0;
-		int least = this.Hand.get(0).getValue();
+		int least = 0;
 		int high = 0;
 		for(Card C: this.Hand)
 		{
@@ -73,19 +73,13 @@ public class Rack
 			}
 			else
 			{
-				if(run > highestRun)
+				score = run * 5;
+				if(score == 50)
 				{
-					highestRun = run;
+					score += 25;
 				}
-				run = 1;
-				least = C.getValue();
+				return score;
 			}
-		}
-		score = highestRun * 5;
-		System.out.println("Highest run: "+ highestRun);
-		if(score == 50)
-		{
-			score += 25;
 		}
 		return score;
 	}

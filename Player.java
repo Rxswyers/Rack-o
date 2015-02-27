@@ -60,8 +60,10 @@ abstract public class Player
 	{
 		this.pickupCard(C);
 		Card result = chooseDiscard();
-		this.setCurrentScore(this.Hand.score());
-    System.out.println("Current Score: "+ this.currentScore);
 		return result;
 	}
+  public void updateScore()
+  {
+    this.setCurrentScore(this.Hand.score());
+  }
 }
