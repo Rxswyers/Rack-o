@@ -10,6 +10,8 @@ public class ImageTest extends JApplet implements ActionListener
 
   public void init()
   {
+    setLayout(new GridLayout(2,2,1,1));
+    setSize(800,600);
     String Images[] = {"blacksailscard.jpg","blacksailsback.jpg"};
     image[0] = getImage(getCodeBase(), Images[0]);
     imageIcons[0] = new ImageIcon(image[0]);
@@ -32,6 +34,7 @@ public class ImageTest extends JApplet implements ActionListener
     Card C = new Card(Images[0],imageIcons[0],25);
     C.setSize(210,225);
     C.addActionListener(this);
+    add(C);
   }
   public void actionPerformed(ActionEvent e)
   {

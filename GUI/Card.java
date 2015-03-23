@@ -56,6 +56,7 @@ public class Card extends JButton
 	}
 	public void paintComponent(Graphics g)
 	{
-		g.drawImage(Pic.getImage(),1,1,this);
+		ImageDrawer.drawScaledImage(this.Pic.getImage(), this, g);
+		//g.drawImage(Pic.getImage(),1,1,this);
 	}
 }
