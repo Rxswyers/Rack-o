@@ -13,7 +13,7 @@ public class Card extends JButton
 	//methods
 
 	//constructor
-	public Card(String, iconName, ImageIcon img, int v)
+	public Card(String iconName, ImageIcon img, int v)
 	{
 		super(iconName,img);
 		this.Pic = img;

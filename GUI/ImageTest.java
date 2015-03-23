@@ -6,7 +6,7 @@ import java.awt.event.*;
 public class ImageTest extends JApplet implements ActionListener
 {
   Image image[] = new Image[2];
-  ImageIcon imageIcons[] = new Imageicon[2];
+  ImageIcon imageIcons[] = new ImageIcon[2];
 
   public void init()
   {
