@@ -1,16 +1,27 @@
-public class Card
+import javax.swing.*;
+import java.awt.*;
+import java.applet.*;
+
+public class Card extends JButton
 {
 	//members
 	private int value;
 	private boolean state; //true - flipped up, false - face down
+	private ImageIcon Pic;
+	private String picFile;
 
 	//methods
 
 	//constructor
-	public Card(int v)
+	public Card(String, iconName, ImageIcon img, int v)
 	{
+		super(iconName,img);
+		this.Pic = img;
+		this.picFile = iconName;
 		this.value = v;
 		this.state = false;
+		setSize(210,225);
+		setVisible(true);
 	}
 
 	//gets
@@ -42,5 +53,9 @@ public class Card
 		else
 			s+= "X";//face down;
 		return s;
+	}
+	public void paintComponent(Graphics g)
+	{
+		g.drawImage(Pic.getImage(),1,1,this);
 	}
 }

@@ -1,43 +1,40 @@
-import java.util.ArrayList;
-public class Test
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
+
+public class Test extends JFrame implements WindowListener, ActionListener
 {
-	public static void main(String args[])
+	//members
+	Button B;
+
+	public Test(String s)
 	{
-		Rack P1Rack = new Rack();
-		Card C1 = new Card(1);
-		Card C2 = new Card(2);
-		Card C3 = new Card(3);
+		super(s);
+		JPanel panel = new JPanel(new BorderLayout(5,5));
 
-		P1Rack.addCard(C1);
-		P1Rack.addCard(C2);
-		P1Rack.addCard(C3);
+		setSize(250,200);
+		panel.setSize(250,250);
+		addWindowListener(this);
+		B = new Button("Testing");
+		panel.add("East",B);
+		B.addActionListener(this);
+		getContentPane().add(panel);
+		setVisible(true);
+	}
+	public void windowClosed(WindowEvent event) {}
+	public void windowDeiconified(WindowEvent event) {}
+	public void windowIconified(WindowEvent event) {}
+	public void windowActivated(WindowEvent event) {}
+	public void windowDeactivated(WindowEvent event) {}
+	public void windowOpened(WindowEvent event) {}
+	public void windowClosing(WindowEvent event) {System.exit(0);}
 
-
-		System.out.println("Removing " + P1Rack.discard(2));
-		System.out.println(P1Rack);
-
-		Player P1 = new Player();
-		Player P2 = new Player();
-		Player P3 = new Player();
-		P1.pickupCard(C1);
-		P1.pickupCard(C2);
-
-		P1.printHand();
-
-		Deck Pickup = new Deck();
-
-		Pickup.addCard(C1);
-		Pickup.addCard(C2);
-
-		System.out.println(Pickup.getSize());
-		System.out.println(Pickup.draw());
-		System.out.println(Pickup.getSize());
-
-		Racko R = new Racko();
-		R.addPlayer(P1);
-		R.addPlayer(P2);
-		R.addPlayer(P3);
-		R.getCards();
-
+	public void actionPerformed(ActionEvent event)
+	{
+		System.out.println("poop");
+	}
+	public static void main(String []args)
+	{
+		new Test("Title");
 	}
 }
