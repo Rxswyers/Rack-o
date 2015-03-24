@@ -20,6 +20,7 @@ public class Card extends JButton
 		this.picFile = iconName;
 		this.value = v;
 		this.state = false;
+		this.setToolTipText(Integer.toString(this.value));
 		setSize(210,225);
 		setVisible(true);
 	}

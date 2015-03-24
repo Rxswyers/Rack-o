@@ -10,8 +10,9 @@ public class ImageTest extends JApplet implements ActionListener
 
   public void init()
   {
-    setLayout(new GridLayout(2,2,1,1));
-    setSize(800,600);
+	setLayout(new CardLayout(0,0));
+	setSize(800,600);
+	
     String Images[] = {"blacksailscard.jpg","blacksailsback.jpg"};
     image[0] = getImage(getCodeBase(), Images[0]);
     imageIcons[0] = new ImageIcon(image[0]);
@@ -29,12 +30,31 @@ public class ImageTest extends JApplet implements ActionListener
     }
     catch (InterruptedException e)
     {}
-
+	
     showStatus("Loaded Image");
+	
+	JPanel panel = new JPanel();
+	add(panel);
+	panel.setLayout(new CardLayout(0,0));
+	
+	JLayeredPane jlp = new JLayeredPane();
+	panel.add(jlp);
+	jlp.setLayout(null);
+	
     Card C = new Card(Images[0],imageIcons[0],25);
-    C.setSize(210,225);
-    C.addActionListener(this);
-    add(C);
+    C.addActionListener(this);	
+	C.setBounds(40,400,95,140);
+	jlp.add(C,new Integer(3));
+	
+	Card C2 = new Card (Images[0],imageIcons[0],20);
+	C2.addActionListener(this);
+	C2.setBounds(60,380,95,140);
+	jlp.add(C2,new Integer(2));
+	
+	Card C3 = new Card (Images[0],imageIcons[0],19);
+	C3.addActionListener(this);
+	C3.setBounds(80,360,95,140);
+	jlp.add(C3, new Integer(1));
   }
   public void actionPerformed(ActionEvent e)
   {
