@@ -46,15 +46,15 @@ public class ImageTest extends JApplet implements ActionListener
 	add(R);
 	R.setLayout(new CardLayout(0,0));
 	Card C;
-	int xOffset = 20;
-	int yOffset = -20;
+	int xOffset = 40;
+	int yOffset = -15;
 	int last = 10;
 	for (int i = 1; i < 11; i ++)
 	{
 		C = new Card(Images[0],imageIcons[0],i);
 		C.addActionListener(this);
 		C.setActionCommand(Integer.toString(i));
-		C.setBounds(120+(xOffset * (i-1)),320+(yOffset*(i-1)),95,140);
+		C.setBounds(120+(xOffset * (i-1)),450+(yOffset*(i-1)),95,140);
 		R.addCard(C,new Integer(10 - i));
 	}
 
