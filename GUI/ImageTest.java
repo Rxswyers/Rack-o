@@ -43,10 +43,11 @@ public class ImageTest extends JApplet implements ActionListener
     showStatus("Loaded Image");
 	Deck D = new Deck();
 	add(D);
+	Card C[] = new Card[2];
 	D.setLayout(new CardLayout(0,0));
 	Card CTest = new Card(Images[0],imageIcons[0],30);
 	CTest.addActionListener(this);
-	//CTest.setBounds(10,10,95,140);
+	
 	Card CTest2 = new Card(Images[0],imageIcons[0],29);
 	CTest2.addActionListener(this);
 	D.addCard(CTest,1,10,10);
