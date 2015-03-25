@@ -1,3 +1,12 @@
+/*Author: 			Ruben Swyers
+* Creation Date: 	March 15, 2015 
+* Due Date: 		March 28, 2015
+* Course: 			CSC243
+* Professor Name: 	Dr. Spiegel
+* Assignment: 		#2 - Racko GUI
+* Filename: 		ImageTest.java
+* Purpose:		  	Testing class to test the classes as I go along
+*/
 import java.applet.*;
 import javax.swing.*;
 import java.awt.*;

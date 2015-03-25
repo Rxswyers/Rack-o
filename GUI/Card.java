@@ -1,3 +1,13 @@
+/*Author: 			Ruben Swyers
+* Creation Date: 	March 15, 2015 
+* Due Date: 		March 28, 2015
+* Course: 			CSC243
+* Professor Name: 	Dr. Spiegel
+* Assignment: 		#2 - Racko GUI
+* Filename: 		Card.java
+* Purpose:		  	This represents a Card in the game. It is a JButton that uses an image,
+					and has a tool tip to display the value
+*/
 import javax.swing.*;
 import java.awt.*;
 import java.applet.*;
@@ -57,6 +67,7 @@ public class Card extends JButton
 	}
 	public void paintComponent(Graphics g)
 	{
+		//Draws the image properly scaled
 		ImageDrawer.drawScaledImage(this.Pic.getImage(), this, g);
 		//g.drawImage(Pic.getImage(),1,1,this);
 	}

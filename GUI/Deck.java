@@ -1,3 +1,13 @@
+/*Author: 			Ruben Swyers
+* Creation Date: 	March 15, 2015 
+* Due Date: 		March 28, 2015
+* Course: 			CSC243
+* Professor Name: 	Dr. Spiegel
+* Assignment: 		#2 - Racko GUI
+* Filename: 		Deck.java
+* Purpose:		  	This represents a Deck in the GUI. It is a JPanel that has a JLayeredPane on it.
+					When a card is added, it gets added to the JLayeredPane.
+*/
 import javax.swing.*;
 import java.awt.*;
 import java.applet.*;

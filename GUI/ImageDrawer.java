@@ -1,14 +1,16 @@
+/*Author: 			www.codejava.net
+* Creation Date: 	unknown
+* Due Date: 		March 28, 2015
+* Course: 			CSC243
+* Professor Name: 	Dr. Spiegel
+* Assignment: 		#2 - Racko GUI
+* Filename: 		ImageDrawer.java
+* Purpose:		  	This is a utility that scales the image to fit in the canvas of a component.
+*/
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
 
-/**
- * This utility class draws and scales an image to fit canvas of a component.
- * if the image is smaller than the canvas, it is kept as it is.
- *
- * @author www.codejava.net
- *
- */
 public class ImageDrawer {
 
     public static void drawScaledImage(Image image, Component canvas, Graphics g) {
