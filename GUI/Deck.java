@@ -25,11 +25,13 @@ public class Deck extends JPanel
 		this.DJLP.setLayout(null);
 	}
 	//methods
-	public void addCard(Card C, int index)
+			//public void addCard(Card C, int index)
+	public void addCard(Card C, int index, int x, int y)
 	{
+		C.setBounds(x,y,95,140);
 		this.DJLP.add(C,new Integer(index));
 	}
-	public Card draw()
+	/*public Card draw()
 	{
 		return this.Pile.pop();
 	}
@@ -74,5 +76,5 @@ public class Deck extends JPanel
 		}
 		return result;
 	}
-
+*/
 }
