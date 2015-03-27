@@ -20,6 +20,7 @@ public class Rack extends JPanel
 	{
 		this.RJLP = new JLayeredPane();
 		this.add(this.RJLP);
+		this.RJLP.setBounds(0,0,600,300);
 		this.RJLP.setLayout(null);
 		
 	}

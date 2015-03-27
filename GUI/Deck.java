@@ -22,6 +22,7 @@ public class Deck extends JPanel
 	{
 		this.DJLP = new JLayeredPane();
 		this.add(this.DJLP);
+		this.DJLP.setBounds(0,0,200,200);
 		this.DJLP.setLayout(null);
 	}
 	//methods
