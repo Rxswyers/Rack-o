@@ -55,7 +55,7 @@ public class ImageTest extends JApplet implements ActionListener
 	Draw.addCard(CTest,1,20,20);
 	Draw.addCard(CTest2,2,22,22);
   //end setting up the draw pile
-  
+
   //Setting up the discard pile
   Deck Discard = new Deck();
   Discard.setBounds(350,200,200,200);
@@ -91,11 +91,14 @@ public class ImageTest extends JApplet implements ActionListener
 		R.addCard(C,new Integer(10 - i));
 	}
   // end rack generation
+  R.printStuff();
+
 	this.setVisible(true);
 	this.validate();
   }
   public void actionPerformed(ActionEvent e)
   {
     System.out.println(e.getActionCommand());
+
   }
 }

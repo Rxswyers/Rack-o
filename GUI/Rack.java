@@ -15,6 +15,7 @@ import java.applet.*;
 public class Rack extends JPanel
 {
 	JLayeredPane RJLP;
+	ArrayList<Card> rack = new ArrayList<Card>();
 
 	public Rack()
 	{
@@ -26,6 +27,29 @@ public class Rack extends JPanel
 	}
 	public void addCard(Card C, int index)
 	{
+		C.setState(true);
+		this.rack.add(C);
 		this.RJLP.add(C,new Integer(index));
+
+	}
+	public void printStuff()
+	{
+		for(int i = this.rack.size() - 1; i >= 0; i --)
+		{
+			System.out.println(this.rack.get(i));
+		}
+	}
+	//Name:
+	//Parameters:
+	//Returns:
+	//Description:
+	public String toString()
+	{
+		String result = "\n";
+		for(int i = this.rack.size() - 1; i >= 0; i --)
+		{
+			result += this.rack.get(i) +"\n";
+		}
+		return result;
 	}
 }
