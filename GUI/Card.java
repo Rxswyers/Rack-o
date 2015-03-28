@@ -1,5 +1,5 @@
 /*Author: 			Ruben Swyers
-* Creation Date: 	March 15, 2015 
+* Creation Date: 	March 15, 2015
 * Due Date: 		March 28, 2015
 * Course: 			CSC243
 * Professor Name: 	Dr. Spiegel
@@ -31,7 +31,6 @@ public class Card extends JButton
 		this.value = v;
 		this.state = false;
 		this.setToolTipText(Integer.toString(this.value));
-		setSize(210,225);
 		setVisible(true);
 	}
 

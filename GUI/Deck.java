@@ -1,5 +1,5 @@
 /*Author: 			Ruben Swyers
-* Creation Date: 	March 15, 2015 
+* Creation Date: 	March 15, 2015
 * Due Date: 		March 28, 2015
 * Course: 			CSC243
 * Professor Name: 	Dr. Spiegel
@@ -17,7 +17,7 @@ public class Deck extends JPanel
 {
 	//members
 	JLayeredPane DJLP;
-	
+
 	public Deck()
 	{
 		this.DJLP = new JLayeredPane();
@@ -29,7 +29,7 @@ public class Deck extends JPanel
 			//public void addCard(Card C, int index)
 	public void addCard(Card C, int index, int x, int y)
 	{
-		C.setBounds(x,y,95,140);
+		C.setBounds(x,y,110,60);
 		this.DJLP.add(C,new Integer(index));
 	}
 	/*public Card draw()

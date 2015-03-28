@@ -41,10 +41,10 @@ public class ImageTest extends JApplet implements ActionListener
     {}
 
     showStatus("Loaded Image");
-	Deck D = new Deck();
-	D.setBounds(10,10,250,250);
-	this.add(D);
-	D.setLayout(null);
+	Deck Draw = new Deck();
+	Draw.setBounds(150,200,200,200);
+	this.add(Draw);
+	Draw.setLayout(null);
 
 
 	//Card Cs[] = new Card[2];
@@ -54,8 +54,21 @@ public class ImageTest extends JApplet implements ActionListener
 
 	Card CTest2 = new Card(Images[0],imageIcons[0],29);
 	CTest2.addActionListener(this);
-	D.addCard(CTest,1,20,20);
-	D.addCard(CTest2,2,22,22);
+	Draw.addCard(CTest,1,20,20);
+	Draw.addCard(CTest2,2,22,22);
+
+  Deck Discard = new Deck();
+  Discard.setBounds(350,200,200,200);
+  this.add(Discard);
+  Discard.setLayout(null);
+
+  Card DTest = new Card(Images[0],imageIcons[0],27);
+  DTest.addActionListener(this);
+
+  Card DTest2 = new Card(Images[0],imageIcons[0],28);
+  DTest2.addActionListener(this);
+  Discard.addCard(DTest,1,20,20);
+  Discard.addCard(DTest2,2,22,22);
 
 	Rack R = new Rack();
 	R.setBounds(0,400,800,200);
@@ -71,8 +84,7 @@ public class ImageTest extends JApplet implements ActionListener
 		C = new Card(Images[0],imageIcons[0],i);
 		C.addActionListener(this);
 		C.setActionCommand(Integer.toString(i));
-		//C.setBounds(120+(xOffset * (i-1)),100+(yOffset*(i-1)),95,140);
-    C.setBounds(120+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
+    C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
 		R.addCard(C,new Integer(10 - i));
 	}
 	this.setVisible(true);
