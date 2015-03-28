@@ -41,13 +41,11 @@ public class ImageTest extends JApplet implements ActionListener
     {}
 
     showStatus("Loaded Image");
+  //Setting up the draw pile
 	Deck Draw = new Deck();
 	Draw.setBounds(150,200,200,200);
 	this.add(Draw);
 	Draw.setLayout(null);
-
-
-	//Card Cs[] = new Card[2];
 
 	Card CTest = new Card(Images[0],imageIcons[0],30);
 	CTest.addActionListener(this);
@@ -56,7 +54,9 @@ public class ImageTest extends JApplet implements ActionListener
 	CTest2.addActionListener(this);
 	Draw.addCard(CTest,1,20,20);
 	Draw.addCard(CTest2,2,22,22);
-
+  //end setting up the draw pile
+  
+  //Setting up the discard pile
   Deck Discard = new Deck();
   Discard.setBounds(350,200,200,200);
   this.add(Discard);
@@ -69,11 +69,14 @@ public class ImageTest extends JApplet implements ActionListener
   DTest2.addActionListener(this);
   Discard.addCard(DTest,1,20,20);
   Discard.addCard(DTest2,2,22,22);
+  //end setting up the discard pile
 
+  //generating the cards on the rack
 	Rack R = new Rack();
 	R.setBounds(0,400,800,200);
 	this.add(R);
 	R.setLayout(null);
+
 
 	Card C;
 	int xOffset = 25;
@@ -87,6 +90,7 @@ public class ImageTest extends JApplet implements ActionListener
     C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
 		R.addCard(C,new Integer(10 - i));
 	}
+  // end rack generation
 	this.setVisible(true);
 	this.validate();
   }
