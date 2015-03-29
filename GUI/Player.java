@@ -6,7 +6,7 @@ abstract public class Player
   protected Rack Hand = new Rack();
   protected int score;				//this score is going to be the actual score
   protected int currentScore;			//this will be the calculated score at the end of each turn
-  protected Card ExtraCard;// = new Card();
+  protected Card ExtraCard;
   //methods
 
   public Player(String name)
