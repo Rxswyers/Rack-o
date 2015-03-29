@@ -54,6 +54,8 @@ public class ImageTest extends JApplet implements ActionListener
 	CTest2.addActionListener(this);
   CTest.setState(false);
   CTest2.setState(false);
+  
+  int drawOffset = 2;
 	Draw.addCard(CTest,1,20,20);
 	Draw.addCard(CTest2,2,22,22);
   //end setting up the draw pile
@@ -69,6 +71,7 @@ public class ImageTest extends JApplet implements ActionListener
 
   Card DTest2 = new Card(Images[0],imageIcons[0],28);
   DTest2.addActionListener(this);
+
   DTest.setState(true);
   DTest2.setState(true);
   Discard.addCard(DTest,1,20,20);
@@ -100,10 +103,10 @@ public class ImageTest extends JApplet implements ActionListener
 
 	this.setVisible(true);
 	this.validate();
+
   }
   public void actionPerformed(ActionEvent e)
   {
     System.out.println(e.getActionCommand());
-
   }
 }
