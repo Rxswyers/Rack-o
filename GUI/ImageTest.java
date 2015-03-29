@@ -21,7 +21,7 @@ public class ImageTest extends JApplet implements ActionListener
   {
 	setLayout(null);
 	setSize(800,600);
-
+    //Getting the image for the background of the cards
     String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
     image[0] = getImage(getCodeBase(), Images[0]);
     imageIcons[0] = new ImageIcon(image[0]);
@@ -41,6 +41,8 @@ public class ImageTest extends JApplet implements ActionListener
     {}
 
     showStatus("Loaded Image");
+    //end getting images
+    
   //Setting up the draw pile
 	Deck Draw = new Deck();
 	Draw.setBounds(150,200,200,200);
@@ -54,7 +56,7 @@ public class ImageTest extends JApplet implements ActionListener
 	CTest2.addActionListener(this);
   CTest.setState(false);
   CTest2.setState(false);
-  
+
   int drawOffset = 2;
 	Draw.addCard(CTest,1,20,20);
 	Draw.addCard(CTest2,2,22,22);

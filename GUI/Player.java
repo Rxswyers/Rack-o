@@ -45,6 +45,10 @@ abstract public class Player
     C.setState(true);
     this.Hand.addCard(C);
   }
+  public Rack getRack()
+  {
+    return this.Hand;
+  }
   public abstract void pickupCard(Card C);
   public void showExtraCard()
   {
