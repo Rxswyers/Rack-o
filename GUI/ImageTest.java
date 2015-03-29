@@ -52,8 +52,8 @@ public class ImageTest extends JApplet implements ActionListener
 
 	Card CTest2 = new Card(Images[0],imageIcons[0],29);
 	CTest2.addActionListener(this);
-  CTest.setState(true);
-  CTest2.setState(true);
+  CTest.setState(false);
+  CTest2.setState(false);
 	Draw.addCard(CTest,1,20,20);
 	Draw.addCard(CTest2,2,22,22);
   //end setting up the draw pile
@@ -69,8 +69,8 @@ public class ImageTest extends JApplet implements ActionListener
 
   Card DTest2 = new Card(Images[0],imageIcons[0],28);
   DTest2.addActionListener(this);
-  DTest.setState(false);
-  DTest2.setState(false);
+  DTest.setState(true);
+  DTest2.setState(true);
   Discard.addCard(DTest,1,20,20);
   Discard.addCard(DTest2,2,22,22);
   //end setting up the discard pile
