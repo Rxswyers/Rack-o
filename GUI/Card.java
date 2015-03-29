@@ -30,7 +30,6 @@ public class Card extends JButton
 		this.picFile = iconName;
 		this.value = v;
 		this.state = false;
-		this.setToolTipText(Integer.toString(this.value));
 		setVisible(true);
 	}
 
@@ -66,8 +65,22 @@ public class Card extends JButton
 	}
 	public void paintComponent(Graphics g)
 	{
-		//Draws the image properly scaled
-		ImageDrawer.drawScaledImage(this.Pic.getImage(), this, g);
-		//g.drawImage(Pic.getImage(),1,1,this);
+		if(this.state)
+		{
+			//Draws the image properly scaled
+			this.setToolTipText(null);
+			ImageDrawer.drawScaledImage(this.Pic.getImage(), this, g);
+		}
+		else
+		{
+			int fontSize = 20;
+			g.setFont(new Font("TimesRoman", Font.PLAIN, fontSize));
+			g.setColor(Color.white);
+			g.fillRect(0,0,110,60);
+			g.setColor(Color.black);
+			g.drawString(""+this.getValue(), 10, 20);
+			this.setToolTipText(Integer.toString(this.value));
+		}
+
 	}
 }
