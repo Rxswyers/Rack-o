@@ -101,7 +101,7 @@ public class Rack extends JPanel
 	{
 		for(Card C:rack)
 		{
-			C.setBounds(200+((rack.indexOf(C)) * 25),130+((rack.indexOf(C)) * -12),110,60);
+			this.RJLP.setLayer(C, new Integer(1));
 		}
 	}
 }

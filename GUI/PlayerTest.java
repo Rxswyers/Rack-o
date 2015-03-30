@@ -110,7 +110,8 @@ public class PlayerTest extends JApplet implements ActionListener
       C.setActionCommand(Integer.toString(i));
       C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
       C.setActionCommand("Place in RJLP: "+(10-i));
-      R.addCard(C,new Integer(10 - i));
+      //R.addCard(C,new Integer(10 - i));
+      R.addCard(C,new Integer(1));
     }
     Players[0].printRack();
     //End Player one's rack
