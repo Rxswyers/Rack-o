@@ -19,6 +19,8 @@ public class PlayerTest extends JApplet implements ActionListener
   Player Players[] = new Player[2];
   int currentTurn;
   int phase; // This can be 1,2
+  Deck Discard = new Deck();
+  Deck Draw = new Deck();
   public void init()
   {
 	setLayout(null);
@@ -46,7 +48,7 @@ public class PlayerTest extends JApplet implements ActionListener
     //end getting images
 
     //Setting up the draw pile
-    Deck Draw = new Deck();
+    //Deck Draw = new Deck();
     Draw.setBounds(150,200,200,200);
     this.add(Draw);
     Draw.setLayout(null);
@@ -67,7 +69,7 @@ public class PlayerTest extends JApplet implements ActionListener
     //end setting up the draw pile
 
     //Setting up the discard pile
-    Deck Discard = new Deck();
+    //Deck Discard = new Deck();
     Discard.setBounds(350,200,200,200);
     this.add(Discard);
     Discard.setLayout(null);
@@ -86,6 +88,7 @@ public class PlayerTest extends JApplet implements ActionListener
     Discard.addCard(DTest2,2,22,22);
     //end setting up the discard pile
     currentTurn = 0;
+    phase = 1;
     //setting up a player to test
     Players[0] = new Human("Ruben");
     //generating the cards on the rack of the Player (Human)
@@ -106,6 +109,7 @@ public class PlayerTest extends JApplet implements ActionListener
       C.addActionListener(this);
       C.setActionCommand(Integer.toString(i));
       C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
+      C.setActionCommand("Place in RJLP: "+(10-i));
       R.addCard(C,new Integer(10 - i));
     }
     Players[0].printRack();
@@ -121,14 +125,35 @@ public class PlayerTest extends JApplet implements ActionListener
     }
     public void actionPerformed(ActionEvent e)
     {
-      //System.out.println(e.getActionCommand());
+      System.out.println(e.getActionCommand());
       System.out.println(((Card)e.getSource()).getOwner());
       System.out.println("Phase: " + phase);
-      //If nobody owns the card, then it's in one of the piles
-      if(((Card)e.getSource()).getOwner() == -1)
+      //phase 1 is the draw phase
+      if(phase == 1)
       {
-        Players[currentTurn].pickupCard(((Card)e.getSource()));
-        phase = 2;
+        //If nobody owns the card, then it's in one of the piles
+        if(((Card)e.getSource()).getOwner() == -1)
+        {
+          Players[currentTurn].pickupCard(((Card)e.getSource()));
+          phase = 2;
+        }
       }
+      else if(phase == 2)
+      {
+        //If nobody owns the card, then it's in one of the piles
+        if(((Card)e.getSource()).getOwner() == -1) //the person is trying to draw from a deck again
+        {
+          System.out.println("You already drew a card");
+        }
+        else if(((Card)e.getSource()).getOwner() == 0) //the card belongs to player 1
+        {
+          Players[0].chooseDiscard(((Card)e.getSource()));
+          Discard.addCard(((Card)e.getSource()),3,24,24);
+          Players[0].printHand();
+          Players[0].getRack().reorder();
+          phase = 1;
+        }
+      }
+
     }
   }

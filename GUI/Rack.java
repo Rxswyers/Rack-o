@@ -43,9 +43,32 @@ public class Rack extends JPanel
 	{
 		return rack.get(v);
 	}
-	public Card discard(Card C1, Card C2)
+	public Card discard(Card Discard)
 	{
-		return C1;
+		Card D;
+		if(Discard.getValue() == this.ExtraCard.getValue())
+		{
+			D = this.ExtraCard;
+			this.ExtraCard = null;
+			System.out.println("Discarding: " + D);
+			return D;
+		}
+		else
+		{
+			int xoff = 25;
+			int yoff = -12;
+			int place = this.rack.indexOf(Discard);
+			this.rack.remove(Discard);
+			this.RJLP.remove(this.RJLP.getIndexOf(Discard));
+			this.rack.add(place,this.ExtraCard);
+			this.ExtraCard.setBounds(200+(xoff*place),130+(yoff*place),110,60);
+			this.RJLP.add(this.ExtraCard,(10 - (place+1)));
+			System.out.println("Plase in RJLP Calculated: "+ (10-(place+1)));
+			System.out.println("Discarding: " + Discard);
+			this.ExtraCard = null;
+			return Discard;
+		}
+
 	}
 	public int score()
 	{
@@ -73,5 +96,12 @@ public class Rack extends JPanel
 			result += this.rack.get(i) +"\n";
 		}
 		return result;
+	}
+	public void reorder()
+	{
+		for(Card C:rack)
+		{
+			C.setBounds(200+((rack.indexOf(C)) * 25),130+((rack.indexOf(C)) * -12),110,60);
+		}
 	}
 }

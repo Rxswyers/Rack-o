@@ -11,23 +11,11 @@ public class Human extends Player
 		C.setOwner(0);
 		this.Hand.setExtra(C);
 	}
-  public Card chooseDiscard()
+  public Card chooseDiscard(Card D)
   {
     Scanner keyboard = new Scanner(System.in);
     Card Result;
-    int choice;
-    System.out.println("My Rack:");
-    System.out.println(this.Hand);
-    System.out.println("What card do you want to discard? (Enter the value of the card)");
-    choice = keyboard.nextInt();
-    if(choice == this.ExtraCard.getValue())
-    {
-      Result = this.ExtraCard;
-    }
-    else
-    {
-      Result = this.Hand.discard(this.ExtraCard,this.Hand.find(choice));
-    }
+    Result = this.Hand.discard(D);
     System.out.println("Current rack score: " + this.Hand.score());
     return Result;
 

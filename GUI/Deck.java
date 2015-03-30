@@ -30,6 +30,7 @@ public class Deck extends JPanel
 	public void addCard(Card C, int index, int x, int y)
 	{
 		C.setBounds(x,y,110,60);
+		C.setOwner(-1);
 		this.DJLP.add(C,new Integer(index));
 	}
 	/*public Card draw()

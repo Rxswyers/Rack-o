@@ -60,11 +60,11 @@ abstract public class Player
     System.out.println(this.Hand);
   }
   public abstract int choosePile(Card Top);
-  public abstract Card chooseDiscard();
+  public abstract Card chooseDiscard(Card D);
   public Card takeTurn(Card C)
 	{
 		this.pickupCard(C);
-		Card result = chooseDiscard();
+		Card result = chooseDiscard(C);
 		return result;
 	}
   public void printRack()
