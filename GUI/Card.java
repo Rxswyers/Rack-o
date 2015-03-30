@@ -31,6 +31,11 @@ public class Card extends JButton
 	//methods
 
 	//constructor
+	/**
+	*@param	iconName	Location of the image to use
+	*@param	img				The image to use for the background
+	*@param	v 				The value of the Card
+	*/
 	public Card(String iconName, ImageIcon img, int v)
 	{
 		super(iconName,img);
@@ -42,33 +47,67 @@ public class Card extends JButton
 	}
 
 	//gets
+	/**
+	*Gets the value of the Card
+	*@return		the value of the Card
+	*/
 	public int getValue()
 	{
 		return this.value;
 	}
+	/**
+	*Gets the state of the Card
+	*@return		the value of the state of a Card
+	*/
 	public boolean getState()
 	{
 		return this.state;
 	}
+	/**
+	*Gets the owner of the Card
+	*@return		the owner of the Card
+	*/
 	public int getOwner()
 	{
 		return this.owner;
 	}
 
 	//sets
+	/**
+	*Sets the value of the Card
+	*@param v 	the value that is desired
+	*/
 	public void setValue(int v)
 	{
 		this.value = v;
 	}
+	/**
+	*Sets the state of the Card
+	*@param	s		<code>true</code> to set it face up,
+	*						<code>false</code> to set it face down
+	*/
 	public void setState(boolean s)
 	{
 		this.state = s;
 	}
+	/**
+	*Sets the owner of the Card
+	*@param	o		owner of the Card
+	*/
 	public void setOwner(int o)
 	{
 		this.owner = o;
 	}
 	//other methods
+	/**
+	*String representation of the Card
+	*@return		Depending on the state of the Card
+	*						<code>true</code> the card will be
+	*						face up and displaying a value,
+	*						<code>false</code> the card will
+	*						be face down and an image will be
+	*						displayed.
+	*/
 	public String toString()
 	{
 		String s ="";
@@ -78,6 +117,12 @@ public class Card extends JButton
 			s+= "X";//face down;
 		return s;
 	}
+	/**
+	*If the state is <code>true</code>, the button will
+	*be white and display the value of the Card. <code>false</code>
+	* will display a background image instead.
+	*@param	g		the <code>Graphics</code> object to use
+	*/
 	public void paintComponent(Graphics g)
 	{
 		//if the state is true
