@@ -19,6 +19,7 @@ public class Card extends JButton
 	private boolean state; //true - flipped up, false - face down
 	private ImageIcon Pic;
 	private String picFile;
+	private int owner;
 
 	//methods
 
@@ -42,6 +43,10 @@ public class Card extends JButton
 	{
 		return this.state;
 	}
+	public int getOwner()
+	{
+		return this.owner;
+	}
 
 	//sets
 	public void setValue(int v)
@@ -52,7 +57,10 @@ public class Card extends JButton
 	{
 		this.state = s;
 	}
-
+	public void setOwner(int o)
+	{
+		this.owner = o;
+	}
 	//other methods
 	public String toString()
 	{

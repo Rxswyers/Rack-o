@@ -16,7 +16,9 @@ public class PlayerTest extends JApplet implements ActionListener
 {
   Image image[] = new Image[2];
   ImageIcon imageIcons[] = new ImageIcon[2];
-
+  Player Players[] = new Player[2];
+  int currentTurn;
+  int phase; // This can be 1,2
   public void init()
   {
 	setLayout(null);
@@ -50,12 +52,14 @@ public class PlayerTest extends JApplet implements ActionListener
     Draw.setLayout(null);
 
     Card CTest = new Card(Images[0],imageIcons[0],30);
-    CTest.addActionListener(this);
+    //CTest.addActionListener(this);
 
     Card CTest2 = new Card(Images[0],imageIcons[0],29);
     CTest2.addActionListener(this);
     CTest.setState(false);
     CTest2.setState(false);
+    CTest.setOwner(-1);
+    CTest2.setOwner(-1);
 
     int drawOffset = 2;
     Draw.addCard(CTest,1,20,20);
@@ -73,17 +77,19 @@ public class PlayerTest extends JApplet implements ActionListener
 
     Card DTest2 = new Card(Images[0],imageIcons[0],28);
     DTest2.addActionListener(this);
+    DTest.setOwner(-1);
+    DTest2.setOwner(-1);
 
     DTest.setState(true);
     DTest2.setState(true);
     Discard.addCard(DTest,1,20,20);
     Discard.addCard(DTest2,2,22,22);
     //end setting up the discard pile
-
+    currentTurn = 0;
     //setting up a player to test
-    Player p1 = new Human("Ruben");
+    Players[0] = new Human("Ruben");
     //generating the cards on the rack of the Player (Human)
-    Rack R = p1.getRack();
+    Rack R = Players[0].getRack();
     R.setBounds(0,400,800,200);
     this.add(R);
     R.setLayout(null);
@@ -96,13 +102,18 @@ public class PlayerTest extends JApplet implements ActionListener
     {
       C = new Card(Images[0],imageIcons[0],i);
       C.setState(true);
+      C.setOwner(0);
       C.addActionListener(this);
       C.setActionCommand(Integer.toString(i));
       C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
       R.addCard(C,new Integer(10 - i));
     }
-    p1.printRack();
+    Players[0].printRack();
     //End Player one's rack
+    if(phase == 2)
+    {
+      System.out.println("Phase 2 has started");
+    }
 
     this.setVisible(true);
   	this.validate();
@@ -110,6 +121,14 @@ public class PlayerTest extends JApplet implements ActionListener
     }
     public void actionPerformed(ActionEvent e)
     {
-      System.out.println(e.getActionCommand());
+      //System.out.println(e.getActionCommand());
+      System.out.println(((Card)e.getSource()).getOwner());
+      System.out.println("Phase: " + phase);
+      //If nobody owns the card, then it's in one of the piles
+      if(((Card)e.getSource()).getOwner() == -1)
+      {
+        Players[currentTurn].pickupCard(((Card)e.getSource()));
+        phase = 2;
+      }
     }
   }

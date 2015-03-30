@@ -16,7 +16,7 @@ public class Rack extends JPanel
 {
 	JLayeredPane RJLP;
 	ArrayList<Card> rack = new ArrayList<Card>();
-
+	Card ExtraCard;
 	public Rack()
 	{
 		this.RJLP = new JLayeredPane();
@@ -50,6 +50,16 @@ public class Rack extends JPanel
 	public int score()
 	{
 		return 1;
+	}
+	public void setExtra(Card C)
+	{
+		this.ExtraCard = C;
+		C.setBounds(50,50,110,60);
+		this.RJLP.add(C,new Integer(11));
+	}
+	public Card getExtra()
+	{
+		return this.ExtraCard;
 	}
 	//Name:
 	//Parameters:

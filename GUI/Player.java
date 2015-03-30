@@ -51,9 +51,9 @@ abstract public class Player
     return this.Hand;
   }
   public abstract void pickupCard(Card C);
-  public void showExtraCard()
+  public Card getExtraCard()
   {
-    System.out.println(this.ExtraCard);
+    return this.Hand.getExtra();
   }
   public void printHand()
   {

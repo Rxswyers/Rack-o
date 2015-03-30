@@ -8,9 +8,8 @@ public class Human extends Player
 	public void pickupCard(Card C)
 	{
 		C.setState(true); //flips the card up so the value can be seen
-		this.ExtraCard = C;
-		System.out.println("Picked up:");
-		this.showExtraCard();
+		C.setOwner(0);
+		this.Hand.setExtra(C);
 	}
   public Card chooseDiscard()
   {
