@@ -39,6 +39,18 @@ public class Rack extends JPanel
 			System.out.println(this.rack.get(i));
 		}
 	}
+	public Card find(int v)
+	{
+		return rack.get(v);
+	}
+	public Card discard(Card C1, Card C2)
+	{
+		return C1;
+	}
+	public int score()
+	{
+		return 1;
+	}
 	//Name:
 	//Parameters:
 	//Returns:

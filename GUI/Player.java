@@ -12,6 +12,7 @@ abstract public class Player
   public Player(String name)
   {
 	  this.setName(name);
+    this.Hand = new Rack();
   }
   //sets
   public void setScore(int s)
@@ -40,10 +41,10 @@ abstract public class Player
     return this.name;
   }
   //other methods
-  public void getCard(Card C)
+  public void getCard(Card C,int index)
   {
     C.setState(true);
-    this.Hand.addCard(C);
+    this.Hand.addCard(C,index);
   }
   public Rack getRack()
   {
@@ -66,8 +67,12 @@ abstract public class Player
 		Card result = chooseDiscard();
 		return result;
 	}
-  public void updateScore()
+  public void printRack()
+  {
+    System.out.println(this.Hand);
+  }
+/*  public void updateScore()
   {
     this.setCurrentScore(this.Hand.score());
-  }
+  }*/
 }

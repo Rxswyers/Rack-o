@@ -42,7 +42,7 @@ public class ImageTest extends JApplet implements ActionListener
 
     showStatus("Loaded Image");
     //end getting images
-    
+
   //Setting up the draw pile
 	Deck Draw = new Deck();
 	Draw.setBounds(150,200,200,200);
@@ -80,7 +80,7 @@ public class ImageTest extends JApplet implements ActionListener
   Discard.addCard(DTest2,2,22,22);
   //end setting up the discard pile
 
-  //generating the cards on the rack
+  //generating the cards on the rack of the Player (Human)
 	Rack R = new Rack();
 	R.setBounds(0,400,800,200);
 	this.add(R);

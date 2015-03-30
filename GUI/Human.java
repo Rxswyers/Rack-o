@@ -49,4 +49,5 @@ public class Human extends Player
     }
     return choice;
   }
+
 }
