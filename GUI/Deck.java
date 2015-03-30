@@ -36,7 +36,7 @@ public class Deck extends JPanel
 		numCards++;
 		int off = 2;
 		//C.setBounds(x,y,110,60);
-		C.setBounds(20+(off*numCards),20+(off*numCards),110,60);
+		C.setBounds(20+(off*this.Cards.indexOf(C)),20+(off*this.Cards.indexOf(C)),110,60);
 		C.setOwner(-1);
 		this.Cards.add(C);
 		this.DJLP.add(C,new Integer(1));
@@ -57,7 +57,7 @@ public class Deck extends JPanel
 			System.out.println("i is: "+i);
 			System.out.println("number of cards: " +numCards);
 			this.Cards.get(i).setBounds(20+(off*(i+1)),20+(off*(i+1)),110,60);
-			System.out.println("x: "+ (20+(off*numCards)) + " y: " + (20+(off*numCards)));
+			System.out.println("x: "+ (20+(off*(i+1))) + " y: " + (20+(off*(i+1))));
 			this.DJLP.add(this.Cards.get(i),new Integer(1));
 			System.out.println("Moved: " + this.Cards.get(i));
 		}
@@ -69,10 +69,11 @@ public class Deck extends JPanel
 			this.DJLP.setLayer(this.Cards.get(i), new Integer(-1));
 		}
 	}
-	/*public Card draw()
+	public void draw()
 	{
-		return this.Pile.pop();
+		this.Cards.remove(this.Cards.size()-1);
 	}
+	/*
 	public int getSize()
 	{
 		return Pile.size();

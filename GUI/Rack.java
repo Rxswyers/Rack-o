@@ -63,7 +63,7 @@ public class Rack extends JPanel
 			this.rack.add(place,this.ExtraCard);
 			this.ExtraCard.setBounds(200+(xoff*place),130+(yoff*place),110,60);
 			this.RJLP.add(this.ExtraCard,(10 - (place+1)));
-			System.out.println("Plase in RJLP Calculated: "+ (10-(place+1)));
+			System.out.println("Place in RJLP Calculated: "+ (10-(place+1)));
 			System.out.println("Discarding: " + Discard);
 			this.ExtraCard = null;
 			return Discard;

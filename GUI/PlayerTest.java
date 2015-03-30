@@ -137,6 +137,14 @@ public class PlayerTest extends JApplet implements ActionListener
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1)
         {
+          if(((Card)e.getSource()).getState() == true) //the card is from the discard pile
+          {
+            Discard.draw();
+          }
+          else
+          {
+            Draw.draw();
+          }
           Players[currentTurn].pickupCard(((Card)e.getSource()));
           phase = 2;
         }
@@ -150,9 +158,9 @@ public class PlayerTest extends JApplet implements ActionListener
         }
         else if(((Card)e.getSource()).getOwner() == 0) //the card belongs to player 1
         {
-          Players[0].chooseDiscard(((Card)e.getSource()));
+
           //Discard.addCard(((Card)e.getSource()),3,24,24);
-          Discard.addCard(((Card)e.getSource()));
+          Discard.addCard(Players[0].chooseDiscard(((Card)e.getSource())));
           Players[0].printHand();
           Players[0].getRack().reorder();
           phase = 1;

@@ -13,7 +13,6 @@ public class Human extends Player
 	}
   public Card chooseDiscard(Card D)
   {
-    Scanner keyboard = new Scanner(System.in);
     Card Result;
     Result = this.Hand.discard(D);
     System.out.println("Current rack score: " + this.Hand.score());
