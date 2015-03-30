@@ -22,10 +22,25 @@ import java.applet.*;
 public class Card extends JButton
 {
 	//members
+	/**
+	*Value of the Card
+	*/
 	private int value;
+	/**
+	*Decides whether the carde will be face up or face down
+	*/
 	private boolean state; //true - flipped up, false - face down
+	/**
+	*Image to be used for the back of the Card
+	*/
 	private ImageIcon Pic;
+	/**
+	*Name of the picture file
+	*/
 	private String picFile;
+	/**
+	*Owner of the Card
+	*/
 	private int owner;
 
 	//methods
