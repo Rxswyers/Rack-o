@@ -64,8 +64,8 @@ public class PlayerTest extends JApplet implements ActionListener
     CTest2.setOwner(-1);
 
     int drawOffset = 2;
-    Draw.addCard(CTest,1,20,20);
-    Draw.addCard(CTest2,2,22,22);
+    Draw.addCard(CTest);
+    Draw.addCard(CTest2);
     //end setting up the draw pile
 
     //Setting up the discard pile
@@ -84,8 +84,10 @@ public class PlayerTest extends JApplet implements ActionListener
 
     DTest.setState(true);
     DTest2.setState(true);
-    Discard.addCard(DTest,1,20,20);
-    Discard.addCard(DTest2,2,22,22);
+    //Discard.addCard(DTest,1,20,20);
+    //Discard.addCard(DTest2,2,22,22);
+    Discard.addCard(DTest);
+    Discard.addCard(DTest2);
     //end setting up the discard pile
     currentTurn = 0;
     phase = 1;
@@ -149,7 +151,8 @@ public class PlayerTest extends JApplet implements ActionListener
         else if(((Card)e.getSource()).getOwner() == 0) //the card belongs to player 1
         {
           Players[0].chooseDiscard(((Card)e.getSource()));
-          Discard.addCard(((Card)e.getSource()),3,24,24);
+          //Discard.addCard(((Card)e.getSource()),3,24,24);
+          Discard.addCard(((Card)e.getSource()));
           Players[0].printHand();
           Players[0].getRack().reorder();
           phase = 1;

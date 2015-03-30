@@ -101,7 +101,7 @@ public class Rack extends JPanel
 	{
 		for(Card C:rack)
 		{
-			this.RJLP.setLayer(C, new Integer(1));
+			this.RJLP.setLayer(C, new Integer(-1));
 		}
 	}
 }

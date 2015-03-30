@@ -11,27 +11,63 @@
 import javax.swing.*;
 import java.awt.*;
 import java.applet.*;
-import java.util.Stack;
+import java.util.ArrayList;
 
 public class Deck extends JPanel
 {
 	//members
 	JLayeredPane DJLP;
-
+	int numCards;
+	ArrayList<Card> Cards;
 	public Deck()
 	{
+		this.Cards = new ArrayList<Card>();
 		this.DJLP = new JLayeredPane();
 		this.add(this.DJLP);
 		this.DJLP.setBounds(0,0,200,200);
 		this.DJLP.setLayout(null);
+		this.numCards = 0;
 	}
 	//methods
 			//public void addCard(Card C, int index)
-	public void addCard(Card C, int index, int x, int y)
+	//public void addCard(Card C, int index, int x, int y)
+	public void addCard(Card C)
 	{
-		C.setBounds(x,y,110,60);
+		numCards++;
+		int off = 2;
+		//C.setBounds(x,y,110,60);
+		C.setBounds(20+(off*numCards),20+(off*numCards),110,60);
 		C.setOwner(-1);
-		this.DJLP.add(C,new Integer(index));
+		this.Cards.add(C);
+		this.DJLP.add(C,new Integer(1));
+		this.fixOrder();
+
+	}
+	public void fixOrder()
+	{
+		int off = 2;
+		for(Card C:Cards)
+		{
+			this.DJLP.remove(C);
+		}
+		//for(int i = this.Cards.size() - 1; i>=0; i --)
+		//for(int i = 0; i < this.Cards.size(); i++)
+		for(int i = this.Cards.size() - 1; i>=0; i --)
+		{
+			System.out.println("i is: "+i);
+			System.out.println("number of cards: " +numCards);
+			this.Cards.get(i).setBounds(20+(off*(i+1)),20+(off*(i+1)),110,60);
+			System.out.println("x: "+ (20+(off*numCards)) + " y: " + (20+(off*numCards)));
+			this.DJLP.add(this.Cards.get(i),new Integer(1));
+			System.out.println("Moved: " + this.Cards.get(i));
+		}
+	}
+	public void reorder()
+	{
+		for(int i = 0; i < this.Cards.size(); i++)
+		{
+			this.DJLP.setLayer(this.Cards.get(i), new Integer(-1));
+		}
 	}
 	/*public Card draw()
 	{
