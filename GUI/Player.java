@@ -8,13 +8,30 @@ import java.util.Scanner;
 abstract public class Player
 {
   //members
+  /**
+  *Name of the Player
+  */
   protected String name;
+  /**
+  *Rack that the Player has
+  */
   protected Rack Hand = new Rack();
+  /**
+  *Running score that the Player has accumulated
+  */
   protected int score;				//this score is going to be the actual score
+  /**
+  *Score that the Player has in their hand
+  */
   protected int currentScore;			//this will be the calculated score at the end of each turn
+  /**
+  *Card that is picked up, but not in the Rack
+  */
   protected Card ExtraCard;
   //methods
-
+  /**
+  *@param name    Desired name of the Player
+  */
   public Player(String name)
   {
 	  this.setName(name);
