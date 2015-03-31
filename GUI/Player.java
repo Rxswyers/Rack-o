@@ -38,27 +38,51 @@ abstract public class Player
     this.Hand = new Rack();
   }
   //sets
+  /**
+  *Sets the score of the Player
+  *@param s       Desired score
+  */
   public void setScore(int s)
   {
 	  this.score = s;
   }
+  /**
+  *Sets the current score of the Player
+  *@param s       Desired current score
+  */
   public void setCurrentScore(int s)
   {
 	  this.currentScore = s;
   }
+  /**
+  *Sets the name of the Player
+  *@param s       Name to give the Player
+  */
   public void setName(String s)
   {
     this.name = s;
   }
   //gets
+  /**
+  *Gets the score of the Player
+  *@return        Score of the Player
+  */
   public int getScore()
   {
 	  return this.score;
   }
+  /**
+  *Gets the running score of the Player
+  *@return        Running score
+  */
   public int getCurrentScore()
   {
 	  return this.currentScore;
   }
+  /**
+  *
+  *
+  */
   public String getName()
   {
     return this.name;
