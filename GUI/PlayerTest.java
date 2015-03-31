@@ -140,10 +140,12 @@ public class PlayerTest extends JApplet implements ActionListener
           if(((Card)e.getSource()).getState() == true) //the card is from the discard pile
           {
             Discard.draw();
+            Discard.top().addActionListener(this);
           }
           else
           {
             Draw.draw();
+            Draw.top().addActionListener(this);
           }
           Players[currentTurn].pickupCard(((Card)e.getSource()));
           phase = 2;
@@ -160,6 +162,7 @@ public class PlayerTest extends JApplet implements ActionListener
         {
 
           //Discard.addCard(((Card)e.getSource()),3,24,24);
+          Discard.top().removeActionListener(this);
           Discard.addCard(Players[0].chooseDiscard(((Card)e.getSource())));
           Players[0].printHand();
           Players[0].getRack().reorder();

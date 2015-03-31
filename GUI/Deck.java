@@ -73,6 +73,18 @@ public class Deck extends JPanel
 	{
 		this.Cards.remove(this.Cards.size()-1);
 	}
+	public Card top()
+	{
+		Card C = null;
+		if(this.Cards.isEmpty())
+		{
+			return C;
+		}
+		else
+		{
+			return this.Cards.get(this.Cards.size()-1);
+		}
+	}
 	/*
 	public int getSize()
 	{
@@ -93,17 +105,7 @@ public class Deck extends JPanel
 			return this.Pile.peek();
 		}
 	}
-	public String top()
-	{
-		if(this.empty())
-		{
-			return "O";
-		}
-		else
-		{
-			return this.Pile.peek().toString();
-		}
-	}
+
 	public String toString()
 	{
 		String result = "";
