@@ -17,17 +17,20 @@ public class PlayerTest extends JApplet implements ActionListener
 {
   Image image[] = new Image[2];
   ImageIcon imageIcons[] = new ImageIcon[2];
-  Player Players[] = new Player[2];
+  ArrayList<Player> Players = new ArrayList<Player>();
   int currentTurn;
   int phase; // This can be 1,2
   Deck Discard = new Deck();
   Deck Draw = new Deck();
+  ArrayList<Card> Cards = new ArrayList<Card>();
+  String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
+
   public void init()
   {
 	setLayout(null);
 	setSize(800,600);
     //Getting the image for the background of the cards
-    String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
+
     image[0] = getImage(getCodeBase(), Images[0]);
     imageIcons[0] = new ImageIcon(image[0]);
 
@@ -85,17 +88,15 @@ public class PlayerTest extends JApplet implements ActionListener
 
     DTest.setState(true);
     DTest2.setState(true);
-    //Discard.addCard(DTest,1,20,20);
-    //Discard.addCard(DTest2,2,22,22);
     Discard.addCard(DTest);
     Discard.addCard(DTest2);
     //end setting up the discard pile
     currentTurn = 0;
     phase = 1;
     //setting up a player to test
-    Players[0] = new Human("Ruben");
+    Players.add(new Human("Ruben"));
     //generating the cards on the rack of the Player (Human)
-    Rack R = Players[0].getRack();
+    Rack R = Players.get(0).getRack();
     R.setBounds(0,400,800,200);
     this.add(R);
     R.setLayout(null);
@@ -116,7 +117,7 @@ public class PlayerTest extends JApplet implements ActionListener
       //R.addCard(C,new Integer(10 - i));
       R.addCard(C,new Integer(1));
     }
-    Players[0].printRack();
+    Players.get(0).printRack();
     //End Player one's rack
     if(phase == 2)
     {
@@ -141,7 +142,7 @@ public class PlayerTest extends JApplet implements ActionListener
         {
           if(((Card)e.getSource()).getState() == true) //the card is from the discard pile
           {
-            Players[currentTurn].pickupCard(Discard.draw());
+            Players.get(currentTurn).pickupCard(Discard.draw());
             if(!Discard.empty())
             {
               Discard.top().addActionListener(this);
@@ -150,7 +151,7 @@ public class PlayerTest extends JApplet implements ActionListener
           }
           else
           {
-            Players[currentTurn].pickupCard(Draw.draw());
+            Players.get(currentTurn).pickupCard(Draw.draw());
 
             if(!Draw.empty())
             {
@@ -163,7 +164,6 @@ public class PlayerTest extends JApplet implements ActionListener
       }
       else if(phase == 2)
       {
-        //checkDeck();
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1) //the person is trying to draw from a deck again
         {
@@ -172,15 +172,14 @@ public class PlayerTest extends JApplet implements ActionListener
         else if(((Card)e.getSource()).getOwner() == 0) //the card belongs to player 1
         {
 
-          //Discard.addCard(((Card)e.getSource()),3,24,24);
           if(!Discard.empty())
           {
             Discard.top().removeActionListener(this);
           }
 
-          Discard.addCard(Players[0].chooseDiscard(((Card)e.getSource())));
-          Players[0].printHand();
-          Players[0].getRack().reorder();
+          Discard.addCard(Players.get(0).chooseDiscard(((Card)e.getSource())));
+          Players.get(0).printHand();
+          Players.get(0).getRack().reorder();
           phase = 1;
         }
       }
@@ -209,5 +208,78 @@ public class PlayerTest extends JApplet implements ActionListener
       {
         this.switchDecks();
       }
+    }
+    public void getCards()
+    {
+      int cardSize = 0;
+      switch(this.Players.size())
+      {
+        case 2:
+        cardSize = 40;
+        break;
+        case 3:
+        cardSize = 50;
+        break;
+        case 4:
+        cardSize = 60;
+        break;
+      }
+      for(int i = 1; i <= cardSize; i ++)
+      {
+        this.Cards.add(new Card(Images[0],imageIcons[0],i));
+        //C = new Card(Images[0],imageIcons[0],i);
+      }
+      Collections.shuffle(this.Cards);
+    }
+    public void deal()
+    {
+      //Used to keep track of the amount of cards that are dealt
+      int count = 0;
+      //Deals 10 cards to each player
+      for(int i = 0; i < this.Players.size(); i++)
+      {
+        for(int j = 0; j < 10; j++)
+        {
+          this.Players.get(i).getCard(this.Cards.get(count));
+          count++;
+        }
+      }
+      //Used for debugging
+      /*
+      System.out.println(this.Players.get(0).getName() +"'s hand");
+      this.Players.get(0).printHand();
+      System.out.println(this.Players.get(1).getName() +"'s hand");
+      this.Players.get(1).printHand();
+      */
+      //Populates the draw pile with the rest of the cards that weren't dealt to players
+      for(int num = count; num < this.Cards.size(); num++)
+      {
+        DrawPile.addCard(this.Cards.get(num));
+      }
+      //sets player one as going first
+      this.currentTurn = 0;
+    }
+    public boolean checkWin()
+    {
+      for(Player P:Players)
+      {
+        if(P.getCurrentScore() == 75)
+        {
+          System.out.println(P.getName() + " won!!");
+          return true;
+        }
+      }
+      if(limitTurns)
+      {
+        if(this.turns == currentTurn)
+        {
+          for(Player P:Players)
+          {
+            System.out.println(P.getName()+" Score: "+P.getCurrentScore());
+          }
+          return true;
+        }
+      }
+      return false;
     }
   }
