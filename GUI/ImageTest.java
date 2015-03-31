@@ -58,8 +58,8 @@ public class ImageTest extends JApplet implements ActionListener
   CTest2.setState(false);
 
   int drawOffset = 2;
-	Draw.addCard(CTest,1,20,20);
-	Draw.addCard(CTest2,2,22,22);
+	Draw.addCard(CTest);
+	Draw.addCard(CTest2);
   //end setting up the draw pile
 
   //Setting up the discard pile
@@ -76,13 +76,13 @@ public class ImageTest extends JApplet implements ActionListener
 
   DTest.setState(true);
   DTest2.setState(true);
-  Discard.addCard(DTest,1,20,20);
-  Discard.addCard(DTest2,2,22,22);
+  Discard.addCard(DTest);
+  Discard.addCard(DTest2);
   //end setting up the discard pile
 
   //generating the cards on the rack of the Player (Human)
 	Rack R = new Rack();
-	R.setBounds(0,400,800,200);
+	R.setBounds(0,0,800,200);
 	this.add(R);
 	R.setLayout(null);
 

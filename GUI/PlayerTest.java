@@ -54,6 +54,9 @@ public class PlayerTest extends JApplet implements ActionListener
     //end getting images
 
     Players.add(new Human("Ruben"));
+    Players.add(new Computer("Comp"));
+    Players.get(0).getRack().setBounds(0,400,800,200);
+    Players.get(1).getRack().setBounds(0,0,800,200);
     //Setting up the draw and discard
     Draw.setBounds(150,200,200,200);
     this.add(Draw);
@@ -62,6 +65,8 @@ public class PlayerTest extends JApplet implements ActionListener
     Discard.setBounds(350,200,200,200);
     this.add(Discard);
     Discard.setLayout(null);
+    this.getCards();
+    this.deal();
     /*
     Card CTest = new Card(Images[0],imageIcons[0],30);
     //CTest.addActionListener(this);
@@ -256,6 +261,8 @@ public class PlayerTest extends JApplet implements ActionListener
       //Used to keep track of the amount of cards that are dealt
       int count = 0;
       Rack R;
+      int xOffset = 25;
+      int yOffset = -12;
       //Deals 10 cards to each player
       for(int i = 0; i < this.Players.size(); i++)
       {
@@ -264,15 +271,8 @@ public class PlayerTest extends JApplet implements ActionListener
         {
           this.Cards.get(count).addActionListener(this);
           this.Cards.get(count).setActionCommand(""+this.Cards.get(count).getValue());
-          if(i == 0)
-          {
-            this.Cards.get(count).setBounds(200+(xOffset*(i-1)),130+(yOffset*(i-1)),110,60);
-          }
-          if(i == 1)
-          {
-            this.Cards.get(count).setBounds();//figure this out for player 2
-          }
-          R.addCard(this.Cards.get(count),j);
+          this.Cards.get(count).setBounds(200+(xOffset*(i-1)),130+(yOffset*(i-1)),110,60);
+          R.addCard(this.Cards.get(count),new Integer(1));
           count++;
         }
       }
