@@ -1,4 +1,10 @@
 import java.util.Scanner;
+/**
+*Player is an abstract class and is designed to be used in the game Racko.
+*It is responsible for everything a Player would have as if playing right
+*on a table.
+*@author Ruben Swyers
+*/
 abstract public class Player
 {
   //members
