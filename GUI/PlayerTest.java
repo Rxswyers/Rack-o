@@ -24,6 +24,8 @@ public class PlayerTest extends JApplet implements ActionListener
   Deck Draw = new Deck();
   ArrayList<Card> Cards = new ArrayList<Card>();
   String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
+  boolean limitTurns;
+  int turns;
 
   public void init()
   {
@@ -201,6 +203,7 @@ public class PlayerTest extends JApplet implements ActionListener
         Draw.addCard(C);
       }
       Draw.top().addActionListener(this);
+      Discard.repaint();
     }
     public void checkDeck()
     {
@@ -235,12 +238,14 @@ public class PlayerTest extends JApplet implements ActionListener
     {
       //Used to keep track of the amount of cards that are dealt
       int count = 0;
+      Rack R;
       //Deals 10 cards to each player
       for(int i = 0; i < this.Players.size(); i++)
       {
+        R = this.Players.get(i).getRack();
         for(int j = 0; j < 10; j++)
         {
-          this.Players.get(i).getCard(this.Cards.get(count));
+          R.addCard(this.Cards.get(count),j);
           count++;
         }
       }
@@ -254,7 +259,7 @@ public class PlayerTest extends JApplet implements ActionListener
       //Populates the draw pile with the rest of the cards that weren't dealt to players
       for(int num = count; num < this.Cards.size(); num++)
       {
-        DrawPile.addCard(this.Cards.get(num));
+        Draw.addCard(this.Cards.get(num));
       }
       //sets player one as going first
       this.currentTurn = 0;

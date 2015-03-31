@@ -52,6 +52,7 @@ public class Rack extends JPanel
 			this.RJLP.remove(this.ExtraCard);
 			this.ExtraCard = null;
 			System.out.println("Discarding: " + D);
+			repaint();
 			return D;
 		}
 		else
