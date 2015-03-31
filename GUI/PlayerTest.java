@@ -25,7 +25,7 @@ public class PlayerTest extends JApplet implements ActionListener
   ArrayList<Card> Cards = new ArrayList<Card>();
   String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
   boolean limitTurns;
-  int turns;
+  int turns = 0;
 
   public void init()
   {
@@ -53,12 +53,16 @@ public class PlayerTest extends JApplet implements ActionListener
     showStatus("Loaded Image");
     //end getting images
 
-    //Setting up the draw pile
-    //Deck Draw = new Deck();
+    Players.add(new Human("Ruben"));
+    //Setting up the draw and discard
     Draw.setBounds(150,200,200,200);
     this.add(Draw);
     Draw.setLayout(null);
 
+    Discard.setBounds(350,200,200,200);
+    this.add(Discard);
+    Discard.setLayout(null);
+    /*
     Card CTest = new Card(Images[0],imageIcons[0],30);
     //CTest.addActionListener(this);
 
@@ -96,7 +100,7 @@ public class PlayerTest extends JApplet implements ActionListener
     currentTurn = 0;
     phase = 1;
     //setting up a player to test
-    Players.add(new Human("Ruben"));
+
     //generating the cards on the rack of the Player (Human)
     Rack R = Players.get(0).getRack();
     R.setBounds(0,400,800,200);
@@ -116,11 +120,11 @@ public class PlayerTest extends JApplet implements ActionListener
       C.setActionCommand(Integer.toString(i));
       C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
       C.setActionCommand("Place in RJLP: "+(10-i));
-      //R.addCard(C,new Integer(10 - i));
       R.addCard(C,new Integer(1));
     }
     Players.get(0).printRack();
     //End Player one's rack
+    */
     if(phase == 2)
     {
       System.out.println("Phase 2 has started");
@@ -171,7 +175,7 @@ public class PlayerTest extends JApplet implements ActionListener
         {
           System.out.println("You already drew a card");
         }
-        else if(((Card)e.getSource()).getOwner() == 0) //the card belongs to player 1
+        else if(((Card)e.getSource()).getOwner() == currentTurn) //the card belongs to player 1
         {
 
           if(!Discard.empty())
@@ -179,10 +183,13 @@ public class PlayerTest extends JApplet implements ActionListener
             Discard.top().removeActionListener(this);
           }
 
-          Discard.addCard(Players.get(0).chooseDiscard(((Card)e.getSource())));
-          Players.get(0).printHand();
-          Players.get(0).getRack().reorder();
+          Discard.addCard(Players.get(currentTurn).chooseDiscard(((Card)e.getSource())));
+          Players.get(currentTurn).printHand();
+          Players.get(currentTurn).getRack().reorder();
+
           phase = 1;
+          turns ++;
+          currentTurn = turns % this.Players.size();
         }
       }
 
@@ -232,6 +239,16 @@ public class PlayerTest extends JApplet implements ActionListener
         this.Cards.add(new Card(Images[0],imageIcons[0],i));
         //C = new Card(Images[0],imageIcons[0],i);
       }
+      /*
+      C = new Card(Images[0],imageIcons[0],i);
+      C.setState(true);
+      C.setOwner(0);
+      C.addActionListener(this);
+      C.setActionCommand(Integer.toString(i));
+      C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
+      C.setActionCommand("Place in RJLP: "+(10-i));
+      R.addCard(C,new Integer(1));
+      */
       Collections.shuffle(this.Cards);
     }
     public void deal()
@@ -243,8 +260,18 @@ public class PlayerTest extends JApplet implements ActionListener
       for(int i = 0; i < this.Players.size(); i++)
       {
         R = this.Players.get(i).getRack();
-        for(int j = 0; j < 10; j++)
+        for(int j = 1; j < 11; j++)
         {
+          this.Cards.get(count).addActionListener(this);
+          this.Cards.get(count).setActionCommand(""+this.Cards.get(count).getValue());
+          if(i == 0)
+          {
+            this.Cards.get(count).setBounds(200+(xOffset*(i-1)),130+(yOffset*(i-1)),110,60);
+          }
+          if(i == 1)
+          {
+            this.Cards.get(count).setBounds();//figure this out for player 2
+          }
           R.addCard(this.Cards.get(count),j);
           count++;
         }
