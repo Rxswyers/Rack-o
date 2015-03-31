@@ -157,7 +157,7 @@ public class PlayerTest extends JApplet implements ActionListener
               Draw.top().addActionListener(this);
             }
           }
-
+          checkDeck();
           phase = 2;
         }
       }
@@ -182,9 +182,6 @@ public class PlayerTest extends JApplet implements ActionListener
           Players[0].printHand();
           Players[0].getRack().reorder();
           phase = 1;
-
-          checkDeck();
-          Draw.top().addActionListener(this);
         }
       }
 
