@@ -69,9 +69,13 @@ public class Deck extends JPanel
 			this.DJLP.setLayer(this.Cards.get(i), new Integer(-1));
 		}
 	}
-	public void draw()
+	public Card draw()
 	{
-		this.Cards.remove(this.Cards.size()-1);
+
+		this.DJLP.remove(this.Cards.size()-1);
+		Card C = this.Cards.remove(this.Cards.size()-1);
+		this.fixOrder();
+		return C;
 	}
 	public Card top()
 	{
@@ -85,15 +89,16 @@ public class Deck extends JPanel
 			return this.Cards.get(this.Cards.size()-1);
 		}
 	}
+	public boolean empty()
+	{
+		return this.Cards.isEmpty();
+	}
 	/*
 	public int getSize()
 	{
 		return Pile.size();
 	}
-	public boolean empty()
-	{
-		return Pile.empty();
-	}
+
 	public Card getTop()
 	{
 		if(this.empty())

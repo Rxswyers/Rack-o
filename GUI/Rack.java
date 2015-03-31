@@ -49,6 +49,7 @@ public class Rack extends JPanel
 		if(Discard.getValue() == this.ExtraCard.getValue())
 		{
 			D = this.ExtraCard;
+			this.RJLP.remove(this.ExtraCard);
 			this.ExtraCard = null;
 			System.out.println("Discarding: " + D);
 			return D;
@@ -78,7 +79,7 @@ public class Rack extends JPanel
 	{
 		this.ExtraCard = C;
 		C.setBounds(50,50,110,60);
-		this.RJLP.add(C,new Integer(11));
+		this.RJLP.add(C,new Integer(1));
 	}
 	public Card getExtra()
 	{

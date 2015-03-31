@@ -11,6 +11,7 @@ import java.applet.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
 
 public class PlayerTest extends JApplet implements ActionListener
 {
@@ -134,25 +135,35 @@ public class PlayerTest extends JApplet implements ActionListener
       //phase 1 is the draw phase
       if(phase == 1)
       {
+
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1)
         {
           if(((Card)e.getSource()).getState() == true) //the card is from the discard pile
           {
-            Discard.draw();
-            Discard.top().addActionListener(this);
+            Players[currentTurn].pickupCard(Discard.draw());
+            if(!Discard.empty())
+            {
+              Discard.top().addActionListener(this);
+            }
+
           }
           else
           {
-            Draw.draw();
-            Draw.top().addActionListener(this);
+            Players[currentTurn].pickupCard(Draw.draw());
+
+            if(!Draw.empty())
+            {
+              Draw.top().addActionListener(this);
+            }
           }
-          Players[currentTurn].pickupCard(((Card)e.getSource()));
+
           phase = 2;
         }
       }
       else if(phase == 2)
       {
+        //checkDeck();
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1) //the person is trying to draw from a deck again
         {
@@ -162,13 +173,44 @@ public class PlayerTest extends JApplet implements ActionListener
         {
 
           //Discard.addCard(((Card)e.getSource()),3,24,24);
-          Discard.top().removeActionListener(this);
+          if(!Discard.empty())
+          {
+            Discard.top().removeActionListener(this);
+          }
+
           Discard.addCard(Players[0].chooseDiscard(((Card)e.getSource())));
           Players[0].printHand();
           Players[0].getRack().reorder();
           phase = 1;
+
+          checkDeck();
+          Draw.top().addActionListener(this);
         }
       }
 
+    }
+    public void switchDecks()
+    {
+      ArrayList<Card> TempCards = new ArrayList<Card>();
+      while(!Discard.empty())
+      {
+        TempCards.add(Discard.draw());
+      }
+      //Shuffle the cards before they go into the drawPile
+      Collections.shuffle(TempCards);
+      for(Card C: TempCards)
+      {
+        C.setState(false);
+        C.removeActionListener(this);
+        Draw.addCard(C);
+      }
+      Draw.top().addActionListener(this);
+    }
+    public void checkDeck()
+    {
+      if(Draw.empty())
+      {
+        this.switchDecks();
+      }
     }
   }
