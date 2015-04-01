@@ -1,15 +1,33 @@
+/**
+*Computer Player to play Racko, it uses a rudementary AI to make it's choices
+*for now.
+*@author	Ruben Swyers
+*/
 public class Computer extends Player
 {
+	/**
+	*@param name			Computer's desired name
+	*/
 	public Computer(String name)
 	{
 		super(name);
 	}
+	/**
+	*Adds a Card to the Rack's extra slot
+	*@param	C					Card to be added to the extra slot
+	*/
 	public void pickupCard(Card C) // set this to abstract
 	{
 		C.setState(true); //flips the card up so the value can be seen
 		C.setOwner(1);
 		this.Hand.setExtra(C);
 	}
+	/**
+	*Chooses what pile to draw from, either the Draw or Discard
+	*@param	Top				The top of the Discard pile
+	*@return					<code>0</code> if it needs the Card from the Discard
+	*deck, or <code>1</code> to draw from the Draw deck.
+	*/
 	public int choosePile(Card Top)
 	{
 		if(this.positionWanted(Top) < 0)//the Discard pile is emtpy
@@ -26,7 +44,11 @@ public class Computer extends Player
 			return 1; //draw from the draw pile
 		}
 	}
-
+	/**
+	*Gets the desired position of a certain Card
+	*@param C					Card to get the desired position of
+	*@return					The desired position of the Card
+	*/
 	public int positionWanted(Card C)
 	{
 		int value = C.getValue();
@@ -75,6 +97,14 @@ public class Computer extends Player
 			return -1;
 		}
 	}
+	/**
+	*Checks to see if a certain position of the Rack is taken by a desired Card.
+	*It will use positionWanted to check to see if it is desired or not.
+	*@param	position				Position to check
+	*@return								<code>true</code> if the position is filled with a desired slot or
+	*<code>false</code> if it is not.
+	@see positionWanted
+	*/
 	public boolean checkPosition(int position)
 	{
 		if(positionWanted(this.Hand.search(position)) == position)
@@ -86,6 +116,11 @@ public class Computer extends Player
 			return false; //the position doesn't have a card that is desired
 		}
 	}
+	/**
+	*Removes a Card from their Rack. This was rewritten for use in the GUI.
+	*@param C							Card to remove from the Rack (including the extra slot)
+	*@return							The Card once it's removed from the Rack.
+	*/
 	public Card chooseDiscard(Card C)
 	{
 		int pos = positionWanted(this.Hand.getExtra());
@@ -102,6 +137,10 @@ public class Computer extends Player
 			return this.Hand.discard(this.Hand.search(pos));
 		}
 	}
+	/**
+	*
+	*
+	*/
 	public Card getDiscard()
 	{
 		int pos = positionWanted(this.Hand.getExtra());
