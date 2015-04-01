@@ -21,7 +21,7 @@ public class Rack extends JPanel
 	{
 		this.RJLP = new JLayeredPane();
 		this.add(this.RJLP);
-		this.RJLP.setBounds(0,0,600,200);
+		this.RJLP.setBounds(0,0,800,200);
 		this.RJLP.setLayout(null);
 
 	}
@@ -105,5 +105,9 @@ public class Rack extends JPanel
 		{
 			this.RJLP.setLayer(C, new Integer(-1));
 		}
+	}
+	public Card search(int pos)
+	{
+		return this.rack.get(pos);
 	}
 }

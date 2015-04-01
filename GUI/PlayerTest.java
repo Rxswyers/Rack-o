@@ -18,7 +18,7 @@ public class PlayerTest extends JApplet implements ActionListener
   Image image[] = new Image[2];
   ImageIcon imageIcons[] = new ImageIcon[2];
   ArrayList<Player> Players = new ArrayList<Player>();
-  int currentTurn;
+  int currentTurn = 0;
   int phase; // This can be 1,2
   Deck Discard = new Deck();
   Deck Draw = new Deck();
@@ -57,6 +57,10 @@ public class PlayerTest extends JApplet implements ActionListener
     Players.add(new Computer("Comp"));
     Players.get(0).getRack().setBounds(0,400,800,200);
     Players.get(1).getRack().setBounds(0,0,800,200);
+    this.add(Players.get(0).getRack());
+    this.add(Players.get(1).getRack());
+    Players.get(0).getRack().setLayout(null);
+    Players.get(1).getRack().setLayout(null);
     //Setting up the draw and discard
     Draw.setBounds(150,200,200,200);
     this.add(Draw);
@@ -130,11 +134,14 @@ public class PlayerTest extends JApplet implements ActionListener
     Players.get(0).printRack();
     //End Player one's rack
     */
+    Players.get(0).printRack();
+    Players.get(1).printRack();
+    Draw.top().addActionListener(this);
     if(phase == 2)
     {
       System.out.println("Phase 2 has started");
     }
-
+    phase = 1;
     this.setVisible(true);
   	this.validate();
 
@@ -171,10 +178,21 @@ public class PlayerTest extends JApplet implements ActionListener
           }
           checkDeck();
           phase = 2;
+          if(currentTurn == 1)
+          {
+            //ActionEvent E = new ActionEvent(((Computer)Players.get(1)).getDiscard(),ActionEvent.ACTION_PERFORMED,null);
+            Card C;
+            C = ((Computer)Players.get(1)).getDiscard();
+            C.doClick();
+            //Discard.addCard(C);
+            //System.out.println(((Computer)Players.get(1)).getDiscard());
+            //Players.get(1).getRack().getExtra().doClick();
+          }
         }
       }
       else if(phase == 2)
       {
+        int compChoice = 1;
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1) //the person is trying to draw from a deck again
         {
@@ -195,6 +213,29 @@ public class PlayerTest extends JApplet implements ActionListener
           phase = 1;
           turns ++;
           currentTurn = turns % this.Players.size();
+          if(currentTurn == 1)
+          {
+            if(!Discard.empty())
+            {
+              compChoice = Players.get(1).choosePile(Discard.top());
+            }
+            else
+            {
+              compChoice = 1;
+            }
+            System.out.println("CompChoice: "+compChoice);
+            if(compChoice == 1)
+            {
+              //ActionEvent A = new ActionEvent(Draw.top(),ActionEvent.ACTION_PERFORMED,null);
+              Draw.top().doClick();
+              System.out.println("Should have drawn from the draw pile");
+            }
+            else
+            {
+              //ActionEvent A = new ActionEvent(Discard.top(),ActionEvent.ACTION_PERFORMED,null);
+              Discard.top().doClick();
+            }
+          }
         }
       }
 
@@ -270,8 +311,9 @@ public class PlayerTest extends JApplet implements ActionListener
         for(int j = 1; j < 11; j++)
         {
           this.Cards.get(count).addActionListener(this);
+          this.Cards.get(count).setOwner(i);
           this.Cards.get(count).setActionCommand(""+this.Cards.get(count).getValue());
-          this.Cards.get(count).setBounds(200+(xOffset*(i-1)),130+(yOffset*(i-1)),110,60);
+          this.Cards.get(count).setBounds(200+(xOffset*(j-1)),130+(yOffset*(j-1)),110,60);
           R.addCard(this.Cards.get(count),new Integer(1));
           count++;
         }

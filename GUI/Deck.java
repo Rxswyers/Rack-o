@@ -54,12 +54,8 @@ public class Deck extends JPanel
 		//for(int i = 0; i < this.Cards.size(); i++)
 		for(int i = this.Cards.size() - 1; i>=0; i --)
 		{
-			System.out.println("i is: "+i);
-			System.out.println("number of cards: " +numCards);
 			this.Cards.get(i).setBounds(20+(off*(i+1)),20+(off*(i+1)),110,60);
-			System.out.println("x: "+ (20+(off*(i+1))) + " y: " + (20+(off*(i+1))));
 			this.DJLP.add(this.Cards.get(i),new Integer(1));
-			System.out.println("Moved: " + this.Cards.get(i));
 		}
 	}
 	public void reorder()

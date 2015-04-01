@@ -7,7 +7,8 @@ public class Computer extends Player
 	public void pickupCard(Card C) // set this to abstract
 	{
 		C.setState(true); //flips the card up so the value can be seen
-		this.ExtraCard = C;
+		C.setOwner(1);
+		this.Hand.setExtra(C);
 	}
 	public int choosePile(Card Top)
 	{
@@ -17,7 +18,8 @@ public class Computer extends Player
 		}
 		else if(this.checkPosition(this.positionWanted(Top)))
 		{
-			return 0; //draw from the discard
+			return 1; //draw from the discard
+			//CHANGED AT 9:34 AM
 		}
 		else
 		{
@@ -84,20 +86,36 @@ public class Computer extends Player
 			return false; //the position doesn't have a card that is desired
 		}
 	}
-	public Card chooseDiscard()
+	public Card chooseDiscard(Card C)
 	{
-		int pos = positionWanted(this.ExtraCard);
+		int pos = positionWanted(this.Hand.getExtra());
 		if(pos == -1)
 		{
-			return this.ExtraCard;
+			return this.Hand.getExtra();
 		}
 		else if(checkPosition(pos))
 		{
-			return this.ExtraCard;
+			return this.Hand.getExtra();
 		}
 		else
 		{
-			return this.Hand.discard(this.ExtraCard,this.Hand.search(pos));
+			return this.Hand.discard(this.Hand.search(pos));
+		}
+	}
+	public Card getDiscard()
+	{
+		int pos = positionWanted(this.Hand.getExtra());
+		if(pos == -1)
+		{
+			return this.Hand.getExtra();
+		}
+		else if(checkPosition(pos))
+		{
+			return this.Hand.getExtra();
+		}
+		else
+		{
+			return this.Hand.search(pos);
 		}
 	}
 
