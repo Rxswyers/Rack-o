@@ -26,6 +26,7 @@ public class PlayerTest extends JApplet implements ActionListener
   String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
   boolean limitTurns;
   int turns = 0;
+  Card fromDiscard;
 
   public void init()
   {
@@ -86,9 +87,6 @@ public class PlayerTest extends JApplet implements ActionListener
     }
     public void actionPerformed(ActionEvent e)
     {
-      System.out.println(e.getActionCommand());
-      System.out.println(((Card)e.getSource()).getOwner());
-      System.out.println("Phase: " + phase);
       //phase 1 is the draw phase
       if(phase == 1)
       {
@@ -99,6 +97,8 @@ public class PlayerTest extends JApplet implements ActionListener
           if(((Card)e.getSource()).getState() == true) //the card is from the discard pile
           {
             Players.get(currentTurn).pickupCard(Discard.draw());
+            fromDiscard = Players.get(currentTurn).getRack().getExtra();
+            fromDiscard.removeActionListener(this); //10:01 AM
             if(!Discard.empty())
             {
               Discard.top().addActionListener(this);
@@ -142,12 +142,22 @@ public class PlayerTest extends JApplet implements ActionListener
           }
 
           Discard.addCard(Players.get(currentTurn).chooseDiscard(((Card)e.getSource())));
-          Players.get(currentTurn).printHand();
+          //Players.get(currentTurn).printHand();
           Players.get(currentTurn).getRack().reorder();
+          if(fromDiscard != null)
+          {
+            fromDiscard.addActionListener(this);
+          }
 
           phase = 1;
           turns ++;
           currentTurn = turns % this.Players.size();
+          if(checkWin())
+          {
+            System.out.println("Somebody won!");
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null,"Someone won, would you like to play again?","Winner",dialogButton);
+          }
           if(currentTurn == 1)
           {
             if(!Discard.empty())
@@ -158,11 +168,11 @@ public class PlayerTest extends JApplet implements ActionListener
             {
               compChoice = 1;
             }
-            System.out.println("CompChoice: "+compChoice);
+            //System.out.println("CompChoice: "+compChoice);
             if(compChoice == 1)
             {
               Draw.top().doClick();
-              System.out.println("Should have drawn from the draw pile");
+              //System.out.println("Should have drawn from the draw pile");
             }
             else
             {
@@ -170,6 +180,7 @@ public class PlayerTest extends JApplet implements ActionListener
             }
           }
         }
+
       }
 
     }
@@ -242,7 +253,7 @@ public class PlayerTest extends JApplet implements ActionListener
           }
           if(i == 1)
           {
-            this.Cards.get(count).setState(false);
+            this.Cards.get(count).setState(true);
             //The show opponent rack cheat can be checked here
           }
           R.addCard(this.Cards.get(count),new Integer(1));

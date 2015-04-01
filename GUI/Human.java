@@ -15,6 +15,7 @@ public class Human extends Player
   {
     Card Result;
     Result = this.Hand.discard(D);
+		this.currentScore = this.Hand.score();
     System.out.println("Current rack score: " + this.Hand.score());
     return Result;
 

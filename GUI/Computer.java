@@ -6,7 +6,7 @@ public class Computer extends Player
 	}
 	public void pickupCard(Card C) // set this to abstract
 	{
-		C.setState(false); //flips the card up so the value can be seen
+		C.setState(true); //flips the card up so the value can be seen
 		C.setOwner(1);
 		this.Hand.setExtra(C);
 	}

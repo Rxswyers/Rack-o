@@ -51,7 +51,6 @@ public class Rack extends JPanel
 			D = this.ExtraCard;
 			this.RJLP.remove(this.ExtraCard);
 			this.ExtraCard = null;
-			System.out.println("Discarding: " + D);
 			repaint();
 			return D;
 		}
@@ -65,16 +64,10 @@ public class Rack extends JPanel
 			this.rack.add(place,this.ExtraCard);
 			this.ExtraCard.setBounds(200+(xoff*place),130+(yoff*place),110,60);
 			this.RJLP.add(this.ExtraCard,(10 - (place+1)));
-			System.out.println("Place in RJLP Calculated: "+ (10-(place+1)));
-			System.out.println("Discarding: " + Discard);
 			this.ExtraCard = null;
 			return Discard;
 		}
 
-	}
-	public int score()
-	{
-		return 1;
 	}
 	public void setExtra(Card C)
 	{
@@ -105,6 +98,38 @@ public class Rack extends JPanel
 		{
 			this.RJLP.setLayer(C, new Integer(-1));
 		}
+
+	}
+	public int score()
+	{
+		int run = 0;
+		int highestRun = 0;
+		int score = 0;
+		int least = 0;
+		int high = 0;
+		for(Card C: this.rack)
+		{
+			if(least < C.getValue())
+			{
+				least = C.getValue();
+				run ++;
+			}
+			else
+			{
+				score = run * 5;
+				if(score == 50)
+				{
+					score += 25;
+				}
+				return score;
+			}
+		}
+		score = run *5;
+		if(score == 50)
+		{
+			score+=25;
+		}
+		return score;
 	}
 	public Card search(int pos)
 	{

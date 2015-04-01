@@ -29,13 +29,10 @@ public class Deck extends JPanel
 		this.numCards = 0;
 	}
 	//methods
-			//public void addCard(Card C, int index)
-	//public void addCard(Card C, int index, int x, int y)
 	public void addCard(Card C)
 	{
 		numCards++;
 		int off = 2;
-		//C.setBounds(x,y,110,60);
 		C.setBounds(20+(off*this.Cards.indexOf(C)),20+(off*this.Cards.indexOf(C)),110,60);
 		C.setOwner(-1);
 		this.Cards.add(C);
@@ -50,8 +47,6 @@ public class Deck extends JPanel
 		{
 			this.DJLP.remove(C);
 		}
-		//for(int i = this.Cards.size() - 1; i>=0; i --)
-		//for(int i = 0; i < this.Cards.size(); i++)
 		for(int i = this.Cards.size() - 1; i>=0; i --)
 		{
 			this.Cards.get(i).setBounds(20+(off*(i+1)),20+(off*(i+1)),110,60);
@@ -71,6 +66,7 @@ public class Deck extends JPanel
 		this.DJLP.remove(this.Cards.size()-1);
 		Card C = this.Cards.remove(this.Cards.size()-1);
 		this.fixOrder();
+		repaint();
 		return C;
 	}
 	public Card top()
@@ -89,34 +85,4 @@ public class Deck extends JPanel
 	{
 		return this.Cards.isEmpty();
 	}
-	/*
-	public int getSize()
-	{
-		return Pile.size();
-	}
-
-	public Card getTop()
-	{
-		if(this.empty())
-		{
-			return new Card(0);
-		}
-		else
-		{
-			return this.Pile.peek();
-		}
-	}
-
-	public String toString()
-	{
-		String result = "";
-		//Printed out the stack without popping anything from it
-		//in order to do so, you need to treat it as a vector
-		for(int i = Pile.size() - 1; i >= 0; i--)
-		{
-			result += "" + Pile.get(i).toString() + "\n";
-		}
-		return result;
-	}
-*/
 }
