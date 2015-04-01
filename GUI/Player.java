@@ -160,8 +160,4 @@ abstract public class Player
   {
     System.out.println(this.Hand);
   }
-/*  public void updateScore()
-  {
-    this.setCurrentScore(this.Hand.score());
-  }*/
 }

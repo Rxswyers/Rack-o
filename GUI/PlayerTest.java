@@ -81,8 +81,8 @@ public class PlayerTest extends JApplet implements ActionListener
     Draw.top().addActionListener(this);
     String response = JOptionPane.showInputDialog(null,"What is your name?","Enter your name",JOptionPane.QUESTION_MESSAGE);
     String delims = " ";
-    String[] tokens = response.split(delims);
-    for(String s:tokens)
+    String[] cheats = response.split(delims);
+    for(String s:cheats)
     {
       System.out.println(s);
     }
@@ -152,7 +152,6 @@ public class PlayerTest extends JApplet implements ActionListener
           }
 
           Discard.addCard(Players.get(currentTurn).chooseDiscard(((Card)e.getSource())));
-          //Players.get(currentTurn).printHand();
           Players.get(currentTurn).getRack().reorder();
           if(fromDiscard != null)
           {
@@ -177,11 +176,9 @@ public class PlayerTest extends JApplet implements ActionListener
             {
               compChoice = 1;
             }
-            //System.out.println("CompChoice: "+compChoice);
             if(compChoice == 1)
             {
               Draw.top().doClick();
-              //System.out.println("Should have drawn from the draw pile");
             }
             else
             {

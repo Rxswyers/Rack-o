@@ -1,22 +1,40 @@
-/*Author: 			Ruben Swyers
-* Creation Date: 	March 15, 2015
-* Due Date: 		March 28, 2015
-* Course: 			CSC243
+/*Author: 					Ruben Swyers
+* Creation Date: 		March 15, 2015
+* Due Date: 				April 1, 2015
+* Course: 					CSC243
 * Professor Name: 	Dr. Spiegel
-* Assignment: 		#2 - Racko GUI
-* Filename: 		Rack.java
-* Purpose:		  	This represents a Rack in the GUI. It is a JPanel that has a JLayeredPane on it.
+* Assignment: 			#2 - Racko GUI
+* Filename: 				Rack.java
+* Purpose:		  		This represents a Rack in the GUI. It is a JPanel that has a JLayeredPane on it.
 					The cards are added to the JLayeredPane to allow overlapping.
 */
 import java.util.ArrayList;
 import javax.swing.*;
 import java.awt.*;
 import java.applet.*;
+/**
+*Rack holds the Cards that a Player has, including the extra one
+* that a player picks up.
+*@author Ruben Swyers
+*/
 public class Rack extends JPanel
 {
+	/**
+	*Holds the contents of the Rack, layers them as well.
+	*/
 	JLayeredPane RJLP;
+	/**
+	*Keeps track of the Rack, including order.
+	*/
 	ArrayList<Card> rack = new ArrayList<Card>();
+	/**
+	*The Card is an extra, and is what the Player picks up
+	*but doesn't put directly into the rack unless they decide to
+	*/
 	Card ExtraCard;
+	/**
+	*Sets up the JLayeredPane
+	*/
 	public Rack()
 	{
 		this.RJLP = new JLayeredPane();
@@ -25,13 +43,17 @@ public class Rack extends JPanel
 		this.RJLP.setLayout(null);
 
 	}
+	/**
+	*Adds a card to a specified index
+	*@param	C			Card to be added
+	*@param index	position to add the Card
+	*/
 	public void addCard(Card C, int index)
 	{
-		//C.setState(true);
 		this.rack.add(C);
 		this.RJLP.add(C,new Integer(index));
-
 	}
+	
 	public void printStuff()
 	{
 		for(int i = this.rack.size() - 1; i >= 0; i --)
@@ -79,10 +101,6 @@ public class Rack extends JPanel
 	{
 		return this.ExtraCard;
 	}
-	//Name:
-	//Parameters:
-	//Returns:
-	//Description:
 	public String toString()
 	{
 		String result = "\n";
