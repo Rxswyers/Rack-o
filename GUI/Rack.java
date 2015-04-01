@@ -135,4 +135,10 @@ public class Rack extends JPanel
 	{
 		return this.rack.get(pos);
 	}
+	public void reset()
+	{
+		this.rack.clear();
+		this.RJLP.removeAll();
+		this.ExtraCard = null;
+	}
 }

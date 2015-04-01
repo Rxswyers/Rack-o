@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.net.MalformedURLException;
+import java.net.*;
 
 public class PlayerTest extends JApplet implements ActionListener
 {
@@ -155,8 +157,7 @@ public class PlayerTest extends JApplet implements ActionListener
           if(checkWin())
           {
             System.out.println("Somebody won!");
-            int dialogButton = JOptionPane.YES_NO_OPTION;
-            int dialogResult = JOptionPane.showConfirmDialog(null,"Someone won, would you like to play again?","Winner",dialogButton);
+
           }
           if(currentTurn == 1)
           {
@@ -274,7 +275,26 @@ public class PlayerTest extends JApplet implements ActionListener
       {
         if(P.getCurrentScore() == 75)
         {
-          System.out.println(P.getName() + " won!!");
+          int dialogButton = JOptionPane.YES_NO_OPTION;
+          int dialogResult = JOptionPane.showConfirmDialog(null,P.getName() + " won!!","Winner",dialogButton);
+          if(dialogResult == JOptionPane.YES_OPTION)
+          {
+            try {
+               this.getAppletContext().showDocument(new URL(getCodeBase()+"appletCaller.html"));
+               //"http://unixweb.kutztown.edu/~userName/indexOfStartupPage"));
+             }
+            catch (MalformedURLException e) {
+                System.out.println(e.getMessage());
+             }
+          }
+          try
+          {
+            Thread.sleep(2500);
+          }
+          catch(Exception ex)
+          {
+            System.out.println("Thread.Sleep Exception. " + ex.getMessage());
+          }
           return true;
         }
       }

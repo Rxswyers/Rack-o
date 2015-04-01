@@ -85,4 +85,10 @@ public class Deck extends JPanel
 	{
 		return this.Cards.isEmpty();
 	}
+	public void reset()
+	{
+		this.Cards.clear();
+		this.DJLP.removeAll();
+		this.numCards = 0;
+	}
 }

@@ -118,5 +118,4 @@ public class Computer extends Player
 			return this.Hand.search(pos);
 		}
 	}
-
 }
