@@ -17,6 +17,7 @@ import java.net.*;
 
 public class PlayerTest extends JApplet implements ActionListener
 {
+  boolean win = false;
   Image image[] = new Image[2];
   ImageIcon imageIcons[] = new ImageIcon[2];
   ArrayList<Player> Players = new ArrayList<Player>();
@@ -78,6 +79,13 @@ public class PlayerTest extends JApplet implements ActionListener
     Players.get(0).printRack();
     Players.get(1).printRack();
     Draw.top().addActionListener(this);
+    String response = JOptionPane.showInputDialog(null,"What is your name?","Enter your name",JOptionPane.QUESTION_MESSAGE);
+    String delims = " ";
+    String[] tokens = response.split(delims);
+    for(String s:tokens)
+    {
+      System.out.println(s);
+    }
     if(phase == 2)
     {
       System.out.println("Phase 2 has started");
@@ -157,7 +165,7 @@ public class PlayerTest extends JApplet implements ActionListener
           if(checkWin())
           {
             System.out.println("Somebody won!");
-
+            win = true;
           }
           if(currentTurn == 1)
           {
@@ -271,6 +279,10 @@ public class PlayerTest extends JApplet implements ActionListener
     }
     public boolean checkWin()
     {
+      if(win)
+      {
+        return true;
+      }
       for(Player P:Players)
       {
         if(P.getCurrentScore() == 75)
