@@ -71,69 +71,7 @@ public class PlayerTest extends JApplet implements ActionListener
     Discard.setLayout(null);
     this.getCards();
     this.deal();
-    /*
-    Card CTest = new Card(Images[0],imageIcons[0],30);
-    //CTest.addActionListener(this);
 
-    Card CTest2 = new Card(Images[0],imageIcons[0],29);
-    CTest2.addActionListener(this);
-    CTest.setState(false);
-    CTest2.setState(false);
-    CTest.setOwner(-1);
-    CTest2.setOwner(-1);
-
-    int drawOffset = 2;
-    Draw.addCard(CTest);
-    Draw.addCard(CTest2);
-    //end setting up the draw pile
-
-    //Setting up the discard pile
-    //Deck Discard = new Deck();
-    Discard.setBounds(350,200,200,200);
-    this.add(Discard);
-    Discard.setLayout(null);
-
-    Card DTest = new Card(Images[0],imageIcons[0],27);
-    //DTest.addActionListener(this);
-
-    Card DTest2 = new Card(Images[0],imageIcons[0],28);
-    DTest2.addActionListener(this);
-    DTest.setOwner(-1);
-    DTest2.setOwner(-1);
-
-    DTest.setState(true);
-    DTest2.setState(true);
-    Discard.addCard(DTest);
-    Discard.addCard(DTest2);
-    //end setting up the discard pile
-    currentTurn = 0;
-    phase = 1;
-    //setting up a player to test
-
-    //generating the cards on the rack of the Player (Human)
-    Rack R = Players.get(0).getRack();
-    R.setBounds(0,400,800,200);
-    this.add(R);
-    R.setLayout(null);
-
-    Card C;
-    int xOffset = 25;
-    int yOffset = -12;
-    int last = 10;
-    for (int i = 1; i < 11; i ++)
-    {
-      C = new Card(Images[0],imageIcons[0],i);
-      C.setState(true);
-      C.setOwner(0);
-      C.addActionListener(this);
-      C.setActionCommand(Integer.toString(i));
-      C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
-      C.setActionCommand("Place in RJLP: "+(10-i));
-      R.addCard(C,new Integer(1));
-    }
-    Players.get(0).printRack();
-    //End Player one's rack
-    */
     Players.get(0).printRack();
     Players.get(1).printRack();
     Draw.top().addActionListener(this);
@@ -180,13 +118,10 @@ public class PlayerTest extends JApplet implements ActionListener
           phase = 2;
           if(currentTurn == 1)
           {
-            //ActionEvent E = new ActionEvent(((Computer)Players.get(1)).getDiscard(),ActionEvent.ACTION_PERFORMED,null);
             Card C;
             C = ((Computer)Players.get(1)).getDiscard();
             C.doClick();
-            //Discard.addCard(C);
-            //System.out.println(((Computer)Players.get(1)).getDiscard());
-            //Players.get(1).getRack().getExtra().doClick();
+            C.setState(true);
           }
         }
       }
@@ -226,13 +161,11 @@ public class PlayerTest extends JApplet implements ActionListener
             System.out.println("CompChoice: "+compChoice);
             if(compChoice == 1)
             {
-              //ActionEvent A = new ActionEvent(Draw.top(),ActionEvent.ACTION_PERFORMED,null);
               Draw.top().doClick();
               System.out.println("Should have drawn from the draw pile");
             }
             else
             {
-              //ActionEvent A = new ActionEvent(Discard.top(),ActionEvent.ACTION_PERFORMED,null);
               Discard.top().doClick();
             }
           }
@@ -283,18 +216,7 @@ public class PlayerTest extends JApplet implements ActionListener
       for(int i = 1; i <= cardSize; i ++)
       {
         this.Cards.add(new Card(Images[0],imageIcons[0],i));
-        //C = new Card(Images[0],imageIcons[0],i);
       }
-      /*
-      C = new Card(Images[0],imageIcons[0],i);
-      C.setState(true);
-      C.setOwner(0);
-      C.addActionListener(this);
-      C.setActionCommand(Integer.toString(i));
-      C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
-      C.setActionCommand("Place in RJLP: "+(10-i));
-      R.addCard(C,new Integer(1));
-      */
       Collections.shuffle(this.Cards);
     }
     public void deal()
@@ -314,17 +236,19 @@ public class PlayerTest extends JApplet implements ActionListener
           this.Cards.get(count).setOwner(i);
           this.Cards.get(count).setActionCommand(""+this.Cards.get(count).getValue());
           this.Cards.get(count).setBounds(200+(xOffset*(j-1)),130+(yOffset*(j-1)),110,60);
+          if(i == 0)
+          {
+            this.Cards.get(count).setState(true);
+          }
+          if(i == 1)
+          {
+            this.Cards.get(count).setState(false);
+            //The show opponent rack cheat can be checked here
+          }
           R.addCard(this.Cards.get(count),new Integer(1));
           count++;
         }
       }
-      //Used for debugging
-      /*
-      System.out.println(this.Players.get(0).getName() +"'s hand");
-      this.Players.get(0).printHand();
-      System.out.println(this.Players.get(1).getName() +"'s hand");
-      this.Players.get(1).printHand();
-      */
       //Populates the draw pile with the rest of the cards that weren't dealt to players
       for(int num = count; num < this.Cards.size(); num++)
       {

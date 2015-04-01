@@ -27,7 +27,7 @@ public class Rack extends JPanel
 	}
 	public void addCard(Card C, int index)
 	{
-		C.setState(true);
+		//C.setState(true);
 		this.rack.add(C);
 		this.RJLP.add(C,new Integer(index));
 
