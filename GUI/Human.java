@@ -1,16 +1,32 @@
 import java.util.Scanner;
+/**
+*Represents a Human Player, processes the choices that the user makes.
+*@author	Ruben Swyers
+*/
 public class Human extends Player
 {
+	/**
+	*@param name			Desired name of the Player
+	*/
 	public Human(String name)
 	{
 		super(name);
 	}
+	/**
+	*Adds a Card to the Rack's extra slot
+	*@param	C					Card to be added to the extra slot
+	*/
 	public void pickupCard(Card C)
 	{
 		C.setState(true); //flips the card up so the value can be seen
 		C.setOwner(0);
 		this.Hand.setExtra(C);
 	}
+	/**
+	*Removes a Card from their Rack. This was rewritten for use in the GUI.
+	*@param C							Card to remove from the Rack (including the extra slot)
+	*@return							The Card once it's removed from the Rack.
+	*/
   public Card chooseDiscard(Card D)
   {
     Card Result;
@@ -19,6 +35,10 @@ public class Human extends Player
     return Result;
 
   }
+	/**
+	*Have the user choose what Deck they would like to draw from.
+	*
+	*/
   public int choosePile(Card Top)
   {
     Scanner keyboard = new Scanner(System.in);
@@ -35,5 +55,4 @@ public class Human extends Player
     }
     return choice;
   }
-
 }
