@@ -103,7 +103,6 @@ public class Computer extends Player
 	*@param	position				Position to check
 	*@return								<code>true</code> if the position is filled with a desired slot or
 	*<code>false</code> if it is not.
-	@see positionWanted
 	*/
 	public boolean checkPosition(int position)
 	{
