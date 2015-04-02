@@ -138,8 +138,9 @@ public class Computer extends Player
 		}
 	}
 	/**
-	*
-	*
+	*Gets the Card that is wanted to be discarded, it doesn't actually
+	*remove it from anything.
+	*@return			Card that is chosen to discard.
 	*/
 	public Card getDiscard()
 	{

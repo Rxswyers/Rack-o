@@ -53,7 +53,9 @@ public class Rack extends JPanel
 		this.rack.add(C);
 		this.RJLP.add(C,new Integer(index));
 	}
-	
+	/**
+	*Prints the rack out.
+	*/
 	public void printStuff()
 	{
 		for(int i = this.rack.size() - 1; i >= 0; i --)
@@ -61,10 +63,21 @@ public class Rack extends JPanel
 			System.out.println(this.rack.get(i));
 		}
 	}
+	/**
+	*Finds a Card in the Rack with an index
+	*@param v 		index of the Card
+	*@return			The Card at that index
+	*/
 	public Card find(int v)
 	{
 		return rack.get(v);
 	}
+	/**
+	*Removes a Card from the Rack, it searches the extra card as well.
+	*This will remove it from the JLayeredPane and the rack ArrayList.
+	*@param	Discard		Card to be discarded from the Rack
+	*@return					The Card that was discarded
+	*/
 	public Card discard(Card Discard)
 	{
 		Card D;
@@ -91,16 +104,28 @@ public class Rack extends JPanel
 		}
 
 	}
+	/**
+	*Sets the Rack's extra Card, adds it to the ArrayList and the JLayeredPane
+	*@param C			Card to add to the extra slot
+	*/
 	public void setExtra(Card C)
 	{
 		this.ExtraCard = C;
 		C.setBounds(50,50,110,60);
 		this.RJLP.add(C,new Integer(1));
 	}
+	/**
+	*Gets the extra Card that is in the Rack.
+	*@return			Card in the extra slot
+	*/
 	public Card getExtra()
 	{
 		return this.ExtraCard;
 	}
+	/**
+	*Prints out the String representation of the Rack.
+	*@return			Representation of the Rack.
+	*/
 	public String toString()
 	{
 		String result = "\n";
@@ -110,6 +135,9 @@ public class Rack extends JPanel
 		}
 		return result;
 	}
+	/**
+	*Resets the order of the layers on the JLayeredPane of the Rack.
+	*/
 	public void reorder()
 	{
 		for(Card C:rack)
@@ -118,6 +146,12 @@ public class Rack extends JPanel
 		}
 
 	}
+	/**
+	*Scores the rack based on the run from the first Card to the last.
+	*It goes in sequential order from smallest to largest. 5 points per
+	*card in order, 25 bonus points for having all 10 Cards in order.
+	*@return			The score of the Rack.
+	*/
 	public int score()
 	{
 		int run = 0;
@@ -149,14 +183,13 @@ public class Rack extends JPanel
 		}
 		return score;
 	}
+	/**
+	*Finds a Card at a certain position of the Rack.
+	*@param pos			The position of the Card
+	*@return				The Card at the position
+	*/
 	public Card search(int pos)
 	{
 		return this.rack.get(pos);
-	}
-	public void reset()
-	{
-		this.rack.clear();
-		this.RJLP.removeAll();
-		this.ExtraCard = null;
 	}
 }
