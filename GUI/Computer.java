@@ -1,3 +1,13 @@
+/*Author: 				Ruben Swyers
+* Creation Date: 	March 15, 2015
+* Due Date: 			April 3, 2015
+* Course: 				CSC243
+* Professor Name: Dr. Spiegel
+* Assignment: 		#2 - Racko GUI
+* Filename: 			Computer.java
+* Purpose:		  	This represents a computer player in the GUI, it will make decisions
+on what actions to take based on a rudementary AI
+*/
 /**
 *Computer Player to play Racko, it uses a rudementary AI to make it's choices
 *for now.

@@ -1,10 +1,10 @@
-/*Author: 			Ruben Swyers
+/*Author: 				Ruben Swyers
 * Creation Date: 	March 15, 2015
-* Due Date: 		March 28, 2015
-* Course: 			CSC243
-* Professor Name: 	Dr. Spiegel
+* Due Date: 			April 3, 2015
+* Course: 				CSC243
+* Professor Name: Dr. Spiegel
 * Assignment: 		#2 - Racko GUI
-* Filename: 		Card.java
+* Filename: 			Card.java
 * Purpose:		  	This represents a Card in the game. It is a JButton that uses an image,
 					and has a tool tip to display the value
 */
