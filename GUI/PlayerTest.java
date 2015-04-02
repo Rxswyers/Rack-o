@@ -28,6 +28,7 @@ public class PlayerTest extends JApplet implements ActionListener
   ArrayList<Card> Cards = new ArrayList<Card>();
   String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
   boolean limitTurns;
+  int turnLimit;
   int turns = 0;
   Card fromDiscard;
 

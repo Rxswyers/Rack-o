@@ -16,10 +16,11 @@ import java.applet.*;
 *The Card has a state member that will determine if it is face up or down.
 *If the state is true, it is face up and displays the value. If it's false
 *then the back of the Card is shown(an image). This class will be the
-*building block for most of the other classes in this project.
+*building block for most of the other classes in this project. Card now implements
+*Comparable so it can be sorted if it's in a list.
 *@author	Ruben Swyers
 */
-public class Card extends JButton
+public class Card extends JButton implements Comparable
 {
 	//members
 	/**
