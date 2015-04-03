@@ -211,7 +211,7 @@ public class Rack extends JPanel
 		}
 		for(int i = 0; i < rack.size(); i ++)
 		{
-			this.rack.get(i).setBounds(200+(xOff*(i+1)),130+(yOff*(i+1)),110,60);
+			this.rack.get(i).setBounds(200+(xOff*(i)),130+(yOff*(i)),110,60);
 			this.RJLP.add(this.rack.get(i),new Integer(1));
 		}
 	}
