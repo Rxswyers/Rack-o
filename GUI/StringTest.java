@@ -4,18 +4,18 @@ public class StringTest
   public static void main(String args[])
   {
     String S;
-    int next = -1;
     int turnLimit = 0;
     boolean limitTurns;
     boolean sCheat;
     int numOrdered = 0;
     int orderLoc = 0;
+    int turnLocation = 0;
     String delims = " ";
     String response = "/c /n 3 /s 10";
     String[] cheats = response.split(delims);
-    int turnLocation = 0;
-    ArrayList<String> cheatList = new ArrayList<String>();
     boolean showOpponent = false;
+    ArrayList<String> cheatList = new ArrayList<String>();
+
     for(String s:cheats)
     {
       cheatList.add(s);
