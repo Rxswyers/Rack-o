@@ -214,6 +214,7 @@ public class Racko
 		{
 			limitTurns = true;
 			turns = Cheats.indexOf("/n") + 1;
+			
 		}
 		else
 		{

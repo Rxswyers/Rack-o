@@ -20,7 +20,7 @@ import java.applet.*;
 *Comparable so it can be sorted if it's in a list.
 *@author	Ruben Swyers
 */
-public class Card extends JButton implements Comparable
+public class Card extends JButton implements Comparable<Card>
 {
 	//members
 	/**
@@ -159,6 +159,16 @@ public class Card extends JButton implements Comparable
 			this.setToolTipText(null);
 			ImageDrawer.drawScaledImage(this.Pic.getImage(), this, g);
 		}
-
+	}
+	/**
+	*Overrides the Comparable compareTo method to compare the values of the
+	*Cards. This will make it possible to sort using Collections.sort().
+	*@param	C			Card to be compared to
+	*@return      a negative integer if the Card value is less than this, zero if they are equal, and
+  * a positive integer if the Card value is greater.
+	*/
+	public int compareTo(Card C)
+	{
+		return this.getValue() - C.getValue();
 	}
 }

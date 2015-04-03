@@ -8,7 +8,7 @@
 * Purpose:		  		This represents a Rack in the GUI. It is a JPanel that has a JLayeredPane on it.
 					The cards are added to the JLayeredPane to allow overlapping.
 */
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.applet.*;
@@ -191,5 +191,26 @@ public class Rack extends JPanel
 	public Card search(int pos)
 	{
 		return this.rack.get(pos);
+	}
+	public void sortN(int n)
+	{
+		Collections.sort(this.rack.subList(0,n),new CardComparator());
+		fixOrder();
+		repaint();
+	}
+	public void fixOrder()
+	{
+		int xOff = 25;
+		int yOff = -12;
+		for(Card C:rack)
+		{
+			this.RJLP.remove(C);
+		}
+		//for(int i = this.rack.size() - 1; i>=0; i --)
+		for(int i = 0; i < rack.size(); i ++)
+		{
+			this.rack.get(i).setBounds(200+(xOff*(i+1)),130+(yOff*(i+1)),110,60);
+			this.RJLP.add(this.rack.get(i),new Integer(1));
+		}
 	}
 }

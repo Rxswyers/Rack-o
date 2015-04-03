@@ -126,7 +126,8 @@ public class Computer extends Player
 		}
 	}
 	/**
-	*Removes a Card from their Rack. This was rewritten for use in the GUI.
+	*Removes a Card from their Rack. This was rewritten for use in the GUI. This
+	* also updates the current score.
 	*@param C							Card to remove from the Rack (including the extra slot)
 	*@return							The Card once it's removed from the Rack.
 	*/
@@ -135,14 +136,17 @@ public class Computer extends Player
 		int pos = positionWanted(this.Hand.getExtra());
 		if(pos == -1)
 		{
+			this.currentScore = this.Hand.score();
 			return this.Hand.getExtra();
 		}
 		else if(checkPosition(pos))
 		{
+			this.currentScore = this.Hand.score();
 			return this.Hand.getExtra();
 		}
 		else
 		{
+			this.currentScore = this.Hand.score();
 			return this.Hand.discard(this.Hand.search(pos));
 		}
 	}

@@ -21,16 +21,25 @@ public class PlayerTest extends JApplet implements ActionListener
   Image image[] = new Image[2];
   ImageIcon imageIcons[] = new ImageIcon[2];
   ArrayList<Player> Players = new ArrayList<Player>();
+  ArrayList<Card> Cards = new ArrayList<Card>();
   int currentTurn = 0;
   int phase; // This can be 1,2
   Deck Discard = new Deck();
   Deck Draw = new Deck();
-  ArrayList<Card> Cards = new ArrayList<Card>();
   String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
+  Card fromDiscard;
+
   boolean limitTurns;
+  boolean oCheat;
   int turnLimit;
   int turns = 0;
-  Card fromDiscard;
+
+  int numOrdered = 0;
+  int orderLoc = 0;
+  int turnLocation = 0;
+  boolean showOpponent;
+
+  ArrayList<String> cheatList = new ArrayList<String>();
 
   public void init()
   {
@@ -58,7 +67,7 @@ public class PlayerTest extends JApplet implements ActionListener
     showStatus("Loaded Image");
     //end getting images
 
-    Players.add(new Human("Ruben"));
+    Players.add(new Human("You"));
     Players.add(new Computer("Comp"));
     Players.get(0).getRack().setBounds(0,400,800,200);
     Players.get(1).getRack().setBounds(0,0,800,200);
@@ -74,23 +83,22 @@ public class PlayerTest extends JApplet implements ActionListener
     Discard.setBounds(350,200,200,200);
     this.add(Discard);
     Discard.setLayout(null);
+
+
+
+    String response = JOptionPane.showInputDialog(null,"Enter the cheats you would like to use"
+    ,"Enter cheats",JOptionPane.QUESTION_MESSAGE);
+    String delims = " ";
+    String[] cheats = response.split(delims);
+    loadCheats(cheats);
+
     this.getCards();
     this.deal();
 
     Players.get(0).printRack();
     Players.get(1).printRack();
     Draw.top().addActionListener(this);
-    String response = JOptionPane.showInputDialog(null,"What is your name?","Enter your name",JOptionPane.QUESTION_MESSAGE);
-    String delims = " ";
-    String[] cheats = response.split(delims);
-    for(String s:cheats)
-    {
-      System.out.println(s);
-    }
-    if(phase == 2)
-    {
-      System.out.println("Phase 2 has started");
-    }
+
     phase = 1;
     this.setVisible(true);
   	this.validate();
@@ -109,7 +117,7 @@ public class PlayerTest extends JApplet implements ActionListener
           {
             Players.get(currentTurn).pickupCard(Discard.draw());
             fromDiscard = Players.get(currentTurn).getRack().getExtra();
-            fromDiscard.removeActionListener(this); //10:01 AM
+            fromDiscard.removeActionListener(this);
             if(!Discard.empty())
             {
               Discard.top().addActionListener(this);
@@ -260,7 +268,15 @@ public class PlayerTest extends JApplet implements ActionListener
           }
           if(i == 1)
           {
-            this.Cards.get(count).setState(true);
+            if(showOpponent)
+            {
+              this.Cards.get(count).setState(true);
+            }
+            else
+            {
+              this.Cards.get(count).setState(false);
+            }
+
             //The show opponent rack cheat can be checked here
           }
           R.addCard(this.Cards.get(count),new Integer(1));
@@ -274,6 +290,10 @@ public class PlayerTest extends JApplet implements ActionListener
       }
       //sets player one as going first
       this.currentTurn = 0;
+      if(oCheat)
+      {
+        Players.get(0).getRack().sortN(numOrdered);
+      }
     }
     public boolean checkWin()
     {
@@ -286,12 +306,11 @@ public class PlayerTest extends JApplet implements ActionListener
         if(P.getCurrentScore() == 75)
         {
           int dialogButton = JOptionPane.YES_NO_OPTION;
-          int dialogResult = JOptionPane.showConfirmDialog(null,P.getName() + " won!!","Winner",dialogButton);
+          int dialogResult = JOptionPane.showConfirmDialog(null,P.getName() + " won!! Would you like to play again?","Winner",dialogButton);
           if(dialogResult == JOptionPane.YES_OPTION)
           {
             try {
                this.getAppletContext().showDocument(new URL(getCodeBase()+"appletCaller.html"));
-               //"http://unixweb.kutztown.edu/~userName/indexOfStartupPage"));
              }
             catch (MalformedURLException e) {
                 System.out.println(e.getMessage());
@@ -310,15 +329,92 @@ public class PlayerTest extends JApplet implements ActionListener
       }
       if(limitTurns)
       {
-        if(this.turns == currentTurn)
+        if(this.turnLimit == this.turns)
         {
           for(Player P:Players)
           {
-            System.out.println(P.getName()+" Score: "+P.getCurrentScore());
+            System.out.println(P.getName()+" - Score: "+P.getCurrentScore());
+          }
+          String winner;
+          if(Players.get(0).getCurrentScore() > Players.get(1).getCurrentScore())
+          {
+            winner = Players.get(0).getName();
+          }
+          else
+          {
+            winner = Players.get(1).getName();
+          }
+          int dialogButton = JOptionPane.YES_NO_OPTION;
+          int dialogResult = JOptionPane.showConfirmDialog(null,winner + " won!! Would you like to play again?","Winner",dialogButton);
+          if(dialogResult == JOptionPane.YES_OPTION)
+          {
+            try {
+               this.getAppletContext().showDocument(new URL(getCodeBase()+"appletCaller.html"));
+             }
+            catch (MalformedURLException e) {
+                System.out.println(e.getMessage());
+             }
+          }
+          try
+          {
+            Thread.sleep(2500);
+          }
+          catch(Exception ex)
+          {
+            System.out.println("Thread.Sleep Exception. " + ex.getMessage());
           }
           return true;
         }
       }
       return false;
+    }
+    public void loadCheats(String []cheats)
+  	{
+  		for(String c:cheats)
+  		{
+  			cheatList.add(c);
+        System.out.println(c);
+  		}
+  		  checkCheats();
+  	}
+    public void checkCheats()
+    {
+      if(cheatList.contains("/c"))
+      {
+        showOpponent = true;
+      }
+      else
+      {
+        showOpponent = false;
+      }
+      if(cheatList.contains("/n"))
+      {
+        limitTurns = true;
+        turnLocation = cheatList.indexOf("/n") + 1;
+        turnLimit = Integer.parseInt(cheatList.get(turnLocation));
+        turnLimit *= 2;
+      }
+      else
+      {
+        limitTurns = false;
+      }
+      if(cheatList.contains("/o"))
+      {
+        oCheat = true;
+        orderLoc = cheatList.indexOf("/o") + 1;
+        numOrdered = Integer.parseInt(cheatList.get(orderLoc));
+        if(numOrdered > 10)
+        {
+          numOrdered = 10;
+        }
+        else if(numOrdered < 0)
+        {
+          numOrdered = 0;
+        }
+      }
+      else
+      {
+        oCheat = false;
+      }
     }
   }

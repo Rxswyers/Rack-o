@@ -11,7 +11,7 @@ import java.applet.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.util.*;
 public class ImageTest extends JApplet implements ActionListener
 {
   Image image[] = new Image[2];
@@ -42,69 +42,24 @@ public class ImageTest extends JApplet implements ActionListener
 
     showStatus("Loaded Image");
     //end getting images
-
-  //Setting up the draw pile
-	Deck Draw = new Deck();
-	Draw.setBounds(150,200,200,200);
-	this.add(Draw);
-	Draw.setLayout(null);
-
-	Card CTest = new Card(Images[0],imageIcons[0],30);
-	CTest.addActionListener(this);
-
-	Card CTest2 = new Card(Images[0],imageIcons[0],29);
-	CTest2.addActionListener(this);
-  CTest.setState(false);
-  CTest2.setState(false);
-
-  int drawOffset = 2;
-	Draw.addCard(CTest);
-	Draw.addCard(CTest2);
-  //end setting up the draw pile
-
-  //Setting up the discard pile
-  Deck Discard = new Deck();
-  Discard.setBounds(350,200,200,200);
-  this.add(Discard);
-  Discard.setLayout(null);
-
-  Card DTest = new Card(Images[0],imageIcons[0],27);
-  DTest.addActionListener(this);
-
-  Card DTest2 = new Card(Images[0],imageIcons[0],28);
-  DTest2.addActionListener(this);
-
-  DTest.setState(true);
-  DTest2.setState(true);
-  Discard.addCard(DTest);
-  Discard.addCard(DTest2);
-  //end setting up the discard pile
-
-  //generating the cards on the rack of the Player (Human)
-	Rack R = new Rack();
-	R.setBounds(0,0,800,200);
-	this.add(R);
-	R.setLayout(null);
-
-
-	Card C;
-	int xOffset = 25;
-	int yOffset = -12;
-	int last = 10;
-	for (int i = 1; i < 11; i ++)
-	{
-		C = new Card(Images[0],imageIcons[0],i);
+    ArrayList<Card> testing = new ArrayList<Card>();
+    Card C = new Card(Images[0],imageIcons[0],5);
     C.setState(true);
-		C.addActionListener(this);
-		C.setActionCommand(Integer.toString(i));
-    C.setBounds(200+(xOffset * (i-1)),130+(yOffset*(i-1)),110,60);
-		R.addCard(C,new Integer(10 - i));
-	}
-  // end rack generation
-  R.printStuff();
+    Card C1 = new Card(Images[0],imageIcons[0],7);
+    C1.setState(true);
+    Card C2 = new Card(Images[0],imageIcons[0],3);
+    C2.setState(true);
+    Card C3 = new Card(Images[0],imageIcons[0],6);
+    C3.setState(true);
+    testing.add(C1);
+    testing.add(C);
+    testing.add(C2);
+    testing.add(C3);
+    System.out.println(testing);
+    Collections.sort(testing.subList(0,3),new CardComparator());
+    System.out.println(testing);
 
-	this.setVisible(true);
-	this.validate();
+    this.setVisible(true);
 
   }
   public void actionPerformed(ActionEvent e)
