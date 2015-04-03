@@ -35,7 +35,7 @@ public class Human extends Player
 	/**
 	*Removes a Card from their Rack. This was rewritten for use in the GUI. This also
 	* updates the current score
-	*@param C							Card to remove from the Rack (including the extra slot)
+	*@param D							Card to remove from the Rack (including the extra slot)
 	*@return							The Card once it's removed from the Rack.
 	*/
   public Card chooseDiscard(Card D)
@@ -49,7 +49,7 @@ public class Human extends Player
 	/**
 	*Have the user choose what Deck they would like to draw from.
 	*@param Top					The top Card of the Discard Deck
-	*@int								0 if the user chose to pick up from the Draw Deck,
+	*@return						0 if the user chose to pick up from the Draw Deck,
 	* 1 if the user chose to draw from the Discard Deck
 	*/
   public int choosePile(Card Top)

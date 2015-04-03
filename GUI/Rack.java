@@ -1,6 +1,6 @@
 /*Author: 					Ruben Swyers
 * Creation Date: 		March 15, 2015
-* Due Date: 				April 1, 2015
+* Due Date: 				April 3, 2015
 * Course: 					CSC243
 * Professor Name: 	Dr. Spiegel
 * Assignment: 			#2 - Racko GUI
@@ -198,6 +198,9 @@ public class Rack extends JPanel
 		fixOrder();
 		repaint();
 	}
+	/**
+	*Fixes the order of the JLayeredPane after changes are made to the ArrayList.
+	*/
 	public void fixOrder()
 	{
 		int xOff = 25;
@@ -206,7 +209,6 @@ public class Rack extends JPanel
 		{
 			this.RJLP.remove(C);
 		}
-		//for(int i = this.rack.size() - 1; i>=0; i --)
 		for(int i = 0; i < rack.size(); i ++)
 		{
 			this.rack.get(i).setBounds(200+(xOff*(i+1)),130+(yOff*(i+1)),110,60);

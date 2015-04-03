@@ -16,11 +16,23 @@ on what actions to take based on a rudementary AI
 public class Computer extends Player
 {
 	/**
+	*Decides if the rack can be seen or not
+	*/
+	boolean see;
+	/**
 	*@param name			Computer's desired name
 	*/
 	public Computer(String name)
 	{
 		super(name);
+		this.see = false;
+	}
+	/**
+	*Set if the Computer's rack can be seen or not
+	*/
+	public void setSight(boolean s)
+	{
+		this.see = s;
 	}
 	/**
 	*Adds a Card to the Rack's extra slot
@@ -28,7 +40,7 @@ public class Computer extends Player
 	*/
 	public void pickupCard(Card C) // set this to abstract
 	{
-		C.setState(true); //flips the card up so the value can be seen
+		C.setState(this.see); //flips the card up so the value can be seen
 		C.setOwner(1);
 		this.Hand.setExtra(C);
 	}

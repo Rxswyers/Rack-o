@@ -1,24 +1,39 @@
-/*Author: 			Ruben Swyers
+/*Author: 				Ruben Swyers
 * Creation Date: 	March 15, 2015
-* Due Date: 		March 28, 2015
-* Course: 			CSC243
-* Professor Name: 	Dr. Spiegel
+* Due Date: 			April 3, 2015
+* Course: 				CSC243
+* Professor Name: Dr. Spiegel
 * Assignment: 		#2 - Racko GUI
-* Filename: 		Deck.java
+* Filename: 			Deck.java
 * Purpose:		  	This represents a Deck in the GUI. It is a JPanel that has a JLayeredPane on it.
-					When a card is added, it gets added to the JLayeredPane.
+									When a card is added, it gets added to the JLayeredPane.
 */
 import javax.swing.*;
 import java.awt.*;
 import java.applet.*;
 import java.util.ArrayList;
-
+/**
+*Holds all of the cards that the players don't have. It's a subclass of JPanel
+* and has a JLayeredPane. The cards are stacked on top of each other at a slight angle.
+*/
 public class Deck extends JPanel
 {
 	//members
+	/**
+	*Allows the Cards to be layed on top of each other at an angle.
+	*/
 	JLayeredPane DJLP;
+	/**
+	*Keeps track of the number of Cards
+	*/
 	int numCards;
+	/**
+	*Holds all of the Cards in the Deck
+	*/
 	ArrayList<Card> Cards;
+	/**
+	*Sets up the Deck
+	*/
 	public Deck()
 	{
 		this.Cards = new ArrayList<Card>();
@@ -29,6 +44,10 @@ public class Deck extends JPanel
 		this.numCards = 0;
 	}
 	//methods
+	/**
+	*Adds a Card to the Deck and correctly sets the position on the JLayeredPane.
+	*@param C				Card to be added.
+	*/
 	public void addCard(Card C)
 	{
 		numCards++;
@@ -40,6 +59,9 @@ public class Deck extends JPanel
 		this.fixOrder();
 
 	}
+	/**
+	*Fixes the order of the Deck once a Card is added.
+	*/
 	public void fixOrder()
 	{
 		int off = 2;
@@ -53,6 +75,9 @@ public class Deck extends JPanel
 			this.DJLP.add(this.Cards.get(i),new Integer(1));
 		}
 	}
+	/**
+	*Reorders the layers of the JLayeredPane to the correct spot
+	*/
 	public void reorder()
 	{
 		for(int i = 0; i < this.Cards.size(); i++)
@@ -60,6 +85,10 @@ public class Deck extends JPanel
 			this.DJLP.setLayer(this.Cards.get(i), new Integer(-1));
 		}
 	}
+	/**
+	*Removes the top card and fixes the order
+	*@return				Card that is removed
+	*/
 	public Card draw()
 	{
 
@@ -69,6 +98,10 @@ public class Deck extends JPanel
 		repaint();
 		return C;
 	}
+	/**
+	*Gets the top Card of the Deck without removing it
+	*@return				Top of the Deck, if it's empty it returns a null Card
+	*/
 	public Card top()
 	{
 		Card C = null;
@@ -81,14 +114,12 @@ public class Deck extends JPanel
 			return this.Cards.get(this.Cards.size()-1);
 		}
 	}
+	/**
+	*Checks to see if the Deck is empty
+	*@return				<code>true</code> if it's empty, <code>false</code> if it isn't
+	*/
 	public boolean empty()
 	{
 		return this.Cards.isEmpty();
-	}
-	public void reset()
-	{
-		this.Cards.clear();
-		this.DJLP.removeAll();
-		this.numCards = 0;
 	}
 }

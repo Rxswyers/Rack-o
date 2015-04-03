@@ -1,3 +1,14 @@
+/*Author: 				Ruben Swyers
+* Creation Date: 	March 15, 2015
+* Due Date: 			April 3, 2015
+* Course: 				CSC243
+* Professor Name: Dr. Spiegel
+* Assignment: 		#2 - Racko GUI
+* Filename: 			Player.java
+* Purpose:		  	This represents a Player in the game. It's an abstract class, so
+                  Human and Computer will be subclasses to implement the class. Player
+                  handles any decisions that are made by anyone playing the game.
+*/
 import java.util.Scanner;
 /**
 *Player is an abstract class and is designed to be used in the game Racko.
