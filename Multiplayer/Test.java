@@ -44,35 +44,10 @@ public class Test extends JApplet implements ActionListener
     //end getting images
 
 		//start testing the infopane
-		JPanel info = new JPanel();
-		info.setLayout(null);
-		//info.setBackground(Color.BLACK);
-    JLabel Name = new JLabel("Name:");
-    info.add(Name);
-    Name.setBounds(10,10,190,15);
-    Name.setText("Name: Rubizzle");
-    info.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.add(info);
-		info.setBounds(600,0,200,100);
-/*
-		JPanel info2 = new JPanel();
-		info2.setLayout(null);
-		info2.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.add(info2);
-		info2.setBounds(600,100,200,100);
+    InfoPanel info = new InfoPanel("Rubizzle");
+    this.add(info);
+    info.setBounds(600,0,200,100);
 
-		JPanel info3 = new JPanel();
-		info3.setLayout(null);
-		info3.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.add(info3);
-		info3.setBounds(600,200,400,100);
-
-		JPanel info4 = new JPanel();
-		info4.setLayout(null);
-		info4.setBorder(BorderFactory.createLineBorder(Color.black));
-		this.add(info4);
-		info4.setBounds(600,300,200,100);
-*/
 		//Avatar panel
 		JPanel Avatar = new JPanel();
 		Avatar.setLayout(null);
