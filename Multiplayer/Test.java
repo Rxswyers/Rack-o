@@ -16,7 +16,8 @@ public class Test extends JApplet implements ActionListener
 {
   Image image[] = new Image[2];
   ImageIcon imageIcons[] = new ImageIcon[2];
-
+  InfoPanel info;
+  InfoPanel info2;
   public void init()
   {
 	setLayout(null);
@@ -44,16 +45,19 @@ public class Test extends JApplet implements ActionListener
     //end getting images
 
 		//start testing the infopane
-    InfoPanel info = new InfoPanel("Rubizzle");
+    info = new InfoPanel("Rubizzle");
     this.add(info);
     info.setBounds(600,0,200,100);
 
-    InfoPanel info2 = new InfoPanel("Not Rubizzle");
+    info2 = new InfoPanel("Not Rubizzle");
     this.add(info2);
     info2.setBounds(600,100,200,100);
 
-
-    switchInfo(info2,info);
+    JButton dosomething = new JButton("Switch");
+    this.add(dosomething);
+    dosomething.setBounds(20,20,50,50);
+    dosomething.addActionListener(this);
+    //switchInfo(info2,info);
 
 
 		//Avatar panel
@@ -74,8 +78,12 @@ public class Test extends JApplet implements ActionListener
       //Swaps with the previous player's InfoPanel
       prev.setBounds(Bounds);
   }
+  //public void switchRack(Rack next)
+  //{
+  //}
   public void actionPerformed(ActionEvent e)
   {
     System.out.println(e.getActionCommand());
+    switchInfo(info2,info);
   }
 }
