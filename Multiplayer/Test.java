@@ -48,6 +48,14 @@ public class Test extends JApplet implements ActionListener
     this.add(info);
     info.setBounds(600,0,200,100);
 
+    InfoPanel info2 = new InfoPanel("Not Rubizzle");
+    this.add(info2);
+    info2.setBounds(600,100,200,100);
+
+
+    switchInfo(info2,info);
+
+
 		//Avatar panel
 		JPanel Avatar = new JPanel();
 		Avatar.setLayout(null);
@@ -56,6 +64,15 @@ public class Test extends JApplet implements ActionListener
 		Avatar.setBounds(600,400,200,200);
 		this.setVisible(true);
 
+  }
+  public void switchInfo(InfoPanel next, InfoPanel prev)
+  {
+      Rectangle Bounds = new Rectangle();
+      Bounds = next.getBounds();
+      //Puts the next InfoPanel on the top
+      next.setBounds(600,0,200,100);
+      //Swaps with the previous player's InfoPanel
+      prev.setBounds(Bounds);
   }
   public void actionPerformed(ActionEvent e)
   {
