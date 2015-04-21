@@ -12,12 +12,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+
 public class Test extends JApplet implements ActionListener
 {
   Image image[] = new Image[2];
   ImageIcon imageIcons[] = new ImageIcon[2];
-  InfoPanel info;
-  InfoPanel info2;
+  ArrayList<InfoPanel> Infos = new ArrayList<InfoPanel>();
   public void init()
   {
 	setLayout(null);
@@ -45,13 +45,13 @@ public class Test extends JApplet implements ActionListener
     //end getting images
 
 		//start testing the infopane
-    info = new InfoPanel("Rubizzle");
-    this.add(info);
-    info.setBounds(600,0,200,100);
+    Infos.add(new InfoPanel("Rubizzle"));
+    this.add(Infos.get(0));
+    Infos.get(0).setBounds(600,0,200,100);
 
-    info2 = new InfoPanel("Not Rubizzle");
-    this.add(info2);
-    info2.setBounds(600,100,200,100);
+    Infos.add(new InfoPanel("Not Rubizzle"));
+    this.add(Infos.get(1));
+    Infos.get(1).setBounds(600,100,200,100);
 
     JButton dosomething = new JButton("Switch");
     this.add(dosomething);
@@ -71,6 +71,8 @@ public class Test extends JApplet implements ActionListener
   }
   public void switchInfo(InfoPanel next, InfoPanel prev)
   {
+      //swap the index of Infos, using the currentplayer as the index
+      // that will be turns % Players.size()
       Rectangle Bounds = new Rectangle();
       Bounds = next.getBounds();
       //Puts the next InfoPanel on the top
@@ -84,6 +86,6 @@ public class Test extends JApplet implements ActionListener
   public void actionPerformed(ActionEvent e)
   {
     System.out.println(e.getActionCommand());
-    switchInfo(info2,info);
+    switchInfo(Infos.get(1),Infos.get(0));
   }
 }
