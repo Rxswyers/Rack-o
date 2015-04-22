@@ -69,8 +69,10 @@ public class Test extends JApplet implements ActionListener
 		this.setVisible(true);
 
   }
-  public void switchInfo(InfoPanel next, InfoPanel prev)
+  public void switchInfo()
   {
+      InfoPanel next = Infos.get(1);
+      InfoPanel prev = Infos.get(0);
       //swap the index of Infos, using the currentplayer as the index
       // that will be turns % Players.size()
       Rectangle Bounds = new Rectangle();
@@ -86,6 +88,6 @@ public class Test extends JApplet implements ActionListener
   public void actionPerformed(ActionEvent e)
   {
     System.out.println(e.getActionCommand());
-    switchInfo(Infos.get(1),Infos.get(0));
+    switchInfo();
   }
 }
