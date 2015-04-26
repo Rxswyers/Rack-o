@@ -52,14 +52,15 @@ public class Computer extends Player
 	*/
 	public int choosePile(Card Top)
 	{
+		System.out.println("Position wanted in choosepile " + this.positionWanted(Top));
 		if(this.positionWanted(Top) < 0)//the Discard pile is emtpy
 		{
 			return 0;
 		}
-		else if(this.checkPosition(this.positionWanted(Top)))
+		else if(!this.checkPosition(this.positionWanted(Top)))
 		{
-			return 1; //draw from the discard
-			//CHANGED AT 9:34 AM
+			return 0; //draw from the discard
+			//CHANGED Line 61
 		}
 		else
 		{
@@ -128,6 +129,7 @@ public class Computer extends Player
 	*/
 	public boolean checkPosition(int position)
 	{
+		System.out.println("Position wanted " + positionWanted(this.Hand.search(position)) + " Position "+ position);
 		if(positionWanted(this.Hand.search(position)) == position)
 		{
 			return true; //position is filled with a card that is desired

@@ -219,7 +219,7 @@ public class Racko extends JApplet implements ActionListener
           if(currentTurn == 1)
           {
             Card C;
-            try
+          /*  try
             {
               Thread.sleep(2200);
             }
@@ -227,7 +227,9 @@ public class Racko extends JApplet implements ActionListener
             {
               System.out.println("Thread.Sleep Exception. " + ex.getMessage());
             }
+            */
             C = ((Computer)Players.get(1)).getDiscard();
+            System.out.println("Computer's turn");
             C.doClick();
             //makes the card visible again in the discard pile
             C.setState(true);
@@ -280,6 +282,8 @@ public class Racko extends JApplet implements ActionListener
             if(!Discard.empty())
             {
               compChoice = Players.get(1).choosePile(Discard.top());
+              System.out.println(Discard.top());
+              System.out.println("Computer's choice " + compChoice);
             }
             else
             {
@@ -287,7 +291,7 @@ public class Racko extends JApplet implements ActionListener
             }
             if(compChoice == 1)
             {
-              try
+              /*try
               {
                 Thread.sleep(2200);
               }
@@ -295,11 +299,14 @@ public class Racko extends JApplet implements ActionListener
               {
                 System.out.println("Thread.Sleep Exception. " + ex.getMessage());
               }
+              */
               //emulates the computer clicking on the draw pile
+              System.out.println("Pickup from draw");
               Draw.top().doClick();
             }
             else
             {
+              /*
               try
               {
                 Thread.sleep(2200);
@@ -307,7 +314,8 @@ public class Racko extends JApplet implements ActionListener
               catch(Exception ex)
               {
                 System.out.println("Thread.Sleep Exception. " + ex.getMessage());
-              }
+              }*/
+              System.out.println("Pickup from discard");
               //emulates the computer clicking on the discard pile
               Discard.top().doClick();
             }
