@@ -202,6 +202,7 @@ public class Racko extends JApplet implements ActionListener
           }
           else //the card is from the draw pile
           {
+
             //handles the human clicking a card on the draw pile
             Players.get(currentTurn).pickupCard(Draw.draw());
 
@@ -219,7 +220,10 @@ public class Racko extends JApplet implements ActionListener
           if(currentTurn == 1)
           {
             Card C;
-          /*  try
+
+            C = ((Computer)Players.get(1)).getDiscard();
+            System.out.println("Computer's turn");
+            try
             {
               Thread.sleep(2200);
             }
@@ -227,12 +231,10 @@ public class Racko extends JApplet implements ActionListener
             {
               System.out.println("Thread.Sleep Exception. " + ex.getMessage());
             }
-            */
-            C = ((Computer)Players.get(1)).getDiscard();
-            System.out.println("Computer's turn");
             C.doClick();
             //makes the card visible again in the discard pile
             C.setState(true);
+
           }
         }
       }
@@ -291,7 +293,7 @@ public class Racko extends JApplet implements ActionListener
             }
             if(compChoice == 1)
             {
-              /*try
+              try
               {
                 Thread.sleep(2200);
               }
@@ -299,7 +301,7 @@ public class Racko extends JApplet implements ActionListener
               {
                 System.out.println("Thread.Sleep Exception. " + ex.getMessage());
               }
-              */
+
               //emulates the computer clicking on the draw pile
               System.out.println("Pickup from draw");
               Draw.top().doClick();

@@ -11,3 +11,5 @@ I chose to add the InfoPanels in a copy of the Racko.java and test it with only 
 It appears that there was a bug that didn't happen in my command line version of the game, which used
 the same code as the GUI. The Computer kept only drawing from the draw pile in the GUI, but drew from both
 in the command line. I had to debug and eventually tracked the error in the Computer class.
+
+I'm now going to work on changing the status of the InfoPanel depending on who's turn it is.
