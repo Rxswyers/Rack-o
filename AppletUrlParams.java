@@ -56,13 +56,13 @@ public class AppletUrlParams extends Applet {
   }
 
   public void dumpMap(Map<?,?> map) {
-    count = 0;
+    int count = 0;
     System.out.println("--------");
     for (Map.Entry<?,?> entry : map.entrySet()) {
       System.out.println(entry.getKey() + ": " + entry.getValue());
       if(count == 1)
       {
-        name = entry.getValue();
+        name = (String)entry.getValue();
       }
       count ++;
     }
