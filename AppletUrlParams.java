@@ -12,7 +12,7 @@ import java.util.Map;
 public class AppletUrlParams extends Applet {
 
   HashMap<String,String> parmsMap ;
-
+  String name;
   public void init() {
     /*
        dump to the console the URL, the URL and its form values
@@ -31,6 +31,7 @@ public class AppletUrlParams extends Applet {
     catch (UnsupportedEncodingException e) {
       e.printStackTrace();
     }
+
    }
 
   public void doit() throws UnsupportedEncodingException {
@@ -55,9 +56,15 @@ public class AppletUrlParams extends Applet {
   }
 
   public void dumpMap(Map<?,?> map) {
+    count = 0;
     System.out.println("--------");
     for (Map.Entry<?,?> entry : map.entrySet()) {
       System.out.println(entry.getKey() + ": " + entry.getValue());
+      if(count == 1)
+      {
+        name = entry.getValue();
+      }
+      count ++;
     }
     System.out.println("--------");
   }
