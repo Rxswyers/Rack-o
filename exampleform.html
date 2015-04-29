@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <title>Example HTML Form</title>
+  </head>
+  <body>
+  <p>To debug a HTML form set its 'action' attribute
+    to reference the ShowParameters Servlet.</p>
+  <form action="AppletUrlParams.html"
+  method="get">
+    Goal Score: <input type="text" name="name"><br>
+    Password: <input type="password" name="password"><br><br><br>
+    Game Theme:
+    <select name="selectbox">
+     <option value="Pink Floyd">Pink Floyd</option>
+     <option value="Get Smart">Get Smart</option>
+     <option value="Simpsons">Simpson's</option>
+    </select><br><br><br>
+    Choice of Game:
+    <input type="radio" name="gameChoice" value="Single">One Player
+    <input type="radio" name="gameChoice" value="Local">Multi Player
+    <input type="radio" name="gameChoice" value="Internet">Internet<br>
+    Feedback: <br><br>
+    <textarea name="textarea" cols="40" rows="5"></textarea><br>
+    <input value="Submit" type="submit">
+  </form>
+  </body>
+</html>
