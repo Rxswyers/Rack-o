@@ -75,6 +75,7 @@ public class AppletUrlParams extends Applet {
     for (Map.Entry<?,?> entry : parmsMap.entrySet()) {
       g.drawString(entry.getKey() + ": " + entry.getValue(),10,y+=15);
     }
+    g.drawString(name,10,y+=15);
     g.drawString("--------",10,y+=15);
   }
 
