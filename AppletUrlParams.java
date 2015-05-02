@@ -13,6 +13,7 @@ public class AppletUrlParams extends Applet {
 
   HashMap<String,String> parmsMap ;
   String name;
+  String oName;
   public void init() {
     /*
        dump to the console the URL, the URL and its form values
@@ -26,6 +27,7 @@ public class AppletUrlParams extends Applet {
     try {
       doit();
       dumpMap(parmsMap);
+      name = parmsMap.get("optionsRadios");
       //System.out.println("name is " + parmsMap.get("name"));
     }
     catch (UnsupportedEncodingException e) {
@@ -34,7 +36,7 @@ public class AppletUrlParams extends Applet {
 
    }
 
-  public void doit() throws UnsupportedEncodingException {
+  public void cutURL() throws UnsupportedEncodingException {
     String completeURL = getDocumentBase().toString();
     System.out.println("Complete URL: " + completeURL);
     int i = completeURL.indexOf("?");
@@ -62,7 +64,7 @@ public class AppletUrlParams extends Applet {
       System.out.println(entry.getKey() + ": " + entry.getValue());
       if(count == 1)
       {
-        name = (String)entry.getValue();
+        oName = (String)entry.getValue();
       }
       count ++;
     }
@@ -78,5 +80,4 @@ public class AppletUrlParams extends Applet {
     g.drawString(name,10,y+=15);
     g.drawString("--------",10,y+=15);
   }
-
 }
