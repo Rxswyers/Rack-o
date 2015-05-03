@@ -182,7 +182,43 @@ public class Racko extends JApplet implements ActionListener
       //phase 1 is the draw phase
       if(phase == 1)
       {
-
+        System.out.println("Phase 1");
+        //handles the computer's draw phase
+        if(currentTurn == 1)
+        {
+          int compChoice = 1;
+          if(!Discard.empty())
+          {
+            compChoice = Players.get(1).choosePile(Discard.top());
+            System.out.println(Discard.top());
+            System.out.println("Computer's choice " + compChoice);
+          }
+          else
+          {
+            compChoice = 1;
+          }
+          if(compChoice == 1)
+          {
+            //emulates the computer clicking on the draw pile
+            System.out.println("Pickup from draw");
+            //check to see if the draw pile is empty, if it is it is switched with the discard pile
+            checkDeck();
+            //move to the discard phase
+            phase = 2;
+            Draw.top().doClick();
+          }
+          else
+          {
+            System.out.println("Pickup from discard");
+            //check to see if the draw pile is empty, if it is it is switched with the discard pile
+            checkDeck();
+            //move to the discard phase
+            phase = 2;
+            //emulates the computer clicking on the discard pile
+            Discard.top().doClick();
+            System.out.println("After click");
+          }
+        }
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1)
         {
@@ -216,33 +252,39 @@ public class Racko extends JApplet implements ActionListener
           checkDeck();
           //move to the discard phase
           phase = 2;
-          //handles the computer's discard phase
-          if(currentTurn == 1)
-          {
-            Card C;
 
-            C = ((Computer)Players.get(1)).getDiscard();
-            System.out.println("Computer's turn");
-            try
-            {
-              Thread.sleep(2200);
-            }
-            catch(Exception ex)
-            {
-              System.out.println("Thread.Sleep Exception. " + ex.getMessage());
-            }
-            C.doClick();
-            //makes the card visible again in the discard pile
-            C.setState(true);
-
-          }
         }
       }
       //discard phase
       else if(phase == 2)
       {
+
+        System.out.println("Phase 2");
         //defaults the computer to draw from the draw pile
-        int compChoice = 1;
+
+        //handles the computer's discard phase
+        if(currentTurn == 1)
+        {
+          Card C;
+
+          C = ((Computer)Players.get(1)).getDiscard();
+          System.out.println("Computer's turn");
+          try{
+            Thread.sleep(2000);
+          }catch(InterruptedException ev)
+          {
+            System.out.println("Can't sleep");
+          }
+          phase = 1;
+          //completes a turn
+          turns ++;
+          //gets the next player
+          currentTurn = turns % this.Players.size();
+          C.doClick();
+          //makes the card visible again in the discard pile
+          C.setState(true);
+
+        }
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1) //the person is trying to draw from a deck again
         {
@@ -278,50 +320,7 @@ public class Racko extends JApplet implements ActionListener
           //Let's everyone know who's turn it is
           switchInfo();
 
-          //handles the computer's draw phase
-          if(currentTurn == 1)
-          {
-            if(!Discard.empty())
-            {
-              compChoice = Players.get(1).choosePile(Discard.top());
-              System.out.println(Discard.top());
-              System.out.println("Computer's choice " + compChoice);
-            }
-            else
-            {
-              compChoice = 1;
-            }
-            if(compChoice == 1)
-            {
-              try
-              {
-                Thread.sleep(2200);
-              }
-              catch(Exception ex)
-              {
-                System.out.println("Thread.Sleep Exception. " + ex.getMessage());
-              }
 
-              //emulates the computer clicking on the draw pile
-              System.out.println("Pickup from draw");
-              Draw.top().doClick();
-            }
-            else
-            {
-              /*
-              try
-              {
-                Thread.sleep(2200);
-              }
-              catch(Exception ex)
-              {
-                System.out.println("Thread.Sleep Exception. " + ex.getMessage());
-              }*/
-              System.out.println("Pickup from discard");
-              //emulates the computer clicking on the discard pile
-              Discard.top().doClick();
-            }
-          }
         }
 
       }

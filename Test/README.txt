@@ -12,4 +12,8 @@ It appears that there was a bug that didn't happen in my command line version of
 the same code as the GUI. The Computer kept only drawing from the draw pile in the GUI, but drew from both
 in the command line. I had to debug and eventually tracked the error in the Computer class.
 
-I'm now going to work on changing the status of the InfoPanel depending on who's turn it is.
+I tested a way to get info from a form and put it into an applet, it took a little bit to get the right
+stuff, but it now can work when I decide to add it in.
+
+I'm now going to work on changing the status of the InfoPanel depending on who's turn it is, then
+get into swapping the racks (eventually add a button to view any player's rack on the InfoPanel)
