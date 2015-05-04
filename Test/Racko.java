@@ -216,7 +216,6 @@ public class Racko extends JApplet implements ActionListener
             phase = 2;
             //emulates the computer clicking on the discard pile
             Discard.top().doClick();
-            System.out.println("After click");
           }
         }
         //If nobody owns the card, then it's in one of the piles
@@ -267,15 +266,17 @@ public class Racko extends JApplet implements ActionListener
         {
           Card C;
           C = ((Computer)Players.get(1)).getDiscard();
-          System.out.println("Computer's turn");
-          /*
           try{
             Thread.sleep(2000);
           }catch(InterruptedException ev)
           {
             System.out.println("Can't sleep");
           }
-          */
+          Discard.addCard(Players.get(1).chooseDiscard(C));
+          Players.get(1).getRack().reorder();
+          System.out.println("Computer's turn");
+
+
           phase = 1;
           //completes a turn
           turns ++;
@@ -331,19 +332,21 @@ public class Racko extends JApplet implements ActionListener
               System.out.println("Pickup from draw");
               //check to see if the draw pile is empty, if it is it is switched with the discard pile
               checkDeck();
+              Players.get(1).pickupCard(Draw.draw());
               //move to the discard phase
               phase = 2;
-              Draw.top().doClick();
+              //Draw.top().doClick();
             }
             else
             {
               System.out.println("Pickup from discard");
               //check to see if the draw pile is empty, if it is it is switched with the discard pile
               checkDeck();
+              Players.get(1).pickupCard(Discard.draw());
               //move to the discard phase
               phase = 2;
               //emulates the computer clicking on the discard pile
-              Discard.top().doClick();
+              //Discard.top().doClick();
               System.out.println("After click");
             }
           }

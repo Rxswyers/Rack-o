@@ -17,3 +17,6 @@ stuff, but it now can work when I decide to add it in.
 
 I'm now going to work on changing the status of the InfoPanel depending on who's turn it is, then
 get into swapping the racks (eventually add a button to view any player's rack on the InfoPanel)
+
+I noticed that the logic behind taking turns was slightly out of wack, I will have to redo taking
+turns.
