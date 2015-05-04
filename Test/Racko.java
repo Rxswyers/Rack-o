@@ -266,15 +266,16 @@ public class Racko extends JApplet implements ActionListener
         if(currentTurn == 1)
         {
           Card C;
-
           C = ((Computer)Players.get(1)).getDiscard();
           System.out.println("Computer's turn");
+          /*
           try{
             Thread.sleep(2000);
           }catch(InterruptedException ev)
           {
             System.out.println("Can't sleep");
           }
+          */
           phase = 1;
           //completes a turn
           turns ++;
@@ -311,6 +312,41 @@ public class Racko extends JApplet implements ActionListener
           turns ++;
           //gets the next player
           currentTurn = turns % this.Players.size();
+          if(currentTurn == 1)
+          {
+            int compChoice = 1;
+            if(!Discard.empty())
+            {
+              compChoice = Players.get(1).choosePile(Discard.top());
+              System.out.println(Discard.top());
+              System.out.println("Computer's choice " + compChoice);
+            }
+            else
+            {
+              compChoice = 1;
+            }
+            if(compChoice == 1)
+            {
+              //emulates the computer clicking on the draw pile
+              System.out.println("Pickup from draw");
+              //check to see if the draw pile is empty, if it is it is switched with the discard pile
+              checkDeck();
+              //move to the discard phase
+              phase = 2;
+              Draw.top().doClick();
+            }
+            else
+            {
+              System.out.println("Pickup from discard");
+              //check to see if the draw pile is empty, if it is it is switched with the discard pile
+              checkDeck();
+              //move to the discard phase
+              phase = 2;
+              //emulates the computer clicking on the discard pile
+              Discard.top().doClick();
+              System.out.println("After click");
+            }
+          }
           //checks to see if anyone won yet
           if(checkWin())
           {
