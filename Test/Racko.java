@@ -65,7 +65,7 @@ public class Racko extends JApplet implements ActionListener
   /**
   *Location of the images
   */
-  String Images[] = {"newblacksailscard.jpg","blacksailsback.jpg"};
+  String Images[] = {"PokemonCardN.jpg","blacksailsback.jpg"};
   /**
   *Card to be kept track of to avoid drawing from the discard and discarding it again
   */
