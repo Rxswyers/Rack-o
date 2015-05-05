@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.net.MalformedURLException;
 import java.net.*;
+import javax.swing.border.Border;
 /**
 *This applet controls the game of Racko. There are 2 players, you and a computer opponent.
 *When the game first starts you can put cheats in the input dialog box. You will play until you
@@ -105,6 +106,8 @@ public class Racko extends JApplet implements ActionListener
   *List of cheats once they are parsed
   */
   ArrayList<String> cheatList = new ArrayList<String>();
+  Border oldB;
+  Card highlightC;
   /**
   *Starts the applet up
   */
@@ -394,6 +397,7 @@ public class Racko extends JApplet implements ActionListener
     {
       Card C;
       C = ((Computer)Players.get(1)).getDiscard();
+      highlight(Players.get(1).getRack().getExtra());
       C.doClick();
       System.out.println("Compt p2");
       //Players.get(1).getRack().reorder();
@@ -407,6 +411,34 @@ public class Racko extends JApplet implements ActionListener
       //gets the next player
       currentTurn = turns % this.Players.size();
       */
+    }
+    public void highlight(Card C)
+    {
+      oldB = C.getBorder();
+      highlightC = C;
+      C.setBorder(BorderFactory.createLineBorder(Color.green, 2));
+      try{
+        System.out.println("Sleepin");
+        Thread.sleep(500);
+
+      }catch(InterruptedException ev)
+      {
+        System.out.println("Can't sleep");
+      }
+      Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+            highlightC.setBorder(oldB);
+
+      }
+        });
+        timer.setRepeats(false);
+        timer.setCoalesce(true);
+        timer.start();
+
+
     }
     /**
     *Switches the Draw and Discard Decks if the Draw Deck is empty.

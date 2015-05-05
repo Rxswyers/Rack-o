@@ -11,6 +11,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.applet.*;
+
 /**
 *The Card class represents a Card in the GUI. It is a subclass of JButton.
 *The Card has a state member that will determine if it is face up or down.
@@ -43,7 +44,6 @@ public class Card extends JButton implements Comparable<Card>
 	*Owner of the Card
 	*/
 	private int owner;
-
 	//methods
 
 	//constructor
