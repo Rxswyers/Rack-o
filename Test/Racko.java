@@ -140,9 +140,9 @@ public class Racko extends JApplet implements ActionListener
     Players.add(new Human("You"));
     Players.add(new Computer("Comp"));
     Players.get(0).getRack().setBounds(0,400,600,200);
-    Players.get(0).getInfoPane().setBounds(600,100,200,100);
+    Players.get(0).getInfoPane().setBounds(600,0,200,100);
     Players.get(1).getRack().setBounds(0,0,600,200);
-    Players.get(1).getInfoPane().setBounds(600,0,200,100);
+    Players.get(1).getInfoPane().setBounds(600,100,200,100);
     this.add(Players.get(0).getRack());
     this.add(Players.get(0).getInfoPane());
     this.add(Players.get(1).getRack());
@@ -188,7 +188,7 @@ public class Racko extends JApplet implements ActionListener
       {
         System.out.println("Phase 1");
         //handles the computer's draw phase
-        if(currentTurn == 1)
+        if(Players.get(currentTurn) instanceof Computer)
         {
           handleComputerP1();
         }
@@ -233,35 +233,6 @@ public class Racko extends JApplet implements ActionListener
       {
 
         System.out.println("Phase 2");
-        //defaults the computer to draw from the draw pile
-        /*
-        //handles the computer's discard phase
-        if(currentTurn == 1)
-        {
-          Card C;
-          C = ((Computer)Players.get(1)).getDiscard();
-          try{
-            Thread.sleep(2000);
-          }catch(InterruptedException ev)
-          {
-            System.out.println("Can't sleep");
-          }
-          Discard.addCard(Players.get(1).chooseDiscard(C));
-          Players.get(1).getRack().reorder();
-          System.out.println("Computer's turn");
-
-
-          phase = 1;
-          //completes a turn
-          turns ++;
-          //gets the next player
-          currentTurn = turns % this.Players.size();
-          C.doClick();
-          //makes the card visible again in the discard pile
-          C.setState(true);
-
-        }
-        */
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1) //the person is trying to draw from a deck again
         {
@@ -289,7 +260,7 @@ public class Racko extends JApplet implements ActionListener
           turns ++;
           //gets the next player
           currentTurn = turns % this.Players.size();
-          if(currentTurn == 1)
+          if(Players.get(currentTurn) instanceof Computer)
           {
                   Timer timer = new Timer(1000, new ActionListener() {
                          @Override
@@ -400,17 +371,6 @@ public class Racko extends JApplet implements ActionListener
       highlight(Players.get(1).getRack().getExtra());
       C.doClick();
       System.out.println("Compt p2");
-      //Players.get(1).getRack().reorder();
-      //System.out.println("Computer's turn");
-
-      /*
-      phase = 1;
-      System.out.println("Shouldn't get here");
-      //completes a turn
-      turns ++;
-      //gets the next player
-      currentTurn = turns % this.Players.size();
-      */
     }
     public void highlight(Card C)
     {
@@ -697,14 +657,16 @@ public class Racko extends JApplet implements ActionListener
     {
         InfoPanel next = Players.get((currentTurn +1) % this.Players.size()).getInfoPane();
         InfoPanel prev = Players.get(currentTurn).getInfoPane();
-        Players.get(currentTurn).getInfoPane().setState(false);
-        Players.get((currentTurn + 1) % this.Players.size()).getInfoPane().setState(true);
+        //Players.get(currentTurn).getInfoPane().setState(false);
+        //Players.get((currentTurn + 1) % this.Players.size()).getInfoPane().setState(true);
+        prev.setState(false);
+        next.setState(true);
         //swap the index of Infos, using the currentplayer as the index
         // that will be turns % Players.size()
         Rectangle Bounds = new Rectangle();
         Bounds = next.getBounds();
         //Puts the next InfoPanel on the top
-        next.setBounds(600,0,200,100);
+        next.setBounds(600,100,200,100);
         //Swaps with the previous player's InfoPanel
         prev.setBounds(Bounds);
     }
