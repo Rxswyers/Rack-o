@@ -13,7 +13,8 @@ import java.applet.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.net.MalformedURLException;
 import java.net.*;
 /**
@@ -186,37 +187,7 @@ public class Racko extends JApplet implements ActionListener
         //handles the computer's draw phase
         if(currentTurn == 1)
         {
-          int compChoice = 1;
-          if(!Discard.empty())
-          {
-            compChoice = Players.get(1).choosePile(Discard.top());
-            System.out.println(Discard.top());
-            System.out.println("Computer's choice " + compChoice);
-          }
-          else
-          {
-            compChoice = 1;
-          }
-          if(compChoice == 1)
-          {
-            //emulates the computer clicking on the draw pile
-            System.out.println("Pickup from draw");
-            //check to see if the draw pile is empty, if it is it is switched with the discard pile
-            checkDeck();
-            //move to the discard phase
-            phase = 2;
-            Draw.top().doClick();
-          }
-          else
-          {
-            System.out.println("Pickup from discard");
-            //check to see if the draw pile is empty, if it is it is switched with the discard pile
-            checkDeck();
-            //move to the discard phase
-            phase = 2;
-            //emulates the computer clicking on the discard pile
-            Discard.top().doClick();
-          }
+          handleComputerP1();
         }
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1)
@@ -260,7 +231,7 @@ public class Racko extends JApplet implements ActionListener
 
         System.out.println("Phase 2");
         //defaults the computer to draw from the draw pile
-
+        /*
         //handles the computer's discard phase
         if(currentTurn == 1)
         {
@@ -287,12 +258,13 @@ public class Racko extends JApplet implements ActionListener
           C.setState(true);
 
         }
+        */
         //If nobody owns the card, then it's in one of the piles
         if(((Card)e.getSource()).getOwner() == -1) //the person is trying to draw from a deck again
         {
           System.out.println("You already drew a card");
         }
-        else if(((Card)e.getSource()).getOwner() == currentTurn) //the card belongs to player 1
+        else if(((Card)e.getSource()).getOwner() == currentTurn) //the card belongs to player the player that owns it
         {
           //Make sure that you can't do anything to the card underneath of the one that will be discarded
           if(!Discard.empty())
@@ -301,6 +273,7 @@ public class Racko extends JApplet implements ActionListener
           }
           //Put the Card in the discard pile
           Discard.addCard(Players.get(currentTurn).chooseDiscard(((Card)e.getSource())));
+          Discard.top().setState(true);
           Players.get(currentTurn).getRack().reorder();
           //reenables the card from the discard pile if the action listener was removed
           if(fromDiscard != null)
@@ -315,40 +288,19 @@ public class Racko extends JApplet implements ActionListener
           currentTurn = turns % this.Players.size();
           if(currentTurn == 1)
           {
-            int compChoice = 1;
-            if(!Discard.empty())
-            {
-              compChoice = Players.get(1).choosePile(Discard.top());
-              System.out.println(Discard.top());
-              System.out.println("Computer's choice " + compChoice);
-            }
-            else
-            {
-              compChoice = 1;
-            }
-            if(compChoice == 1)
-            {
-              //emulates the computer clicking on the draw pile
-              System.out.println("Pickup from draw");
-              //check to see if the draw pile is empty, if it is it is switched with the discard pile
-              checkDeck();
-              Players.get(1).pickupCard(Draw.draw());
-              //move to the discard phase
-              phase = 2;
-              //Draw.top().doClick();
-            }
-            else
-            {
-              System.out.println("Pickup from discard");
-              //check to see if the draw pile is empty, if it is it is switched with the discard pile
-              checkDeck();
-              Players.get(1).pickupCard(Discard.draw());
-              //move to the discard phase
-              phase = 2;
-              //emulates the computer clicking on the discard pile
-              //Discard.top().doClick();
-              System.out.println("After click");
-            }
+                  Timer timer = new Timer(1000, new ActionListener() {
+                         @Override
+                         public void actionPerformed(ActionEvent e) {
+
+
+                        handleComputerP1();
+
+                  }
+                     });
+                     timer.setRepeats(false);
+                     timer.setCoalesce(true);
+                     timer.start();
+            //handleComputerP1();
           }
           //checks to see if anyone won yet
           if(checkWin())
@@ -364,6 +316,97 @@ public class Racko extends JApplet implements ActionListener
 
       }
 
+    }
+    public void handleComputerP1()
+    {
+      int compChoice = 1;
+      if(!Discard.empty())
+      {
+        compChoice = Players.get(1).choosePile(Discard.top());
+        System.out.println(Discard.top());
+        System.out.println("Computer's choice " + compChoice);
+      }
+      else
+      {
+        compChoice = 1;
+      }
+      if(compChoice == 1)
+      {
+        //emulates the computer clicking on the draw pile
+        System.out.println("Pickup from draw");
+        //check to see if the draw pile is empty, if it is it is switched with the discard pile
+        checkDeck();
+        Players.get(1).pickupCard(Draw.draw());
+        if(!Draw.empty())
+        {
+          //only make the top card able to be clicked
+          Draw.top().addActionListener(this);
+        }
+        //move to the discard phase
+        phase = 2;
+        Timer timer = new Timer(1000, new ActionListener() {
+               @Override
+               public void actionPerformed(ActionEvent e) {
+
+
+              handleComputerP2();
+
+        }
+           });
+           timer.setRepeats(false);
+           timer.setCoalesce(true);
+           timer.start();
+      }
+      else
+      {
+        System.out.println("Pickup from discard");
+        //check to see if the draw pile is empty, if it is it is switched with the discard pile
+        checkDeck();
+        try{
+          System.out.println("Sleepin");
+          Thread.sleep(500);
+
+        }catch(InterruptedException ev)
+        {
+          System.out.println("Can't sleep");
+        }
+        Players.get(1).pickupCard(Discard.draw());
+        //move to the discard phase
+        phase = 2;
+        Timer timer = new Timer(1000, new ActionListener() {
+               @Override
+               public void actionPerformed(ActionEvent e) {
+
+
+              handleComputerP2();
+
+        }
+           });
+           timer.setRepeats(false);
+           timer.setCoalesce(true);
+           timer.start();
+        //emulates the computer clicking on the discard pile
+        //Discard.top().doClick();
+        System.out.println("After click");
+      }
+    }
+    public void handleComputerP2()
+    {
+      Card C;
+      C = ((Computer)Players.get(1)).getDiscard();
+      C.doClick();
+      System.out.println("Compt p2");
+      //Players.get(1).getRack().reorder();
+      //System.out.println("Computer's turn");
+
+      /*
+      phase = 1;
+      System.out.println("Shouldn't get here");
+      //completes a turn
+      turns ++;
+      //gets the next player
+      currentTurn = turns % this.Players.size();
+      */
     }
     /**
     *Switches the Draw and Discard Decks if the Draw Deck is empty.
