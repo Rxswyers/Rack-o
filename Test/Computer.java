@@ -22,7 +22,7 @@ public class Computer extends Player
 	/**
 	*
 	*/
-	int numOpponents;
+	int numPlayers;
 	/**
 	*@param name			Computer's desired name
 	*/
@@ -79,7 +79,17 @@ public class Computer extends Player
 	public int positionWanted(Card C)
 	{
 		int value = C.getValue();
-		return (int)Math.floor((value-1)/6);
+		switch(numPlayers)
+		{
+			case 2:
+				return (int)Math.floor((value-1)/4);
+			case 3:
+				return (int)Math.floor((value-1)/5);
+			case 4:
+				return (int)Math.floor((value-1)/6);
+			default:
+				return -1;
+		}
 	}
 	/**
 	*Checks to see if a certain position of the Rack is taken by a desired Card.
@@ -145,5 +155,10 @@ public class Computer extends Player
 		{
 			return this.Hand.search(pos);
 		}
+	}
+
+	public void setNumPlayers(int n)
+	{
+		this.numPlayers = n;
 	}
 }

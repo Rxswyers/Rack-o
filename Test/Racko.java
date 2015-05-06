@@ -18,6 +18,8 @@ import java.util.Collections;
 import java.net.MalformedURLException;
 import java.net.*;
 import javax.swing.border.Border;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 /**
 *This applet controls the game of Racko. There are 2 players, you and a computer opponent.
 *When the game first starts you can put cheats in the input dialog box. You will play until you
@@ -109,6 +111,8 @@ public class Racko extends JApplet implements ActionListener
   Border oldB;
   Card highlightC;
   Card compPick;
+  HashMap<String,String> parmsMap;
+  int numP;
   /**
   *Starts the applet up
   */
@@ -139,8 +143,23 @@ public class Racko extends JApplet implements ActionListener
 
     showStatus("Loaded Image");
     setContentPane(new ImagePanel(image[1]));
+
+
+    try {
+      cutURL();
+      //dumpMap(parmsMap);
+      numP = Integer.parseInt(parmsMap.get("numPRadios"));
+      System.out.println("NumP is " + numP);
+    }
+    catch (UnsupportedEncodingException e) {
+      e.printStackTrace();
+    }
+
+
+
     //end getting images
     //sets up the players and their racks
+    /*
     Players.add(new Human("You",0));
     Players.add(new Computer("Comp",1));
     Players.add(new Computer("Comp2",2));
@@ -165,6 +184,23 @@ public class Racko extends JApplet implements ActionListener
     Players.get(1).getRack().setLayout(null);
     Players.get(2).getRack().setLayout(null);
     Players.get(3).getRack().setLayout(null);
+    */
+    Players.add(new Human("You",0));
+    Players.get(0).getRack().setBounds(0,400,600,200);
+    Players.get(0).getInfoPane().setBounds(600,0,200,100);
+    this.add(Players.get(0).getRack());
+    this.add(Players.get(0).getInfoPane());
+    Players.get(0).getRack().setLayout(null);
+    for(int i = 1; i < numP; i ++)
+    {
+      Players.add(new Computer(("Comp"+i),i));
+      Players.get(i).getRack().setBounds(0+((i-1)*800),0,600,200);
+      Players.get(i).getInfoPane().setBounds(600,0+(i*100),200,100);
+      add(Players.get(i).getRack());
+      add(Players.get(i).getInfoPane());
+      Players.get(i).getRack().setLayout(null);
+      ((Computer)Players.get(i)).setNumPlayers(numP);
+    }
     //Setting up the draw and discard
     Draw.setBounds(150,200,200,200);
     this.add(Draw);
@@ -174,14 +210,14 @@ public class Racko extends JApplet implements ActionListener
     this.add(Discard);
     Discard.setLayout(null);
 
-
+/*
     //asks for cheats
     String response = JOptionPane.showInputDialog(null,"Enter the cheats you would like to use"
     ,"Enter cheats",JOptionPane.QUESTION_MESSAGE);
     String delims = " ";
     String[] cheats = response.split(delims);
     loadCheats(cheats);
-
+*/
     this.getCards();
     this.deal();
     //sets up the top of the draw pile, so it can be clicked
@@ -279,7 +315,11 @@ public class Racko extends JApplet implements ActionListener
           phase = 1;
           //completes a turn
           turns ++;
-          switchInfo();
+          if(Players.size() > 2)
+          {
+            switchInfo();
+          }
+
           //gets the next player
           currentTurn = turns % this.Players.size();
           if(Players.get(currentTurn) instanceof Computer)
@@ -486,11 +526,11 @@ public class Racko extends JApplet implements ActionListener
           this.Cards.get(count).setOwner(i);
           this.Cards.get(count).setActionCommand(""+this.Cards.get(count).getValue());
           this.Cards.get(count).setBounds(200+(xOffset*(j-1)),130+(yOffset*(j-1)),110,60);
-          if(i == 0)
+          if(Players.get(i) instanceof Human)
           {
             this.Cards.get(count).setState(true);
           }
-          if(i == 1 || i == 2)
+          if(Players.get(i) instanceof Computer)
           {
             if(showOpponent)
             {
@@ -691,5 +731,27 @@ public class Racko extends JApplet implements ActionListener
       next.setBounds(600,0,200,100);
       //Swaps with the previous player's InfoPanel
       prev.setBounds(oldBounds);
+    }
+
+    public void cutURL() throws UnsupportedEncodingException {
+      String completeURL = getDocumentBase().toString();
+      System.out.println("Complete URL: " + completeURL);
+      int i = completeURL.indexOf("?");
+      if (i > -1) {
+         String searchURL = completeURL.substring(completeURL.indexOf("?") + 1);
+         System.out.println("Search URL: " + searchURL);
+         initMap(searchURL);
+      }
+    }
+
+    public void initMap(String search) throws UnsupportedEncodingException
+    {
+      parmsMap = new HashMap<String,String>();
+      String params[] = search.split("&");
+
+      for (String param : params) {
+         String temp[] = param.split("=");
+         parmsMap.put(temp[0], java.net.URLDecoder.decode(temp[1], "UTF-8"));
+      }
     }
   }
