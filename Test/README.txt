@@ -19,4 +19,11 @@ I'm now going to work on changing the status of the InfoPanel depending on who's
 get into swapping the racks (eventually add a button to view any player's rack on the InfoPanel)
 
 I noticed that the logic behind taking turns was slightly out of wack, I will have to redo taking
-turns.
+turns. The bug was in Racko, it was also a good opportunity to add the swapping of InfoPanels. The next
+step is to switch the Racks. This is also the first attempt at adding more than 2 players. I'll have to
+see if painting the Racks outside of the applet and then swapping the bounds when it's the Player's turn.
+The Racks only need to switch when the person going is a Computer, otherwise it will display the Human's Rack
+in place of the opponent's. Making an internet Player a subclass of Computer will work with this very nicely.
+When I fixed the bug, I also made the opponent's discard to be highlighted for a little bit.
+
+Once I get the Racks to swap automatically, I will try to add a button in the InfoPanel to swap the Racks at will.

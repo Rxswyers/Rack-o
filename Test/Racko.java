@@ -114,7 +114,8 @@ public class Racko extends JApplet implements ActionListener
   public void init()
   {
 	setLayout(null);
-	setSize(800,600);
+	//setSize(800,600);
+  setSize(1400,600);
     //Getting the image for the background of the cards
 
     image[0] = getImage(getCodeBase(), Images[0]);
@@ -139,16 +140,22 @@ public class Racko extends JApplet implements ActionListener
     //sets up the players and their racks
     Players.add(new Human("You"));
     Players.add(new Computer("Comp"));
+    Players.add(new Computer("Comp2"));
     Players.get(0).getRack().setBounds(0,400,600,200);
     Players.get(0).getInfoPane().setBounds(600,0,200,100);
     Players.get(1).getRack().setBounds(0,0,600,200);
     Players.get(1).getInfoPane().setBounds(600,100,200,100);
+    Players.get(2).getRack().setBounds(800,0,600,200);
+    Players.get(2).getInfoPane().setBounds(600,200,200,100);
     this.add(Players.get(0).getRack());
     this.add(Players.get(0).getInfoPane());
     this.add(Players.get(1).getRack());
     this.add(Players.get(1).getInfoPane());
+    this.add(Players.get(2).getRack());
+    this.add(Players.get(2).getInfoPane());
     Players.get(0).getRack().setLayout(null);
     Players.get(1).getRack().setLayout(null);
+    Players.get(2).getRack().setLayout(null);
     //Setting up the draw and discard
     Draw.setBounds(150,200,200,200);
     this.add(Draw);
@@ -172,6 +179,7 @@ public class Racko extends JApplet implements ActionListener
     Draw.top().addActionListener(this);
 
     phase = 1;
+    System.out.println("Player 2's name "+Players.get(1).getName());
     this.setVisible(true);
   	this.validate();
 
@@ -267,7 +275,7 @@ public class Racko extends JApplet implements ActionListener
           currentTurn = turns % this.Players.size();
           if(Players.get(currentTurn) instanceof Computer)
           {
-                  Timer timer = new Timer(1000, new ActionListener() {
+                  Timer timer = new Timer(1500, new ActionListener() {
                          @Override
                          public void actionPerformed(ActionEvent e) {
 
@@ -301,9 +309,10 @@ public class Racko extends JApplet implements ActionListener
       int compChoice = 1;
       if(!Discard.empty())
       {
-        compChoice = Players.get(1).choosePile(Discard.top());
+        compChoice = Players.get(currentTurn).choosePile(Discard.top());
         System.out.println(Discard.top());
         System.out.println("Computer's choice " + compChoice);
+        System.out.println("Comp's name " + Players.get(currentTurn).getName());
       }
       else
       {
@@ -315,7 +324,7 @@ public class Racko extends JApplet implements ActionListener
         System.out.println("Pickup from draw");
         //check to see if the draw pile is empty, if it is it is switched with the discard pile
         checkDeck();
-        Players.get(1).pickupCard(Draw.draw());
+        Players.get(currentTurn).pickupCard(Draw.draw());
         if(!Draw.empty())
         {
           //only make the top card able to be clicked
@@ -341,15 +350,15 @@ public class Racko extends JApplet implements ActionListener
         System.out.println("Pickup from discard");
         //check to see if the draw pile is empty, if it is it is switched with the discard pile
         checkDeck();
-        try{
+        /*try{
           System.out.println("Sleepin");
           Thread.sleep(500);
 
         }catch(InterruptedException ev)
         {
           System.out.println("Can't sleep");
-        }
-        Players.get(1).pickupCard(Discard.draw());
+        }*/
+        Players.get(currentTurn).pickupCard(Discard.draw());
         //move to the discard phase
         phase = 2;
         Timer timer = new Timer(1000, new ActionListener() {
@@ -372,8 +381,8 @@ public class Racko extends JApplet implements ActionListener
     public void handleComputerP2()
     {
       Card C;
-      C = ((Computer)Players.get(1)).getDiscard();
-      highlight(Players.get(1).getRack().getExtra());
+      C = ((Computer)Players.get(currentTurn)).getDiscard();
+      highlight(Players.get(currentTurn).getRack().getExtra());
       C.doClick();
       System.out.println("Compt p2");
     }
@@ -382,15 +391,15 @@ public class Racko extends JApplet implements ActionListener
       oldB = C.getBorder();
       highlightC = C;
       C.setBorder(BorderFactory.createLineBorder(Color.green, 2));
-      try{
+      /*try{
         System.out.println("Sleepin");
         Thread.sleep(500);
 
       }catch(InterruptedException ev)
       {
         System.out.println("Can't sleep");
-      }
-      Timer timer = new Timer(1000, new ActionListener() {
+      }*/
+      Timer timer = new Timer(1500, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -485,7 +494,7 @@ public class Racko extends JApplet implements ActionListener
           {
             this.Cards.get(count).setState(true);
           }
-          if(i == 1)
+          if(i == 1 || i == 2)
           {
             if(showOpponent)
             {
@@ -620,6 +629,7 @@ public class Racko extends JApplet implements ActionListener
       {
         showOpponent = true;
         ((Computer)Players.get(1)).setSight(showOpponent);
+        ((Computer)Players.get(2)).setSight(showOpponent);
       }
       else
       {
@@ -660,7 +670,7 @@ public class Racko extends JApplet implements ActionListener
     */
     public void switchInfo()
     {
-      Player nextP = Players.get((currentTurn + 1));
+      Player nextP = Players.get((currentTurn + 1)%this.Players.size());
       Player prevP = Players.get(currentTurn);
 
       InfoPanel next = Players.get((currentTurn +1) % this.Players.size()).getInfoPane();
@@ -669,11 +679,27 @@ public class Racko extends JApplet implements ActionListener
       //Players.get((currentTurn + 1) % this.Players.size()).getInfoPane().setState(true);
       prev.setState(false);
       next.setState(true);
+      for(Player play: Players)
+      {
+        if(play != nextP)
+        {
+          play.getInfoPane().setState(false);
+        }
+      }
       //swap the index of Infos, using the currentplayer as the index
       // that will be turns % Players.size()
       Rectangle oldBounds = new Rectangle();
       oldBounds = next.getBounds();
+/*
+      if((nextP instanceof Computer) && (prevP instanceof Computer) )
+      //if(nextP instanceof Computer)
+      {
+        Rectangle oldRBounds = new Rectangle();
+        oldRBounds = nextP.getRack().getBounds();
 
+        nextP.getRack().setBounds(0,0,600,200);
+        prevP.getRack().setBounds(oldRBounds);
+      }*/
       //Puts the next InfoPanel on the top
       next.setBounds(600,100,200,100);
       //Swaps with the previous player's InfoPanel

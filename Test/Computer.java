@@ -75,7 +75,7 @@ public class Computer extends Player
 	public int positionWanted(Card C)
 	{
 		int value = C.getValue();
-		if(value >= 1 && value <= 4)
+		/*if(value >= 1 && value <= 4)
 		{
 			return 0;
 		}
@@ -118,7 +118,8 @@ public class Computer extends Player
 		else
 		{
 			return -1;
-		}
+		}*/
+		return (int)Math.floor((value-1)/5);
 	}
 	/**
 	*Checks to see if a certain position of the Rack is taken by a desired Card.
