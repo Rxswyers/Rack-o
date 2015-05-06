@@ -119,7 +119,7 @@ public class Computer extends Player
 		{
 			return -1;
 		}*/
-		return (int)Math.floor((value-1)/5);
+		return (int)Math.floor((value-1)/6);
 	}
 	/**
 	*Checks to see if a certain position of the Rack is taken by a desired Card.

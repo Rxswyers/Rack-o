@@ -30,3 +30,5 @@ Once I get the Racks to swap automatically, I will try to add a button in the In
 First I had to get the InfoPanels swapping correctly with 3 Players, now I will test swapping the Racks.
 The Racks and InfoPanels now properly switch, there was a bug at first when trying to swap right after the
 Human goes. I didn't want to swap the Human's rack, so I didn't update the others while the Human went.
+Painting the Racks off the view of the Applet worked great. The racks all update properly, and when it's your
+turn, the rack that went before you is showing.
