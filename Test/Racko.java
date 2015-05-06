@@ -254,6 +254,11 @@ public class Racko extends JApplet implements ActionListener
           {
             fromDiscard.addActionListener(this);
           }
+          if(checkWin())
+          {
+            System.out.println("Somebody won!");
+            win = true;
+          }
           //puts you back to the draw phase
           phase = 1;
           //completes a turn
@@ -655,19 +660,23 @@ public class Racko extends JApplet implements ActionListener
     */
     public void switchInfo()
     {
-        InfoPanel next = Players.get((currentTurn +1) % this.Players.size()).getInfoPane();
-        InfoPanel prev = Players.get(currentTurn).getInfoPane();
-        //Players.get(currentTurn).getInfoPane().setState(false);
-        //Players.get((currentTurn + 1) % this.Players.size()).getInfoPane().setState(true);
-        prev.setState(false);
-        next.setState(true);
-        //swap the index of Infos, using the currentplayer as the index
-        // that will be turns % Players.size()
-        Rectangle Bounds = new Rectangle();
-        Bounds = next.getBounds();
-        //Puts the next InfoPanel on the top
-        next.setBounds(600,100,200,100);
-        //Swaps with the previous player's InfoPanel
-        prev.setBounds(Bounds);
+      Player nextP = Players.get((currentTurn + 1));
+      Player prevP = Players.get(currentTurn);
+
+      InfoPanel next = Players.get((currentTurn +1) % this.Players.size()).getInfoPane();
+      InfoPanel prev = Players.get(currentTurn).getInfoPane();
+      //Players.get(currentTurn).getInfoPane().setState(false);
+      //Players.get((currentTurn + 1) % this.Players.size()).getInfoPane().setState(true);
+      prev.setState(false);
+      next.setState(true);
+      //swap the index of Infos, using the currentplayer as the index
+      // that will be turns % Players.size()
+      Rectangle oldBounds = new Rectangle();
+      oldBounds = next.getBounds();
+
+      //Puts the next InfoPanel on the top
+      next.setBounds(600,100,200,100);
+      //Swaps with the previous player's InfoPanel
+      prev.setBounds(oldBounds);
     }
   }
