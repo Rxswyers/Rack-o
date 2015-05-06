@@ -42,6 +42,7 @@ public class Deck extends JPanel
 		this.DJLP.setBounds(0,0,200,200);
 		this.DJLP.setLayout(null);
 		this.numCards = 0;
+		setOpaque(false);
 	}
 	//methods
 	/**

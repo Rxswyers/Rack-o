@@ -28,6 +28,7 @@ public class InfoPanel extends JPanel
       this.Going.setBounds(10,45,190,15);
       this.setLayout(null);
       this.setBorder(BorderFactory.createLineBorder(Color.black));
+      setOpaque(false);
   }
   public void setState(boolean s)
   {

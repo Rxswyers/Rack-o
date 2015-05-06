@@ -65,7 +65,7 @@ public class Racko extends JApplet implements ActionListener
   /**
   *Location of the images
   */
-  String Images[] = {"PokemonCardN.jpg","blacksailsback.jpg"};
+  String Images[] = {"PokemonCardN.jpg","PokemonBack.jpg"};
   /**
   *Card to be kept track of to avoid drawing from the discard and discarding it again
   */
@@ -117,6 +117,7 @@ public class Racko extends JApplet implements ActionListener
 	setLayout(null);
 	//setSize(800,600);
   setSize(800,600);
+
     //Getting the image for the background of the cards
 
     image[0] = getImage(getCodeBase(), Images[0]);
@@ -137,6 +138,7 @@ public class Racko extends JApplet implements ActionListener
     {}
 
     showStatus("Loaded Image");
+    setContentPane(new ImagePanel(image[1]));
     //end getting images
     //sets up the players and their racks
     Players.add(new Human("You",0));
@@ -285,7 +287,6 @@ public class Racko extends JApplet implements ActionListener
                   Timer timer = new Timer(1000, new ActionListener() {
                          @Override
                          public void actionPerformed(ActionEvent e) {
-
                         handleComputerP1();
                   }
                      });
@@ -299,7 +300,6 @@ public class Racko extends JApplet implements ActionListener
             System.out.println("Somebody won!");
             win = true;
           }
-
         }
       }
 

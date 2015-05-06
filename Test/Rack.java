@@ -41,6 +41,7 @@ public class Rack extends JPanel
 		this.add(this.RJLP);
 		this.RJLP.setBounds(0,0,800,200);
 		this.RJLP.setLayout(null);
+		setOpaque(false);
 
 	}
 	/**
