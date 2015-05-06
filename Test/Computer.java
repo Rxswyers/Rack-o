@@ -20,6 +20,10 @@ public class Computer extends Player
 	*/
 	boolean see;
 	/**
+	*
+	*/
+	int numOpponents;
+	/**
 	*@param name			Computer's desired name
 	*/
 	public Computer(String name, int identity)
@@ -75,50 +79,6 @@ public class Computer extends Player
 	public int positionWanted(Card C)
 	{
 		int value = C.getValue();
-		/*if(value >= 1 && value <= 4)
-		{
-			return 0;
-		}
-		else if(value >= 5 && value <= 8)
-		{
-			return 1;
-		}
-		else if(value >= 9 && value <= 12)
-		{
-			return 2;
-		}
-		else if(value >= 13 && value <= 16)
-		{
-			return 3;
-		}
-		else if(value >= 17 && value <= 20)
-		{
-			return 4;
-		}
-		else if(value >= 21 && value <= 24)
-		{
-			return 5;
-		}
-		else if(value >= 25 && value <= 28)
-		{
-			return 6;
-		}
-		else if(value >= 29 && value <= 32)
-		{
-			return 7;
-		}
-		else if(value >= 33 && value <= 36)
-		{
-			return 8;
-		}
-		else if(value >= 37 && value <= 40)
-		{
-			return 9;
-		}
-		else
-		{
-			return -1;
-		}*/
 		return (int)Math.floor((value-1)/6);
 	}
 	/**
