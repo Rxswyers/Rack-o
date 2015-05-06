@@ -277,13 +277,11 @@ public class Racko extends JApplet implements ActionListener
           currentTurn = turns % this.Players.size();
           if(Players.get(currentTurn) instanceof Computer)
           {
-                  Timer timer = new Timer(1500, new ActionListener() {
+                  Timer timer = new Timer(1000, new ActionListener() {
                          @Override
                          public void actionPerformed(ActionEvent e) {
 
-
                         handleComputerP1();
-
                   }
                      });
                      timer.setRepeats(false);
@@ -298,7 +296,7 @@ public class Racko extends JApplet implements ActionListener
           }
 
           //checks to see if anyone won yet
-
+          //switchInfo();
 
         }
 
@@ -372,7 +370,7 @@ public class Racko extends JApplet implements ActionListener
       Card C;
       compPick = ((Computer)Players.get(currentTurn)).getDiscard();
       highlight(compPick);
-      Timer timer = new Timer(1500, new ActionListener() {
+      Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -661,9 +659,6 @@ public class Racko extends JApplet implements ActionListener
 
       InfoPanel next = Players.get((currentTurn+1) % this.Players.size()).getInfoPane();
       InfoPanel prev = Players.get(currentTurn).getInfoPane();
-      //Players.get(currentTurn).getInfoPane().setState(false);
-      //Players.get((currentTurn + 1) % this.Players.size()).getInfoPane().setState(true);
-      //prev.setState(false);
 
       for(Player play: Players)
       {
@@ -681,9 +676,9 @@ public class Racko extends JApplet implements ActionListener
         oldRBounds = nextP.getRack().getBounds();
 
         nextP.getRack().setBounds(0,0,600,200);
-        prevP.getRack().setBounds(oldRBounds);
+        prevP.getRack().setBounds(800,0,600,200);
+        //nextP.getRack().revalidate();
         nextP.getRack().repaint();
-        prevP.getRack().repaint();
         System.out.println("Rack is showing " + prevP.getName());
       }
       else if((nextP instanceof Computer) && (prevP instanceof Human))
@@ -692,10 +687,7 @@ public class Racko extends JApplet implements ActionListener
         oldRBounds = nextP.getRack().getBounds();
         nextP.getRack().setBounds(0,0,600,200);
         Players.get((currentTurn +2)%this.Players.size()).getRack().setBounds(oldRBounds);
-        //prevP.getRack().setBounds(oldRBounds);
         nextP.getRack().repaint();
-        prevP.getRack().repaint();
-
       }
       //Puts the next InfoPanel on the top
       next.setBounds(600,0,200,100);
