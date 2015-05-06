@@ -27,3 +27,6 @@ in place of the opponent's. Making an internet Player a subclass of Computer wil
 When I fixed the bug, I also made the opponent's discard to be highlighted for a little bit.
 
 Once I get the Racks to swap automatically, I will try to add a button in the InfoPanel to swap the Racks at will.
+First I had to get the InfoPanels swapping correctly with 3 Players, now I will test swapping the Racks.
+The Racks and InfoPanels now properly switch, there was a bug at first when trying to swap right after the
+Human goes. I didn't want to swap the Human's rack, so I didn't update the others while the Human went.

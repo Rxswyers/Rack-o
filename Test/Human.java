@@ -18,9 +18,9 @@ public class Human extends Player
 	/**
 	*@param name			Desired name of the Player
 	*/
-	public Human(String name)
+	public Human(String name,int identity)
 	{
-		super(name);
+		super(name,identity);
 	}
 	/**
 	*Adds a Card to the Rack's extra slot
@@ -29,7 +29,7 @@ public class Human extends Player
 	public void pickupCard(Card C)
 	{
 		C.setState(true); //flips the card up so the value can be seen
-		C.setOwner(0);
+		C.setOwner(this.id);
 		this.Hand.setExtra(C);
 	}
 	/**

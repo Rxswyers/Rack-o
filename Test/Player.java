@@ -43,13 +43,15 @@ abstract public class Player
   Panel that contains the name of the Player and notifies if it is their turn.
   */
   protected InfoPanel Info;
+  protected int id;
   //methods
   /**
   *@param name    Desired name of the Player
   */
-  public Player(String name)
+  public Player(String name,int identity)
   {
 	  this.setName(name);
+    this.id = identity;
     this.Hand = new Rack();
     this.Info = new InfoPanel(name);
   }

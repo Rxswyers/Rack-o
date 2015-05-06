@@ -22,9 +22,9 @@ public class Computer extends Player
 	/**
 	*@param name			Computer's desired name
 	*/
-	public Computer(String name)
+	public Computer(String name, int identity)
 	{
-		super(name);
+		super(name,identity);
 		this.see = false;
 	}
 	/**
@@ -41,7 +41,7 @@ public class Computer extends Player
 	public void pickupCard(Card C) // set this to abstract
 	{
 		C.setState(this.see); //flips the card up so the value can be seen
-		C.setOwner(1);
+		C.setOwner(this.id);
 		this.Hand.setExtra(C);
 	}
 	/**
