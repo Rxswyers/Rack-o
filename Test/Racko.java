@@ -67,7 +67,7 @@ public class Racko extends JApplet implements ActionListener
   /**
   *Location of the images
   */
-  String Images[] = {"PokemonCardN.jpg","PokemonBack.jpg"};
+  String Images[] = {"PokemonCardN.jpg","PokemonBack.jpg","pika.png"};
   /**
   *Card to be kept track of to avoid drawing from the discard and discarding it again
   */
@@ -130,6 +130,9 @@ public class Racko extends JApplet implements ActionListener
     image[1] = getImage(getCodeBase(), Images[1]);
     imageIcons[1] = new ImageIcon(image[1]);
 
+    image[2] = getImage(getCodeBase(), Images[2]);
+    imageIcons[2] = new ImageIcon(image[2]);
+
     MediaTracker mt = new MediaTracker(this);
     showStatus("Loading Image ...");
 
@@ -185,6 +188,9 @@ public class Racko extends JApplet implements ActionListener
     Players.get(2).getRack().setLayout(null);
     Players.get(3).getRack().setLayout(null);
     */
+    JLabel pikachu = new JLabel(imageIcons[2]);
+    pikachu.setBounds(0,0,40,40);
+    this.add(pikachu);
     Players.add(new Human("You",0));
     Players.get(0).getRack().setBounds(0,400,600,200);
     Players.get(0).getInfoPane().setBounds(600,0,200,100);
