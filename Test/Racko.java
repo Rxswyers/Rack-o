@@ -3,7 +3,7 @@
 * Due Date: 		  May 7, 2015
 * Course: 			  CSC243
 * Professor Name: Dr. Spiegel
-* Assignment: 		#3 - Racko GUI
+* Assignment: 		#2 - Racko GUI
 * Filename: 		  Racko.java
 * Purpose:		  	This is the applet that controls the game. The draw Deck is face down on the left.
                   and the discard Deck is on the right. Your Rack is on the bottom and the opponent's is
@@ -146,6 +146,10 @@ public class Racko extends JApplet implements ActionListener, MouseListener
   */
   JMenuItem stop = new JMenuItem("Stop");
   /**
+  *Menu item to pick the other song
+  */
+  JMenuItem other = new JMenuItem("Other Song");
+  /**
   *Holds the component that the popup menu appeared on
   */
   Component cmp = null;
@@ -153,6 +157,10 @@ public class Racko extends JApplet implements ActionListener, MouseListener
   *Background music
   */
   AudioClip backMusic;
+  /**
+  *Keeps track of what song is playing
+  */
+  Boolean otherSong = false;
   /**
   *Starts the applet up
   */
@@ -163,8 +171,10 @@ public class Racko extends JApplet implements ActionListener, MouseListener
     //sets up the context menu
     pop.add(play);
     pop.add(stop);
+    pop.add(other);
     play.addActionListener(this);
     stop.addActionListener(this);
+    other.addActionListener(this);
     //sets up the background music
     String music = "opening.wav";
     backMusic = getAudioClip(getCodeBase(), music);
@@ -276,6 +286,27 @@ public class Racko extends JApplet implements ActionListener, MouseListener
       {
         backMusic.stop();
         return;
+      }
+      if(((e.getSource()) == other) && (cmp != null))
+      {
+        if(otherSong == false)
+        {
+          backMusic.stop();
+          String music = "battle.wav";
+          backMusic = getAudioClip(getCodeBase(), music);
+          backMusic.loop();
+          otherSong = true;
+          return;
+        }
+        else
+        {
+          backMusic.stop();
+          String music = "opening.wav";
+          backMusic = getAudioClip(getCodeBase(), music);
+          backMusic.loop();
+          otherSong = false;
+          return;
+        }
       }
 
 
@@ -618,19 +649,14 @@ public class Racko extends JApplet implements ActionListener, MouseListener
       {
         if(P.getCurrentScore() == 75)
         {
-          //alerts the user if there is a winner, and asks to play again
-          int dialogButton = JOptionPane.YES_NO_OPTION;
-          int dialogResult = JOptionPane.showConfirmDialog(null,P.getName() + " won!! Would you like to play again?","Winner",dialogButton);
-          if(dialogResult == JOptionPane.YES_OPTION)
+          String message = "";
+          message += (P.getName() + " won!\n");
+          //prints the scores of the players to the command line
+          for(Player Pl:Players)
           {
-            try {
-              //restarts the applet
-               this.getAppletContext().showDocument(new URL(getCodeBase()+"appletCaller.html"));
-             }
-            catch (MalformedURLException e) {
-                System.out.println(e.getMessage());
-             }
+            message+= (Pl.getName()+" - Score: "+Pl.getCurrentScore()+'\n');
           }
+          JOptionPane.showMessageDialog(this,message);
           return true;
         }
       }

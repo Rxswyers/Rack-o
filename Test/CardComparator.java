@@ -1,9 +1,9 @@
 /*Author: 				Ruben Swyers
 * Creation Date: 	April 2, 2015
-* Due Date: 			April 3, 2015
+* Due Date: 			May 7, 2015
 * Course: 				CSC243
 * Professor Name: Dr. Spiegel
-* Assignment: 		#2 - Racko GUI
+* Assignment: 		#3 - Racko GUI
 * Filename: 			CardComparator.java
 * Purpose:		  	This is a custom Comparator to make Cards sortable while in an
 *                 ArrayList

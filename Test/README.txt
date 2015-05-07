@@ -15,6 +15,9 @@ Since my design only allows 2 Racks to be shown at all times, when playing with
 more than 2 people the Computer Racks will swap out. It may not seem like they do,
 but if you use the /c cheat you can verify.
 
+There is a bug, it rarely happens. A computer may pick a card and the Applet doesn't register it
+as the computer doing it. It will fall onto you, then make it unable to continue.
+
 These are notes as I progressed through my project:
 
 I've decided to add on to my GUI, because there is a lot of extra space not being used.
