@@ -35,11 +35,11 @@ public class Racko extends JApplet implements ActionListener
   /**
   *Holds the images used in the game
   */
-  Image image[] = new Image[2];
+  Image image[] = new Image[3];
   /**
   *Holds the image icons used in the game
   */
-  ImageIcon imageIcons[] = new ImageIcon[2];
+  ImageIcon imageIcons[] = new ImageIcon[3];
   /**
   *Keeps track of the players of the game
   */
@@ -67,7 +67,7 @@ public class Racko extends JApplet implements ActionListener
   /**
   *Location of the images
   */
-  String Images[] = {"PokemonCardN.jpg","PokemonBack.jpg","pika.png"};
+  String Images[] = {"PokemonCardN.jpg","PokemonBack.jpg","pika2.png"};
   /**
   *Card to be kept track of to avoid drawing from the discard and discarding it again
   */
@@ -113,6 +113,7 @@ public class Racko extends JApplet implements ActionListener
   Card compPick;
   HashMap<String,String> parmsMap;
   int numP;
+  String response;
   /**
   *Starts the applet up
   */
@@ -152,46 +153,16 @@ public class Racko extends JApplet implements ActionListener
       cutURL();
       //dumpMap(parmsMap);
       numP = Integer.parseInt(parmsMap.get("numPRadios"));
+      response = parmsMap.get("name");
       System.out.println("NumP is " + numP);
     }
     catch (UnsupportedEncodingException e) {
       e.printStackTrace();
     }
-
-
-
+    String delims = " ";
+    String[] cheats = response.split(delims);
     //end getting images
-    //sets up the players and their racks
-    /*
-    Players.add(new Human("You",0));
-    Players.add(new Computer("Comp",1));
-    Players.add(new Computer("Comp2",2));
-    Players.add(new Computer("Comp3",3));
-    Players.get(0).getRack().setBounds(0,400,600,200);
-    Players.get(0).getInfoPane().setBounds(600,0,200,100);
-    Players.get(1).getRack().setBounds(0,0,600,200);
-    Players.get(1).getInfoPane().setBounds(600,100,200,100);
-    Players.get(2).getRack().setBounds(800,0,600,200);
-    Players.get(2).getInfoPane().setBounds(600,200,200,100);
-    Players.get(3).getRack().setBounds(800,0,600,200);
-    Players.get(3).getInfoPane().setBounds(600,300,200,100);
-    this.add(Players.get(0).getRack());
-    this.add(Players.get(0).getInfoPane());
-    this.add(Players.get(1).getRack());
-    this.add(Players.get(1).getInfoPane());
-    this.add(Players.get(2).getRack());
-    this.add(Players.get(2).getInfoPane());
-    this.add(Players.get(3).getRack());
-    this.add(Players.get(3).getInfoPane());
-    Players.get(0).getRack().setLayout(null);
-    Players.get(1).getRack().setLayout(null);
-    Players.get(2).getRack().setLayout(null);
-    Players.get(3).getRack().setLayout(null);
-    */
-    JLabel pikachu = new JLabel(imageIcons[2]);
-    pikachu.setBounds(0,0,40,40);
-    this.add(pikachu);
-    Players.add(new Human("You",0));
+    Players.add(new Human(cheats[0],0));
     Players.get(0).getRack().setBounds(0,400,600,200);
     Players.get(0).getInfoPane().setBounds(600,0,200,100);
     this.add(Players.get(0).getRack());
@@ -207,6 +178,8 @@ public class Racko extends JApplet implements ActionListener
       Players.get(i).getRack().setLayout(null);
       ((Computer)Players.get(i)).setNumPlayers(numP);
     }
+
+    loadCheats(cheats);
     //Setting up the draw and discard
     Draw.setBounds(150,200,200,200);
     this.add(Draw);
@@ -224,6 +197,8 @@ public class Racko extends JApplet implements ActionListener
     String[] cheats = response.split(delims);
     loadCheats(cheats);
 */
+
+
     this.getCards();
     this.deal();
     //sets up the top of the draw pile, so it can be clicked
@@ -599,15 +574,14 @@ public class Racko extends JApplet implements ActionListener
       //checks for the limitTurns cheat
       if(limitTurns)
       {
+        String message = "";
         if(this.turnLimit == this.turns)
         {
-          //prints the scores of the players to the command line
-          for(Player P:Players)
-          {
-            System.out.println(P.getName()+" - Score: "+P.getCurrentScore());
-          }
-          String winner;
+          String winner = "";
+          Player winna;
+          int highScore = 0;
           //gets the winner's name
+          /*
           if(Players.get(0).getCurrentScore() > Players.get(1).getCurrentScore())
           {
             winner = Players.get(0).getName();
@@ -615,20 +589,26 @@ public class Racko extends JApplet implements ActionListener
           else
           {
             winner = Players.get(1).getName();
-          }
-          //Shows who won and asks to play again
-          int dialogButton = JOptionPane.YES_NO_OPTION;
-          int dialogResult = JOptionPane.showConfirmDialog(null,winner + " won!! Would you like to play again?","Winner",dialogButton);
-          if(dialogResult == JOptionPane.YES_OPTION)
+          }*/
+          for(Player Pl:Players)
           {
-            try {
-               this.getAppletContext().showDocument(new URL(getCodeBase()+"appletCaller.html"));
-             }
-            catch (MalformedURLException e) {
-                System.out.println(e.getMessage());
-             }
+            if(highScore < Pl.getCurrentScore())
+            {
+              highScore = Pl.getCurrentScore();
+              winner = Pl.getName();
+            }
           }
-
+          message += (winner + " won!\n");
+          //prints the scores of the players to the command line
+          for(Player P:Players)
+          {
+            message+= (P.getName()+" - Score: "+P.getCurrentScore()+'\n');
+          }
+          JOptionPane.showMessageDialog(this,message);
+          //Shows who won and asks to play again
+          //int dialogButton = JOptionPane.YES_NO_OPTION;
+          //int dialogResult = JOptionPane.showConfirmDialog(null,winner + " won!! Would you like to play again?","Winner",dialogButton);
+          //if(dialogResult == JOptionPane.YES_OPTION)
           return true;
         }
       }
@@ -652,11 +632,26 @@ public class Racko extends JApplet implements ActionListener
     */
     public void checkCheats()
     {
+      if(cheatList.size() > 1)
+      {
+        AudioClip audioClip;
+        String pika = "pikachu.wav";
+
+        audioClip = getAudioClip(getCodeBase(), pika);
+        audioClip.play();
+      }
       if(cheatList.contains("/c"))
       {
         showOpponent = true;
-        ((Computer)Players.get(1)).setSight(showOpponent);
-        ((Computer)Players.get(2)).setSight(showOpponent);
+        System.out.println("interesting");
+        for(Player play: Players)
+        {
+          if(play instanceof Computer)
+          {
+            ((Computer)play).setSight(showOpponent);
+            System.out.println("worked");
+          }
+        }
       }
       else
       {
