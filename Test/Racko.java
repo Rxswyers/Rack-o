@@ -1,9 +1,9 @@
 /*Author: 			  Ruben Swyers
 * Creation Date: 	March 15, 2015
-* Due Date: 		  April 3, 2015
+* Due Date: 		  May 7, 2015
 * Course: 			  CSC243
 * Professor Name: Dr. Spiegel
-* Assignment: 		#2 - Racko GUI
+* Assignment: 		#3 - Racko GUI
 * Filename: 		  Racko.java
 * Purpose:		  	This is the applet that controls the game. The draw Deck is face down on the left.
                   and the discard Deck is on the right. Your Rack is on the bottom and the opponent's is
@@ -26,7 +26,7 @@ import java.util.HashMap;
 * or the computer get all of the cards in your racks in order.
 *@author Ruben Swyers
 */
-public class Racko extends JApplet implements ActionListener
+public class Racko extends JApplet implements ActionListener, MouseListener
 {
   /**
   *Keeps track of the state of the game
@@ -108,20 +108,66 @@ public class Racko extends JApplet implements ActionListener
   *List of cheats once they are parsed
   */
   ArrayList<String> cheatList = new ArrayList<String>();
+  /**
+  *Keeps track of the original border of a button, used when highlighting it
+  */
   Border oldB;
+  /**
+  *Card to be highlighted
+  */
   Card highlightC;
+  /**
+  *Card that the computer picks in their turn
+  */
   Card compPick;
+  /**
+  *Holds the parameters from the HTML form
+  */
   HashMap<String,String> parmsMap;
+  /**
+  *Number of players, attained from the HTML form
+  */
   int numP;
+  /**
+  *Contains the information from the name textbox in the HTML form, can also
+  *have cheats.
+  */
   String response;
+  /**
+  *Popup menu to control the music
+  */
+  JPopupMenu pop = new JPopupMenu();
+  /**
+  *Menu item to play the music
+  */
+  JMenuItem play = new JMenuItem("Play");
+  /**
+  *Menu item to stop the music
+  */
+  JMenuItem stop = new JMenuItem("Stop");
+  /**
+  *Holds the component that the popup menu appeared on
+  */
+  Component cmp = null;
+  /**
+  *Background music
+  */
+  AudioClip backMusic;
   /**
   *Starts the applet up
   */
   public void init()
   {
-	setLayout(null);
-	//setSize(800,600);
-  setSize(800,600);
+	  setLayout(null);
+    setSize(800,600);
+    //sets up the context menu
+    pop.add(play);
+    pop.add(stop);
+    play.addActionListener(this);
+    stop.addActionListener(this);
+    //sets up the background music
+    String music = "opening.wav";
+    backMusic = getAudioClip(getCodeBase(), music);
 
     //Getting the image for the background of the cards
 
@@ -148,7 +194,7 @@ public class Racko extends JApplet implements ActionListener
     showStatus("Loaded Image");
     setContentPane(new ImagePanel(image[1]));
 
-
+    //gets the info from the form on the web page
     try {
       cutURL();
       //dumpMap(parmsMap);
@@ -162,6 +208,8 @@ public class Racko extends JApplet implements ActionListener
     String delims = " ";
     String[] cheats = response.split(delims);
     //end getting images
+
+    //handles making the players
     Players.add(new Human(cheats[0],0));
     Players.get(0).getRack().setBounds(0,400,600,200);
     Players.get(0).getInfoPane().setBounds(600,0,200,100);
@@ -179,6 +227,7 @@ public class Racko extends JApplet implements ActionListener
       ((Computer)Players.get(i)).setNumPlayers(numP);
     }
 
+    //loads up the cheats
     loadCheats(cheats);
     //Setting up the draw and discard
     Draw.setBounds(150,200,200,200);
@@ -188,34 +237,48 @@ public class Racko extends JApplet implements ActionListener
     Discard.setBounds(350,200,200,200);
     this.add(Discard);
     Discard.setLayout(null);
-
-/*
-    //asks for cheats
-    String response = JOptionPane.showInputDialog(null,"Enter the cheats you would like to use"
-    ,"Enter cheats",JOptionPane.QUESTION_MESSAGE);
-    String delims = " ";
-    String[] cheats = response.split(delims);
-    loadCheats(cheats);
-*/
-
-
+    //deals the cards
     this.getCards();
     this.deal();
     //sets up the top of the draw pile, so it can be clicked
     Draw.top().addActionListener(this);
 
     phase = 1;
+    //enales the frame to use the context menu
+    this.addMouseListener(this);
+    //waits 3 seconds to start the background music
+    Timer timer = new Timer(3000, new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+          backMusic.loop();
+    }
+       });
+    timer.setRepeats(false);
+    timer.setCoalesce(true);
+    timer.start();
     this.setVisible(true);
   	this.validate();
 
   }
     /**
-    *Handles any interaction with the Cards on the GUI. This is also where
+    *Handles any interaction with the Cards as well as the popup menu on the GUI. This is also where
     * the players take their turns based on what Cards they click.
     *@param e     ActionEvent triggered by clicking a Card.
     */
     public void actionPerformed(ActionEvent e)
     {
+      if((e.getSource() == play) && (cmp != null))
+      {
+        backMusic.loop();
+        return;
+      }
+      if((e.getSource() == stop) && (cmp != null))
+      {
+        backMusic.stop();
+        return;
+      }
+
+
       //phase 1 is the draw phase
       if(phase == 1)
       {
@@ -305,15 +368,15 @@ public class Racko extends JApplet implements ActionListener
           currentTurn = turns % this.Players.size();
           if(Players.get(currentTurn) instanceof Computer)
           {
-                  Timer timer = new Timer(1000, new ActionListener() {
-                         @Override
-                         public void actionPerformed(ActionEvent e) {
-                        handleComputerP1();
-                  }
-                     });
-                     timer.setRepeats(false);
-                     timer.setCoalesce(true);
-                     timer.start();
+              Timer timer = new Timer(1000, new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                handleComputerP1();
+              }
+              });
+              timer.setRepeats(false);
+              timer.setCoalesce(true);
+              timer.start();
           }
           //checks if anyone won
           if(checkWin())
@@ -581,15 +644,6 @@ public class Racko extends JApplet implements ActionListener
           Player winna;
           int highScore = 0;
           //gets the winner's name
-          /*
-          if(Players.get(0).getCurrentScore() > Players.get(1).getCurrentScore())
-          {
-            winner = Players.get(0).getName();
-          }
-          else
-          {
-            winner = Players.get(1).getName();
-          }*/
           for(Player Pl:Players)
           {
             if(highScore < Pl.getCurrentScore())
@@ -605,10 +659,6 @@ public class Racko extends JApplet implements ActionListener
             message+= (P.getName()+" - Score: "+P.getCurrentScore()+'\n');
           }
           JOptionPane.showMessageDialog(this,message);
-          //Shows who won and asks to play again
-          //int dialogButton = JOptionPane.YES_NO_OPTION;
-          //int dialogResult = JOptionPane.showConfirmDialog(null,winner + " won!! Would you like to play again?","Winner",dialogButton);
-          //if(dialogResult == JOptionPane.YES_OPTION)
           return true;
         }
       }
@@ -733,7 +783,9 @@ public class Racko extends JApplet implements ActionListener
       //Swaps with the previous player's InfoPanel
       prev.setBounds(oldBounds);
     }
-
+    /**
+    *Cuts out the base URL and throws the parameters into a hash map
+    */
     public void cutURL() throws UnsupportedEncodingException {
       String completeURL = getDocumentBase().toString();
       System.out.println("Complete URL: " + completeURL);
@@ -744,7 +796,10 @@ public class Racko extends JApplet implements ActionListener
          initMap(searchURL);
       }
     }
-
+    /**
+    *Makes a hash map of the information from the HTML form
+    *@param search        info from the HTML form
+    */
     public void initMap(String search) throws UnsupportedEncodingException
     {
       parmsMap = new HashMap<String,String>();
@@ -755,4 +810,40 @@ public class Racko extends JApplet implements ActionListener
          parmsMap.put(temp[0], java.net.URLDecoder.decode(temp[1], "UTF-8"));
       }
     }
+    /**
+    *Custom handler for dealing with the context menu, it will display the menu
+    *where the user right clicks
+    *@param  ev     MouseEvent that made a mouse pressed or mouse released event
+    */
+    private void popup(MouseEvent ev)
+    {
+      int x = 0;
+      int y = 0;
+      if(ev.isPopupTrigger())
+      {
+        cmp = ev.getComponent();
+        x = ev.getX();
+        y = ev.getY();
+        pop.show(cmp,x,y);
+      }
+    }
+    /**
+    *Handles the mouse being left clicked, will launch the custom handler for
+    *the popup menu
+    */
+    public void mousePressed(MouseEvent ev)
+    {
+      popup(ev);
+    }
+    /**
+    *Handles the mouse being left clicked, will launch the custom handler for
+    *the popup menu. This was added for OS differences.
+    */
+    public void mouseReleased(MouseEvent ev)
+    {
+      popup(ev);
+    }
+    public void mouseClicked(MouseEvent ev) {}
+    public void mouseEntered(MouseEvent ev) {}
+    public void mouseExited(MouseEvent ev) {}
   }

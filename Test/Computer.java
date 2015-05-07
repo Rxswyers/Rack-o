@@ -1,9 +1,9 @@
 /*Author: 				Ruben Swyers
 * Creation Date: 	March 15, 2015
-* Due Date: 			April 3, 2015
+* Due Date: 			May 7, 2015
 * Course: 				CSC243
 * Professor Name: Dr. Spiegel
-* Assignment: 		#2 - Racko GUI
+* Assignment: 		#3 - Racko GUI
 * Filename: 			Computer.java
 * Purpose:		  	This represents a computer player in the GUI, it will make decisions
 on what actions to take based on a rudementary AI
@@ -20,7 +20,7 @@ public class Computer extends Player
 	*/
 	boolean see;
 	/**
-	*
+	*Number of players, held for the AI
 	*/
 	int numPlayers;
 	/**
@@ -156,7 +156,10 @@ public class Computer extends Player
 			return this.Hand.search(pos);
 		}
 	}
-
+	/**
+  *Sets the number of players
+	*@param	n		Number of players
+  */
 	public void setNumPlayers(int n)
 	{
 		this.numPlayers = n;

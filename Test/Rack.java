@@ -1,9 +1,9 @@
 /*Author: 					Ruben Swyers
 * Creation Date: 		March 15, 2015
-* Due Date: 				April 3, 2015
+* Due Date: 				May 7, 2015
 * Course: 					CSC243
 * Professor Name: 	Dr. Spiegel
-* Assignment: 			#2 - Racko GUI
+* Assignment: 			#3 - Racko GUI
 * Filename: 				Rack.java
 * Purpose:		  		This represents a Rack in the GUI. It is a JPanel that has a JLayeredPane on it.
 					The cards are added to the JLayeredPane to allow overlapping.
@@ -41,6 +41,7 @@ public class Rack extends JPanel
 		this.add(this.RJLP);
 		this.RJLP.setBounds(0,0,800,200);
 		this.RJLP.setLayout(null);
+		//sets the panel to be transparent
 		setOpaque(false);
 
 	}

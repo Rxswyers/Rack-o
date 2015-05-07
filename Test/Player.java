@@ -1,9 +1,9 @@
 /*Author: 				Ruben Swyers
 * Creation Date: 	March 15, 2015
-* Due Date: 			April 3, 2015
+* Due Date: 			May 7, 2015
 * Course: 				CSC243
 * Professor Name: Dr. Spiegel
-* Assignment: 		#2 - Racko GUI
+* Assignment: 		#3 - Racko GUI
 * Filename: 			Player.java
 * Purpose:		  	This represents a Player in the game. It's an abstract class, so
                   Human and Computer will be subclasses to implement the class. Player
@@ -43,6 +43,9 @@ abstract public class Player
   Panel that contains the name of the Player and notifies if it is their turn.
   */
   protected InfoPanel Info;
+  /**
+  *ID of the player, to set the owner of the Cards as they pick them up.
+  */
   protected int id;
   //methods
   /**

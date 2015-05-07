@@ -1,3 +1,22 @@
+Cheats
+  /c - Shows the opponent's hand
+  /o - Orders the first n amount of cards in your rack to start.
+       use "/o n" when entering cheats, n being a number
+  /n - limits the number of turns, allowing each player to go once per turn.
+
+  In order to use cheats, add them in the name textbox of the HTML Form.
+  If you added a cheat, you will get a confirmation in the applet in the form of
+  hearing pikachu.
+
+It will take 3 seconds from load for the background music to start, if you want to stop
+it, then use the context menu.
+
+Since my design only allows 2 Racks to be shown at all times, when playing with
+more than 2 people the Computer Racks will swap out. It may not seem like they do,
+but if you use the /c cheat you can verify.
+
+These are notes as I progressed through my project:
+
 I've decided to add on to my GUI, because there is a lot of extra space not being used.
 I'm thinking that making a panel that displays the user's name and if it is their
 turn or not on the right side of the GUI. Each player will have one, and if it is their
@@ -32,3 +51,9 @@ The Racks and InfoPanels now properly switch, there was a bug at first when tryi
 Human goes. I didn't want to swap the Human's rack, so I didn't update the others while the Human went.
 Painting the Racks off the view of the Applet worked great. The racks all update properly, and when it's your
 turn, the rack that went before you is showing.
+
+Adding music was pretty easy, and so was the context menu. I used the context menu to control the music, you have
+play and stop items on the context menu.
+
+Because I stuck with my original plan to swap Racks and InfoPanels, it unfortunately took up more time than I thought
+it would. Animations may not be implemented due to that ):
