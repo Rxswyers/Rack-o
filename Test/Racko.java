@@ -20,6 +20,7 @@ import java.net.*;
 import javax.swing.border.Border;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.io.File;
 /**
 *This applet controls the game of Racko. There are 2 players, you and a computer opponent.
 *When the game first starts you can put cheats in the input dialog box. You will play until you
@@ -175,9 +176,21 @@ public class Racko extends JApplet implements ActionListener, MouseListener
     play.addActionListener(this);
     stop.addActionListener(this);
     other.addActionListener(this);
+/*
+    File opening = new File(getCodeBase()+"opening.wav");
+    File pika = new File("pikachu.wav");
+    File battle = new File("battle.wav");
+
+    opening.setReadable(true);
+    opening.setWritable(true);
+    pika.setReadable(true);
+    pika.setWritable(true);
+    battle.setReadable(true);
+    battle.setWritable(true);
+*/
     //sets up the background music
-    String music = "opening.wav";
-    backMusic = getAudioClip(getCodeBase(), music);
+    String music = "opening.au";
+    backMusic = getAudioClip(getCodeBase(),music);
 
     //Getting the image for the background of the cards
 
@@ -292,7 +305,7 @@ public class Racko extends JApplet implements ActionListener, MouseListener
         if(otherSong == false)
         {
           backMusic.stop();
-          String music = "battle.wav";
+          String music = "battle.au";
           backMusic = getAudioClip(getCodeBase(), music);
           backMusic.loop();
           otherSong = true;
@@ -301,7 +314,7 @@ public class Racko extends JApplet implements ActionListener, MouseListener
         else
         {
           backMusic.stop();
-          String music = "opening.wav";
+          String music = "opening.au";
           backMusic = getAudioClip(getCodeBase(), music);
           backMusic.loop();
           otherSong = false;
@@ -711,7 +724,7 @@ public class Racko extends JApplet implements ActionListener, MouseListener
       if(cheatList.size() > 1)
       {
         AudioClip audioClip;
-        String pika = "pikachu.wav";
+        String pika = "pikachu.au";
 
         audioClip = getAudioClip(getCodeBase(), pika);
         audioClip.play();
